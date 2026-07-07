@@ -1,0 +1,12 @@
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1f3a2e;
+}
+
+@media (min-width: 640px) {
+  .title {
+    font-size: 2.5rem;
+  }
+}
