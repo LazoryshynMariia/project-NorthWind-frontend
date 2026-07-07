@@ -1,0 +1,103 @@
+.formTitle {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #000;
+}
+
+.formText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: #000;
+}
+
+.formDesc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.btn .btn:active {
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  padding: 6px 12px;
+  width: 335px;
+  height: 44px;
+  background: #4a9849;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.btn:hover .btn:hover {
+  border: 1px solid #4a9849;
+  background: #def2de;
+  color: #1b391b;
+}
+
+.btn:disabled {
+  background: #4a9849;
+  opacity: 0.3;
+}
+
+.field {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 8px;
+  width: 335px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1b391b;
+}
+
+.field::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.field:active {
+  background: rgba(255, 255, 255, 0);
+}
+
+@media (min-width: 768px) {
+  .formTitle {
+    font-size: 44px;
+  }
+
+  .field {
+    width: 644px;
+    height: 40px;
+  }
+
+  .btn {
+    width: 644px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .formTitle {
+    font-size: 52px;
+  }
+
+  .formText {
+    font-size: 20px;
+  }
+
+  .formDesc {
+    font-size: 18px;
+  }
+}
