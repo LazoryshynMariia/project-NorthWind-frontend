@@ -5,13 +5,34 @@
   justify-content: center;
   align-items: center;
 
-  padding: 24px 20px;
+  padding: 24px 20px 28px;
 
   margin-top: auto;
 
   font-size: 12px;
-  line-height: 16px;
+  line-height: 18px;
   font-weight: 400;
 
-  color: var(--color-neutral-dark);
+  color: var(--color-scheme-1-text);
+}
+
+.desktopText {
+  display: none;
+}
+
+@media (min-width: 1440px) {
+  .footer {
+    padding-bottom: 25px;
+
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .mobileText {
+    display: none;
+  }
+
+  .desktopText {
+    display: inline;
+  }
 }

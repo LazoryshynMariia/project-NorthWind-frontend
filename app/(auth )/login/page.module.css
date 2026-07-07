@@ -13,6 +13,8 @@
 
   display: flex;
   flex-direction: column;
+
+  padding: 20px 19px 0;
 }
 
 .content {
@@ -22,7 +24,7 @@
   justify-content: center;
   align-items: flex-start;
 
-  padding-top: 28px;
+  padding-top: 96px;
 }
 
 .content > * {
@@ -31,19 +33,12 @@
 
 @media (min-width: 768px) {
   .container {
-    max-width: 768px;
-    padding: 24px 32px 0;
+    padding: 20px 38px 0;
   }
 }
 
 @media (min-width: 1440px) {
   .container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 64px;
-  }
-
-  .content {
-    padding-top: 8px;
+    padding: 48px 70px 0;
   }
 }

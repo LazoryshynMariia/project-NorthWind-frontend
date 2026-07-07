@@ -9,8 +9,24 @@ export interface LoginData {
   password: string;
 }
 
+export interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface AuthResponse {
+  status: number;
+  message: string;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+    user: AuthUser;
+  };
+}
+
 export const login = async (data: LoginData) => {
-  const response = await api.post('/api/auth/login', data);
+  const response = await api.post<AuthResponse>('/api/auth/login', data);
 
   return response.data;
 };

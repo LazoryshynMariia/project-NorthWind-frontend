@@ -4,9 +4,8 @@
 
 .container {
   width: 100%;
-  max-width: 335px;
-  margin: 0 auto;
-  padding: 18px 0 0;
+  margin: 0;
+  padding: 0;
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -21,8 +20,8 @@
 
 @media (min-width: 768px) {
   .container {
-    max-width: 704px;
-    padding-top: 24px;
+    max-width: none;
+    padding-top: 0;
   }
 }
 
@@ -32,11 +31,12 @@
 
 @media (min-width: 1440px) {
   .container {
-    max-width: 1312px;
-    padding-top: 32px;
+    max-width: none;
+    padding-top: 0;
   }
+
   .logo {
-  width: 124px;
-  height: 36px;
-}
+    width: 124px;
+    height: 36px;
+  }
 }

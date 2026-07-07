@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
@@ -24,25 +25,21 @@ const initialValues = {
 };
 
 export default function LoginForm() {
-const handleSubmit = async (values: typeof initialValues) => {
-  try {
-    const response = await login(values);
+  const router = useRouter();
 
-    localStorage.setItem(
-      'accessToken',
-      response.data.accessToken,
-    );
+  const handleSubmit = async (values: typeof initialValues) => {
+    try {
+      const response = await login(values);
 
-    localStorage.setItem(
-      'refreshToken',
-      response.data.refreshToken,
-    );
+      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('refreshToken', response.data.refreshToken);
 
-    toast.success(response.message);
-  } catch (error) {
-    toast.error('Неправильна пошта або пароль');
-  }
-};
+      toast.success(response.message);
+      router.push('/');
+    } catch {
+      toast.error('Неправильна пошта або пароль');
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -60,7 +57,7 @@ const handleSubmit = async (values: typeof initialValues) => {
       <h1 className={styles.title}>Вхід</h1>
 
       <p className={styles.subtitle}>
-        Вітаємо знову у спільноту мандрівників!
+        Вітаємо знову у спільноті мандрівників!
       </p>
 
       <Formik
@@ -69,11 +66,8 @@ const handleSubmit = async (values: typeof initialValues) => {
         onSubmit={handleSubmit}
       >
         <Form className={styles.form}>
-
           <div className={styles.field}>
-            <label className={styles.label}>
-              Пошта*
-            </label>
+            <label className={styles.label}>Пошта*</label>
 
             <Field
               className={styles.input}
@@ -90,9 +84,7 @@ const handleSubmit = async (values: typeof initialValues) => {
           </div>
 
           <div className={styles.field}>
-            <label className={styles.label}>
-              Пароль*
-            </label>
+            <label className={styles.label}>Пароль*</label>
 
             <Field
               className={styles.input}
@@ -108,13 +100,9 @@ const handleSubmit = async (values: typeof initialValues) => {
             />
           </div>
 
-          <button
-            className={styles.button}
-            type="submit"
-          >
+          <button className={styles.button} type="submit">
             Увійти
           </button>
-
         </Form>
       </Formik>
     </div>
