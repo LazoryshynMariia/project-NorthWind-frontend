@@ -11,6 +11,7 @@ import styles from './LoginForm.module.css';
 
 const loginSchema = Yup.object({
   email: Yup.string()
+    .trim()
     .email('Некоректна пошта')
     .required("Обов'язкове поле"),
 
@@ -29,7 +30,10 @@ export default function LoginForm() {
 
   const handleSubmit = async (values: typeof initialValues) => {
     try {
-      const response = await login(values);
+      const response = await login({
+        ...values,
+        email: values.email.trim(),
+      });
 
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
@@ -65,45 +69,59 @@ export default function LoginForm() {
         validationSchema={loginSchema}
         onSubmit={handleSubmit}
       >
-        <Form className={styles.form}>
-          <div className={styles.field}>
-            <label className={styles.label}>Пошта*</label>
+        {({ isSubmitting }) => (
+          <Form className={styles.form}>
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="email">
+                Пошта*
+              </label>
 
-            <Field
-              className={styles.input}
-              name="email"
-              type="email"
-              placeholder="hello@podorozhnyk.ua"
-            />
+              <Field
+                id="email"
+                className={styles.input}
+                name="email"
+                type="email"
+                placeholder="hello@podorozhnyk.ua"
+                autoComplete="email"
+              />
 
-            <ErrorMessage
-              name="email"
-              component="p"
-              className={styles.error}
-            />
-          </div>
+              <ErrorMessage
+                name="email"
+                component="p"
+                className={styles.error}
+              />
+            </div>
 
-          <div className={styles.field}>
-            <label className={styles.label}>Пароль*</label>
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="password">
+                Пароль*
+              </label>
 
-            <Field
-              className={styles.input}
-              name="password"
-              type="password"
-              placeholder="********"
-            />
+              <Field
+                id="password"
+                className={styles.input}
+                name="password"
+                type="password"
+                placeholder="********"
+                autoComplete="current-password"
+              />
 
-            <ErrorMessage
-              name="password"
-              component="p"
-              className={styles.error}
-            />
-          </div>
+              <ErrorMessage
+                name="password"
+                component="p"
+                className={styles.error}
+              />
+            </div>
 
-          <button className={styles.button} type="submit">
-            Увійти
-          </button>
-        </Form>
+            <button
+              className={styles.button}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Входимо...' : 'Увійти'}
+            </button>
+          </Form>
+        )}
       </Formik>
     </div>
   );

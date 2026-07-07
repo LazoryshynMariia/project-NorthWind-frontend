@@ -158,6 +158,11 @@
   background: var(--color-mantis);
 }
 
+.button:disabled {
+  cursor: not-allowed;
+  opacity: .7;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     max-width: 646px;
