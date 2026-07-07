@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import PageTitle from '@/components/PageTitle/PageTitle';
+// import PageTitle from '@/components/PageTitle/PageTitle';
 import TravellersList from '@/components/TravellersList/TravellersList';
 import css from './TravellersPage.module.css';
+import Footer from '@/components/Footer/Footer';
 
 export const metadata: Metadata = {
   title: 'Мандрівники',
@@ -13,10 +14,12 @@ export default function TravellersPage() {
     <main className={css.page}>
       <section className={css.section}>
         <div className={css.container}>
-          <PageTitle>Мандрівники</PageTitle>
+          <h1 className={css.title}>Мандрівники</h1>
+          {/* <PageTitle>Мандрівники</PageTitle> */}
           <TravellersList />
         </div>
       </section>
     </main>
+    <Footer/>
   );
 }
