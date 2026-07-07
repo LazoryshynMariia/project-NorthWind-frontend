@@ -1,3 +1,9 @@
+import NewStoryForm from './NewStoryForm';
+
 export default function StoriesPage() {
-  return <main>NewStoryPage</main>;
+  return (
+    <main>
+      <NewStoryForm />
+    </main>
+  );
 }
