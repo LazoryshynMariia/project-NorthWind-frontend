@@ -11,7 +11,7 @@ const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
 });
 
-export const metadata: Metadata = {};
+export const metadata: Metadata = { title: 'Природні Мандри' };
 
 export default function RootLayout({
   children,
