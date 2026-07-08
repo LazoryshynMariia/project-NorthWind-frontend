@@ -24,7 +24,7 @@
     display: none;
 }
 
-.list {
+/* .list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
@@ -37,8 +37,8 @@
 
 .list li:nth-child(n + 4) {
     display: none;
-}
-
+}/*  
+*/
 .controls {
     display: flex;
     justify-content: flex-end;
@@ -46,6 +46,11 @@
 
     margin-top: 24px;
     margin-bottom: 48px;
+
+}
+
+.swiper {
+    width: 100%;
 }
 
 .arrow {
@@ -54,8 +59,6 @@
     justify-content: center;
 
     margin-top: 24px;
-
-    border: 1px solid #4a9849;
 
     background-color: #def2de;
     color: #1b391b;
@@ -67,6 +70,25 @@
     padding: 12px;
     width: 48px;
     height: 48px;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.arrow:hover:not(:global(.swiper-button-disabled)) {
+    background-color: #F2F2F2;
+    border-color: #8DD18C;
+}
+
+.arrow:active:not(:global(.swiper-button-disabled)) {
+    background-color: #8DD18C;
+}
+
+.arrow:global(.swiper-button-disabled) {
+    background-color: #F2F2F2;
+    opacity: 0.4;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    cursor: not-allowed;
 }
 
 .bottomLink {
@@ -99,6 +121,53 @@
 .bottomLink:hover,
 .bottomLink:focus {
     background-color: #214421;
+}
+
+.mobileSlider {
+    display: block;
+}
+
+.tabletSlider,
+.desktopSlider {
+    display: none;
+}
+
+.mobileGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.tabletGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.desktopGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+@media screen and (min-width: 768px) {
+    .mobileSlider {
+        display: none;
+    }
+
+    .tabletSlider {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .tabletSlider {
+        display: none;
+    }
+
+    .desktopSlider {
+        display: block;
+    }
 }
 
 /* TABLET */
@@ -143,14 +212,14 @@
         display: none;
     }
 
-    .list {
+    /* .list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 24px;
     }
 
     .list li:nth-child(-n + 4) {
         display: flex;
-    }
+    } */
 }
 
 /* DESKTOP */
@@ -163,9 +232,9 @@
         font-size: 52px;
     }
 
-    .list {
+    /* .list {
         grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
+    } */
 
     .topLink {
         width: 202px;

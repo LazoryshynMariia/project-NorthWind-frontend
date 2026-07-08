@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-// import PageTitle from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle/PageTitle';
 import TravellersList from '@/components/TravellersList/TravellersList';
 import css from './TravellersPage.module.css';
-import Footer from '@/components/Footer/Footer';
+// import Header from '@/components/Header/Header';
 
 export const metadata: Metadata = {
   title: 'Мандрівники',
@@ -11,15 +11,17 @@ export const metadata: Metadata = {
 
 export default function TravellersPage() {
   return (
-    <main className={css.page}>
-      <section className={css.section}>
-        <div className={css.container}>
-          <h1 className={css.title}>Мандрівники</h1>
-          {/* <PageTitle>Мандрівники</PageTitle> */}
-          <TravellersList />
-        </div>
-      </section>
-    </main>
-    <Footer/>
+    <>
+      {/* <Header /> */}
+      <main className={css.page}>
+        <section className={css.section}>
+          <div className={css.container}>
+            {/* <h1 className={css.title}>Мандрівники</h1> */}
+            <PageTitle title="Мандрівники" />
+            <TravellersList />
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
