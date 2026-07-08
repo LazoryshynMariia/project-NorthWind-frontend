@@ -49,62 +49,67 @@ export default function RegistrationForm() {
         validationSchema={RegistrationFormSchema}
         onSubmit={handleSubmit}
       >
-        <Form className={styles.form}>
-          <div className={styles.inputDiv}>
-            <label htmlFor={`${fieldId}-name`} className={styles.formDesc}>
-              Імʼя та Прізвище*
-            </label>
-            <Field
-              type="text"
-              name="name"
-              placeholder="Ваше імʼя та прізвище"
-              id={`${fieldId}-name`}
-              className={styles.field}
-            />
-            <ErrorMessage
-              name="name"
-              component="span"
-              className={styles.error}
-            />
-          </div>
-          <div className={styles.inputDiv}>
-            <label htmlFor={`${fieldId}-email`} className={styles.formDesc}>
-              Пошта*
-            </label>
-            <Field
-              type="email"
-              name="email"
-              placeholder="hello@podorozhnyky.ua"
-              id={`${fieldId}-email`}
-              className={styles.field}
-            />
-            <ErrorMessage
-              name="name"
-              component="span"
-              className={styles.error}
-            />
-          </div>
-          <div className={styles.inputDiv}>
-            <label htmlFor={`${fieldId}-password`} className={styles.formDesc}>
-              Пароль*
-            </label>
-            <Field
-              type="password"
-              name="password"
-              placeholder="********"
-              id={`${fieldId}-password`}
-              className={styles.field}
-            />
-            <ErrorMessage
-              name="name"
-              component="span"
-              className={styles.error}
-            />
-          </div>
-          <button className={styles.btn} type="submit">
-            Зареєструватись
-          </button>
-        </Form>
+        {({ errors, touched }) => (
+          <Form className={styles.form}>
+            <div className={styles.inputDiv}>
+              <label htmlFor={`${fieldId}-name`} className={styles.formDesc}>
+                Імʼя та Прізвище*
+              </label>
+              <Field
+                type="text"
+                name="name"
+                placeholder="Ваше імʼя та прізвище"
+                id={`${fieldId}-name`}
+                className={`${styles.field} ${touched.name && errors.name ? styles.inputError : ''}`}
+              />
+              <ErrorMessage
+                name="name"
+                component="span"
+                className={styles.textError}
+              />
+            </div>
+            <div className={styles.inputDiv}>
+              <label htmlFor={`${fieldId}-email`} className={styles.formDesc}>
+                Пошта*
+              </label>
+              <Field
+                type="email"
+                name="email"
+                placeholder="hello@podorozhnyky.ua"
+                id={`${fieldId}-email`}
+                className={`${styles.field} ${touched.email && errors.email ? styles.inputError : ''}`}
+              />
+              <ErrorMessage
+                name="email"
+                component="span"
+                className={styles.textError}
+              />
+            </div>
+            <div className={styles.inputDiv}>
+              <label
+                htmlFor={`${fieldId}-password`}
+                className={styles.formDesc}
+              >
+                Пароль*
+              </label>
+              <Field
+                type="password"
+                name="password"
+                placeholder="********"
+                id={`${fieldId}-password`}
+                className={`${styles.field} ${touched.password && errors.password ? styles.inputError : ''}`}
+              />
+              <ErrorMessage
+                name="password"
+                component="span"
+                className={styles.textError}
+              />
+            </div>
+            <button className={styles.btn} type="submit">
+              Зареєструватись
+            </button>
+          </Form>
+        )}
       </Formik>
     </div>
   );

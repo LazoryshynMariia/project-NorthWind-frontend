@@ -1,3 +1,10 @@
+import styles from './AuthFooter.module.css';
+
 export default function AuthFooter() {
-  return <footer>© 2025 Природні Мандри</footer>;
+  const currentYear = new Date().getFullYear();
+  return (
+    <footer className={styles.copyrightForm}>
+      © {currentYear} Природні Мандри
+    </footer>
+  );
 }

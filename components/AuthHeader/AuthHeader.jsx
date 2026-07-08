@@ -1,12 +1,5 @@
-// import Link from 'next/link';
-// import Image from 'next/image';
+import Link from 'next/link';
 
-// export default function AuthHeader(){
-//     return (
-//  <Link href="/">
-//  { <image}
-//  {src="'/> }
-// alt="Logo"
-//    { </Link> }
-//     )
-// }
+export default function AuthHeader() {
+  return <Link href="/"></Link>;
+}
