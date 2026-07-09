@@ -2,6 +2,7 @@ import Logo from '@/components/Logo/Logo';
 import SocialList from '@/components/SocialList/SocialList';
 import FooterNav from '@/components/FooterNav/FooterNav';
 import Copyright from '@/components/Copyright/Copyright';
+import ThemeToggle from '@/components/ThemeToggle/ThemeToggle';
 
 import styles from './Footer.module.css';
 
@@ -11,7 +12,10 @@ const Footer = () => {
       <div className={styles.container}>
         <div className={styles.top}>
           <Logo />
-          <SocialList />
+          <div className={styles.topRight}>
+            <SocialList />
+            <ThemeToggle />
+          </div>
         </div>
 
         <div className={styles.nav}>
