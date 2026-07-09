@@ -16,6 +16,12 @@
   gap: 24px;
 }
 
+.topRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .nav {
   display: flex;
   justify-content: center;

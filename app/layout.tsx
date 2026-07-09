@@ -5,6 +5,7 @@ import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
 import ToastProvider from '@/components/ToastProvider/ToastProvider';
 import LoaderProvider from '@/components/LoaderProvider/LoaderProvider';
+import { ThemeProvider } from '@/context/ThemeContext';
 
 const montserrat = Montserrat({
   variable: '--font-montserrat',
@@ -16,18 +17,40 @@ export const metadata: Metadata = {
   title: 'Природні мандри',
 };
 
+// Runs before hydration so the correct theme is applied immediately,
+// avoiding a flash of the wrong theme on page load.
+const themeInitScript = `
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var theme = stored === 'dark' || stored === 'light' ? stored : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uk">
+    <html lang="uk" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className={montserrat.variable}>
+<<<<<<< HEAD
         <AuthProvider>
           <LoaderProvider>{children}</LoaderProvider>
         </AuthProvider>
         <ToastProvider />
+=======
+        <ThemeProvider>
+          <LoaderProvider>{children}</LoaderProvider>
+          <ToastProvider />
+        </ThemeProvider>
+>>>>>>> c2e6d28 (feat: add light/dark theme toggle in footer)
       </body>
     </html>
   );
