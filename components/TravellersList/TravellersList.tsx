@@ -6,6 +6,7 @@ import TravellerCard from '@/components/TravellerCard/TravellerCard';
 import { getTravellers } from '@/services/travellers';
 import type { Traveller } from '@/types/traveller';
 // import Loader from '@/components/LoaderProvider/Loader';
+import toast from 'react-hot-toast';
 import css from './TravellersList.module.css';
 
 const PER_PAGE = 12;
@@ -36,6 +37,7 @@ export default function TravellersList() {
             : 'Сталася помилка під час завантаження мандрівників';
 
         setErrorMessage(message);
+        toast.error(message);
       } finally {
         setIsLoading(false);
       }
@@ -63,12 +65,17 @@ export default function TravellersList() {
           : 'Сталася помилка під час завантаження мандрівників';
 
       setErrorMessage(message);
+      toast.error(message);
     } finally {
       setIsLoadingMore(false);
     }
   };
 
   if (isLoading) {
+    // Замінити коли з'явиться компонент Loader
+
+    return <p className={css.status}>Завантаження...</p>;
+
     // return <Loader />;
   }
 
@@ -90,6 +97,7 @@ export default function TravellersList() {
 
       {errorMessage && <p className={css.error}>{errorMessage}</p>}
 
+      {/* Замінити коли з'явиться компонент Pagination */}
       {/* {hasNextPage && (
         <Pagination
           onClick={handleLoadMore}

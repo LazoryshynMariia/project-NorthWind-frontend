@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PageTitle from '@/components/PageTitle/PageTitle';
+// import PageTitle from '@/components/PageTitle/PageTitle';
 import TravellersList from '@/components/TravellersList/TravellersList';
 import css from './TravellersPage.module.css';
 // import Header from '@/components/Header/Header';
@@ -16,8 +16,11 @@ export default function TravellersPage() {
       <main className={css.page}>
         <section className={css.section}>
           <div className={css.container}>
-            {/* <h1 className={css.title}>Мандрівники</h1> */}
-            <PageTitle title="Мандрівники" />
+            {/* Замінити після створення головного компоненту */}
+
+            <h1 className={css.title}>Мандрівники</h1>
+
+            {/* <PageTitle title="Мандрівники" /> */}
             <TravellersList />
           </div>
         </section>
