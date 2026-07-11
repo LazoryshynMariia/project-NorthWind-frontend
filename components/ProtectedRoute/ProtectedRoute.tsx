@@ -7,5 +7,5 @@ type ProtectedRouteProps = {
 };
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-    return children;
+  return children;
 }
