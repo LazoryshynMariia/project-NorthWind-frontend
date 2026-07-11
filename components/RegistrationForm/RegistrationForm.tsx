@@ -1,8 +1,13 @@
 'use client';
+
 import { Formik, Form, Field, FormikHelpers, ErrorMessage } from 'formik';
 import { useId } from 'react';
 import * as Yup from 'yup';
 import styles from './RegistrationForm.module.css';
+import { toast } from 'react-hot-toast';
+// import { register } from '@/lib/api/clientApi';
+import { useRouter } from 'next/navigation';
+// import api from '../../lib/api/api';
 
 interface RegistrationFormValues {
   name: string;
@@ -20,22 +25,34 @@ const RegistrationFormSchema = Yup.object().shape({
   name: Yup.string().max(32, 'Name is too long').required('Name is required'),
   email: Yup.string()
     .email('Invalid email format')
-    .max(64, 'Name is too long')
+    .max(64, 'Email is too long')
     .required('Email is required'),
   password: Yup.string()
-    .min(8, 'Name must be at least 8 characters')
-    .max(128, 'Name is too long')
+    .min(8, 'Password must be at least 8 characters')
+    .max(128, 'Password is too long')
     .required('Password is required'),
 });
 
 export default function RegistrationForm() {
   const fieldId = useId();
+  const router = useRouter();
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: RegistrationFormValues,
     actions: FormikHelpers<RegistrationFormValues>
   ) => {
-    actions.resetForm();
+    try {
+      await register(values);
+
+      actions.resetForm();
+      setTimeout(() => {
+        router.push('/');
+      }, 1500);
+    } catch (error) {
+      toast.error('Не вдалося зареєструватися');
+    } finally {
+      actions.setSubmitting(false);
+    }
   };
 
   return (
@@ -49,7 +66,7 @@ export default function RegistrationForm() {
         validationSchema={RegistrationFormSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, isSubmitting }) => (
           <Form className={styles.form}>
             <div className={styles.inputDiv}>
               <label htmlFor={`${fieldId}-name`} className={styles.formDesc}>
@@ -105,7 +122,11 @@ export default function RegistrationForm() {
                 className={styles.textError}
               />
             </div>
-            <button className={styles.btn} type="submit">
+            <button
+              className={styles.btn}
+              type="submit"
+              disabled={isSubmitting}
+            >
               Зареєструватись
             </button>
           </Form>

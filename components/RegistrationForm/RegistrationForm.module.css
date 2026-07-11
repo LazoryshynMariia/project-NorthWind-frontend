@@ -93,6 +93,7 @@
   font-size: 16px;
   line-height: 1.5;
   color: #fff;
+  cursor: pointer;
 }
 
 .btn:active {
@@ -109,6 +110,7 @@
 .btn:disabled {
   background: #4a9849;
   opacity: 0.3;
+  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {
