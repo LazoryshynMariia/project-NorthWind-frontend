@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
-import Image from 'next/image';
+import { ChangeEvent, useState } from 'react';
+
+import styles from './ImgPicker.module.css';
 
 type Props = {
   onChangePhoto: (file: File | null) => void;
@@ -10,48 +11,64 @@ type Props = {
 
 const ImgPicker = ({ profilePhotoUrl, onChangePhoto }: Props) => {
   const [previewUrl, setPreviewUrl] = useState<string>(profilePhotoUrl || '');
-    const [error, setError] = useState<string>('');
-    
-const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    setError('')
+  const [error, setError] = useState<string>('');
 
-    if (file) {
-      // Перевіримо тип файлу
-      if (!file.type.startsWith('image/')) {
-        setError('Only images')
-        return
-      }
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setError('');
 
-      // Перевіримо розмір файлу (максимум 5MB)
-      if (file.size > 1 * 1024 * 1024) {
-        setError('Max file size 1MB')
-        return
-      }
+    if (!file) return;
 
-      onChangePhoto(file) // передаємо файл у батьківський компонент
-      
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result as string)
-      }
-      reader.readAsDataURL(file)
+    if (!file.type.startsWith('image/')) {
+      setError('Only images');
+      return;
     }
-  }
-  
+
+    if (file.size > 1 * 1024 * 1024) {
+      setError('Max file size 1MB');
+      return;
+    }
+
+    console.log('[ImgPicker] file:', file);
+    onChangePhoto(file);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const result = reader.result as string;
+      console.log(
+        '[ImgPicker] previewUrl (data URL length):',
+        result.length,
+        result.slice(0, 60)
+      );
+      setPreviewUrl(result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  console.log('[ImgPicker] render, previewUrl empty?', !previewUrl);
 
   return (
-    <div>
-	    {/* Відображаємо прев'ю якщо зображення існує */}
-          {previewUrl && (
-              <Image src={previewUrl} alt='Preview' width={300} height={300} />
-          )}
-        <label>
-          📷 Choose photo
-          <input type='file' accept='image/*' onChange={handleFileChange} />
-        </label>
-      
-      {error && <p>{error}</p>}
+    <div className={styles.wrapper}>
+      <div className={styles.preview}>
+        {previewUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={previewUrl} alt="Preview" className={styles.image} />
+        ) : (
+          <div className={styles.placeholder} />
+        )}
+      </div>
+
+      <label className={styles.button}>
+        Завантажити
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className={styles.input}
+        />
+      </label>
+
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };
