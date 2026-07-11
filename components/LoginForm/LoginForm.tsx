@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
-import { login } from '@/services/auth';
+import { login } from '@/lib/api/auth';
 
 import styles from './LoginForm.module.css';
 

@@ -1,8 +1,4 @@
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-});
+import { nextServer } from '@/lib/api/api';
 
 export interface LoginData {
   email: string;
@@ -26,7 +22,7 @@ export interface AuthResponse {
 }
 
 export const login = async (data: LoginData) => {
-  const response = await api.post<AuthResponse>('/api/auth/login', data);
+  const response = await nextServer.post<AuthResponse>('/auth/login', data);
 
   return response.data;
 };

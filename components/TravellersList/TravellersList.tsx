@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import TravellerCard from '@/components/TravellerCard/TravellerCard';
 // import Pagination from '@/components/Pagination/Pagination';
-import { getTravellers } from '@/services/travellers';
+import { getTravellers } from '@/lib/api/travellers';
 import type { Traveller } from '@/types/traveller';
 // import Loader from '@/components/LoaderProvider/Loader';
 import toast from 'react-hot-toast';
