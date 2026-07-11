@@ -8,3 +8,5 @@ body {
   padding: 0;
   font-family: var(--font-montserrat), sans-serif;
 }
+
+@import 'ldrs/react/DotPulse.css';
