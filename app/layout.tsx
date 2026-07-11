@@ -12,7 +12,9 @@ const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
 });
 
-export const metadata: Metadata = { title: 'Природні Мандри' };
+export const metadata: Metadata = {
+  title: 'Природні мандри',
+};
 
 // Runs before hydration so the correct theme is applied immediately,
 // avoiding a flash of the wrong theme on page load.
