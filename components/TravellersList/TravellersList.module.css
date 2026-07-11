@@ -141,3 +141,13 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+.loaderWrapper,
+.loadMoreLoader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-height: 48px;
+}
