@@ -6,13 +6,14 @@ import { useState } from 'react';
 
 import styles from './NewStoryForm.module.css';
 import { addStory } from '@/lib/api/clientApi';
+import { AddStory } from '@/types/stories';
 
 export default function NewStoryForm() {
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   console.log(imageFile);
 
-  const handleSaveUser = async (data: any) => {
+  const handleSaveUser = async (data: AddStory) => {
     if (!imageFile) {
       return;
     }
@@ -25,8 +26,10 @@ export default function NewStoryForm() {
   };
 
   return (
-    <Formik
-      initialValues={{}}
+    <Formik<AddStory>
+      initialValues={{  title: '',
+  article: '',
+  category: '',}}
       onSubmit={data => {
         handleSaveUser(data);
       }}

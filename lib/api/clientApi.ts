@@ -1,6 +1,7 @@
+import { AddStory } from '@/types/stories';
 import { nextServer } from './api';
 
-export const addStory = async (data: any, img: File): Promise<string> => {
+export const addStory = async (data: AddStory, img: File): Promise<string> => {
   const formData = new FormData();
   formData.append('img', img);
   formData.append('title', data.title);
