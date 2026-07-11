@@ -5,21 +5,20 @@ import { useId } from 'react';
 import * as Yup from 'yup';
 import styles from './RegistrationForm.module.css';
 import { toast } from 'react-hot-toast';
-// import { register } from '@/lib/api/clientApi';
+import { nextServer } from '@/lib/api/api';
 import { useRouter } from 'next/navigation';
-// import api from '../../lib/api/api';
 
-interface RegistrationFormValues {
-  name: string;
-  email: string;
-  password: string;
-}
+// interface RegistrationFormValues {
+//   name: string;
+//   email: string;
+//   password: string;
+// }
 
-const initialValues: RegistrationFormValues = {
-  name: '',
-  email: '',
-  password: '',
-};
+// const initialValues: RegistrationFormValues = {
+//   name: '',
+//   email: '',
+//   password: '',
+// };
 
 const RegistrationFormSchema = Yup.object().shape({
   name: Yup.string().max(32, 'Name is too long').required('Name is required'),
@@ -42,7 +41,7 @@ export default function RegistrationForm() {
     actions: FormikHelpers<RegistrationFormValues>
   ) => {
     try {
-      await register(values);
+      await nextServer(values);
 
       actions.resetForm();
       setTimeout(() => {
