@@ -5,20 +5,15 @@ import { useId } from 'react';
 import * as Yup from 'yup';
 import styles from './RegistrationForm.module.css';
 import { toast } from 'react-hot-toast';
-import { nextServer } from '@/lib/api/api';
+import { register } from '@/lib/api/auth';
 import { useRouter } from 'next/navigation';
+import { RegisterRequest, login } from '../../lib/api/auth';
 
-// interface RegistrationFormValues {
-//   name: string;
-//   email: string;
-//   password: string;
-// }
-
-// const initialValues: RegistrationFormValues = {
-//   name: '',
-//   email: '',
-//   password: '',
-// };
+const initialValues: RegisterRequest = {
+  name: '',
+  email: '',
+  password: '',
+};
 
 const RegistrationFormSchema = Yup.object().shape({
   name: Yup.string().max(32, 'Name is too long').required('Name is required'),
@@ -37,16 +32,16 @@ export default function RegistrationForm() {
   const router = useRouter();
 
   const handleSubmit = async (
-    values: RegistrationFormValues,
-    actions: FormikHelpers<RegistrationFormValues>
+    values: RegisterRequest,
+    actions: FormikHelpers<RegisterRequest>
   ) => {
     try {
-      await nextServer(values);
-
-      actions.resetForm();
-      setTimeout(() => {
-        router.push('/');
-      }, 1500);
+      await register(values);
+      await login({
+        email: values.email,
+        password: values.password,
+      });
+      router.push('/');
     } catch (error) {
       toast.error('Не вдалося зареєструватися');
     } finally {
