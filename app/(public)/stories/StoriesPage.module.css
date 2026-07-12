@@ -1,0 +1,18 @@
+.main {
+  width: 100%;
+  max-width: 1312px;
+  margin: 0 auto;
+  padding-top: 64px;
+}
+
+@media (max-width: 1439px) {
+  .main {
+    padding: 48px 32px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 40px 20px 0;
+  }
+}
