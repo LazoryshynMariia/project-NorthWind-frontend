@@ -5,9 +5,8 @@ import { useId } from 'react';
 import * as Yup from 'yup';
 import styles from './RegistrationForm.module.css';
 import { toast } from 'react-hot-toast';
-import { register } from '@/lib/api/auth';
+import { register, type RegisterRequest, login } from '@/lib/api/auth';
 import { useRouter } from 'next/navigation';
-import { RegisterRequest, login } from '../../lib/api/auth';
 import axios from 'axios';
 
 const initialValues: RegisterRequest = {
@@ -42,10 +41,15 @@ export default function RegistrationForm() {
   ) => {
     try {
       await register(values);
-      await login({
+
+      const response = await login({
         email: values.email,
         password: values.password,
       });
+
+      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('refreshToken', response.data.refreshToken);
+
       router.push('/');
     } catch (error) {
       if (axios.isAxiosError(error)) {
