@@ -57,7 +57,7 @@ export default function NewStoryForm() {
         const res = await getGategories();
         setCategories(res);
       } catch (e) {
-        console.log(e);
+        toast.error('Щось пішло не так');
       } finally {
         setIsloading(false);
       }

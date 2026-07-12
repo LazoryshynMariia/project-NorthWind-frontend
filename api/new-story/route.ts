@@ -15,8 +15,6 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    console.log(res);
-
     return NextResponse.json(res.data, { status: res.status });
   } catch (error) {
     if (isAxiosError(error)) {

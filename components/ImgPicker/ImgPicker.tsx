@@ -31,17 +31,11 @@ const ImgPicker = ({ profilePhotoUrl, onChangePhoto, error, setError }: Props) =
       return;
     }
 
-    console.log('[ImgPicker] file:', file);
     onChangePhoto(file);
 
     const reader = new FileReader();
     reader.onloadend = () => {
       const result = reader.result as string;
-      console.log(
-        '[ImgPicker] previewUrl (data URL length):',
-        result.length,
-        result.slice(0, 60)
-      );
       setPreviewUrl(result);
     };
     reader.readAsDataURL(file);
