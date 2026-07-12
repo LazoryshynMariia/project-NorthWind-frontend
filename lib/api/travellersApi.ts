@@ -1,6 +1,24 @@
-import { nextServer } from './api';
+import { nextServer } from '@/lib/api/api';
+import type { TravellersResponse, Traveller } from '@/types/traveller';
 import type { ApiResponse, PaginatedResponse } from '@/types/api';
-import type { Story, Traveller } from '@/types';
+import type { Story } from '@/types';
+
+export async function getTravellers(
+  page: number,
+  perPage: number
+): Promise<TravellersResponse> {
+  const { data } = await nextServer.get<TravellersResponse>(
+    '/users/travellers',
+    {
+      params: {
+        page,
+        perPage,
+      },
+    }
+  );
+
+  return data;
+}
 
 export async function getTravellerById(id: string): Promise<Traveller | null> {
   try {
