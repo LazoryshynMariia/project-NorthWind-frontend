@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { nextServer } from '@/lib/api/api';
 import type { PaginatedResponse } from '@/types/api';
 import type { Story } from '@/types';
+import Pagination from '../Pagination/Pagination';
 import StoryCard from '../StoryCard/StoryCard';
 import css from './TravellersStories.module.css';
 
@@ -64,15 +65,7 @@ export default function TravellersStories({
         ))}
       </ul>
       {hasNextPage && (
-        // TODO: replace with the shared Pagination button from #44
-        <button
-          type="button"
-          className={css.loadMore}
-          onClick={handleLoadMore}
-          disabled={isLoading}
-        >
-          {isLoading ? 'Завантаження...' : 'Показати ще'}
-        </button>
+        <Pagination onClick={handleLoadMore} isLoading={isLoading} />
       )}
     </div>
   );
