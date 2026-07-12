@@ -15,7 +15,7 @@ const FooterNav = () => {
         {links.map(({ label, href }) => (
           <li key={href}>
             <Link href={href} className={styles.link}>
-              {label}
+              <span className={styles.linkText}>{label}</span>
             </Link>
           </li>
         ))}

@@ -10,17 +10,21 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.top}>
-          <Logo />
-          <SocialList />
-        </div>
+          <div className={styles.brand}>
+            <Logo />
+            <SocialList />
+          </div>
 
-        <div className={styles.nav}>
           <FooterNav />
         </div>
 
-        <hr className={styles.divider} />
+        <div className={styles.bottom}>
+          <hr className={styles.divider} />
 
-        <Copyright />
+          <div className={styles.copyrightRow}>
+            <Copyright />
+          </div>
+        </div>
       </div>
     </footer>
   );

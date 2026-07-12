@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: #24331f;
+  color: var(--color-scheme-2-text);
   text-decoration: none;
 }
 
