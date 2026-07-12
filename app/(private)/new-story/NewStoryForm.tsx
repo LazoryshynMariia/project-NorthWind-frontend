@@ -5,13 +5,11 @@ import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
 
 import styles from './NewStoryForm.module.css';
-import { addStory } from '@/lib/api/clientApi';
+import { addStory } from '@/lib/api/storiesApi';
 import { AddStory } from '@/types/stories';
 
 export default function NewStoryForm() {
   const [imageFile, setImageFile] = useState<File | null>(null);
-
-  console.log(imageFile);
 
   const handleSaveUser = async (data: AddStory) => {
     if (!imageFile) {

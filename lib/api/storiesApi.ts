@@ -12,7 +12,7 @@ export const addStory = async (data: AddStory, img: File): Promise<string> => {
     console.log(key, value);
   }
 
-  const res = await nextServer.post('/stories', formData);
+  const res = await nextServer.post('/stories', formData,) //{headers: {'Content-Type': 'multipart/form-data',}});
   console.log(res);
 
   return res.data.url;
