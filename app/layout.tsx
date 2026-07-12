@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import Layout from '@/components/Layout/Layout';
 import ToastProvider from '@/components/ToastProvider/ToastProvider';
 import LoaderProvider from '@/components/LoaderProvider/LoaderProvider';
 
@@ -26,7 +26,9 @@ export default function RootLayout({
     <html lang="uk" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <LoaderProvider>
+            <Layout>
           {children}
+          </Layout>
         </LoaderProvider>
         < ToastProvider />
       </body>

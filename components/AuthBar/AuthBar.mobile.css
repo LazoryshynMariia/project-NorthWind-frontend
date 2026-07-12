@@ -1,30 +1,67 @@
 .authBar {
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 
-.link {
-  display: flex;
+.loginButton,
+.registerButton {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
-  height: 48px;
-  padding: 12px 24px;
-  box-sizing: border-box;
-  color: var(--color-text-primary);
+  width: 100%;
+  border: 1px solid var(--color-scheme-2-border);
+  border-radius: 6px;
+  padding: 4px 0;
+  font-weight: 500;
   font-size: 16px;
-  font-weight: 400;
   line-height: 1.5;
-  border-bottom: 1px solid var(--color-gray-100);
-  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--main-transition), color var(--main-transition), border var(--main-transition);
 }
 
-.active {
-  border-bottom-color: var(--color-gray-700);
+.loginButton {
+  background: var(--opacity-neutral-darkest-5);
+  color: var(--color-scheme-2-text);
 }
 
-@media screen and (min-width: 1440px) {
-  .link {
-    font-size: 18px;
+.loginButton:hover,
+.loginButton:focus {
+  background: var(--color-mantis-dark);
+  border: 1px solid var(--color-mantis-dark);
+  color: var(--color-white);
+  outline: none;
+}
+
+.registerButton {
+  background: var(--color-mantis-dark);
+  color: var(--color-white);
+  border: 1px solid var(--color-mantis-dark);
+}
+
+.registerButton:hover,
+.registerButton:focus {
+  background: var(--color-mantis-darker);
+  border: 1px solid var(--color-mantis-darker);
+  outline: none;
+}
+
+.authBar.inline {
+  flex-direction: row;
+  gap: 12px;
+}
+
+.inline .loginButton,
+.inline .registerButton {
+  width: auto;
+  padding: 4px 10px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .loginButton,
+  .registerButton {
+    font-size: 20px;
+    line-height: 1.5;
   }
 }

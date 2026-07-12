@@ -1,40 +1,41 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import css from './AuthBar.module.css';
 
-import styles from "./AuthBar.module.css";
-
-const authLinks = [
-  {
-    href: "/auth/register",
-    label: "Реєстрація",
-  },
-  {
-    href: "/auth/login",
-    label: "Вхід",
-  },
-];
-
-export function AuthBar() {
-  const pathname = usePathname();
-
-  return (
-    <nav className={styles.authBar} aria-label="Навігація авторизації">
-      {authLinks.map(({ href, label }) => {
-        const isActive = pathname === href;
-
-        return (
-          <Link
-            key={href}
-            href={href}
-            className={`${styles.link} ${isActive ? styles.active : ""}`}
-            aria-current={isActive ? "page" : undefined}
-          >
-            {label}
-          </Link>
-        );
-      })}
-    </nav>
-  );
+interface AuthBarProps {
+  onOpenLogin: () => void;
+  onOpenRegister: () => void;
+  variant?: 'default' | 'inline';
 }
+
+export const AuthBar = ({
+  onOpenLogin,
+  onOpenRegister,
+  variant = 'default',
+}: AuthBarProps) => {
+  return (
+    <div
+      className={`${css.AuthBar} ${
+        variant === 'inline' ? css.inline : ''
+      }`}
+    >
+      <button
+        type="button"
+        className={css.loginButton}
+        onClick={onOpenLogin}
+      >
+        Вхід
+      </button>
+
+      <button
+        type="button"
+        className={css.registerButton}
+        onClick={onOpenRegister}
+      >
+        Реєстрація
+      </button>
+    </div>
+  );
+};
+
+export default AuthBar;
