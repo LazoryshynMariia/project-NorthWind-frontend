@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
@@ -40,17 +40,12 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={montserrat.variable}>
-<<<<<<< HEAD
         <AuthProvider>
-          <LoaderProvider>{children}</LoaderProvider>
+          <ThemeProvider>
+            <LoaderProvider>{children}</LoaderProvider>
+            <ToastProvider />
+          </ThemeProvider>
         </AuthProvider>
-        <ToastProvider />
-=======
-        <ThemeProvider>
-          <LoaderProvider>{children}</LoaderProvider>
-          <ToastProvider />
-        </ThemeProvider>
->>>>>>> c2e6d28 (feat: add light/dark theme toggle in footer)
       </body>
     </html>
   );
