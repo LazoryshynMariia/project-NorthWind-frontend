@@ -175,7 +175,7 @@ export default function NewStoryForm() {
               >
                 {isloading ? 'Збереження...' : 'Зберегти'}
               </button>
-              <button className={`${styles.button} ${styles.btnGhost}`} onClick={()=>form.resetForm()}>
+              <button type="button" className={`${styles.button} ${styles.btnGhost}`} onClick={()=>form.resetForm()}>
                 Відмінити
               </button>
             </div>
