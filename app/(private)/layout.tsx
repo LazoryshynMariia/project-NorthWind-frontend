@@ -1,3 +1,4 @@
+import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 import { ReactNode } from 'react';
 
 type PrivateLayoutProps = {
@@ -5,5 +6,5 @@ type PrivateLayoutProps = {
 };
 
 export default function PrivateLayout({ children }: PrivateLayoutProps) {
-  return children;
+  return <ProtectedRoute>{children}</ProtectedRoute>;
 }

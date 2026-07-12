@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import TravellerCard from '@/components/TravellerCard/TravellerCard';
-// import Pagination from '@/components/Pagination/Pagination';
-import { getTravellers } from '@/services/travellers';
+import Pagination from '@/components/Pagination/Pagination';
+import { getTravellers } from '@/lib/api/travellers';
 import type { Traveller } from '@/types/traveller';
 // import Loader from '@/components/LoaderProvider/Loader';
 import toast from 'react-hot-toast';
 import css from './TravellersList.module.css';
-import { DotPulse } from 'ldrs/react';
 
 const PER_PAGE = 12;
 
@@ -98,22 +97,9 @@ export default function TravellersList() {
 
       {errorMessage && <p className={css.error}>{errorMessage}</p>}
 
-      {hasNextPage &&
-        (isLoadingMore ? (
-          <div className={css.loadMoreLoader}>
-            <DotPulse size="43" speed="1.3" color="#254c24" />
-          </div>
-        ) : (
-          <div className={css.loadMoreWrapper}>
-            <button
-              type="button"
-              className={css.loadMoreBtn}
-              onClick={handleLoadMore}
-            >
-              Показати ще
-            </button>
-          </div>
-        ))}
+      {hasNextPage && (
+        <Pagination onClick={handleLoadMore} isLoading={isLoadingMore} />
+      )}
     </div>
   );
 }
