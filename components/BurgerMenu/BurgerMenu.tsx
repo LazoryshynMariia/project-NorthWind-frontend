@@ -7,8 +7,10 @@ import { IoCloseOutline } from 'react-icons/io5';
 import css from './BurgerMenu.module.css';
 
 import Logo from '@/components/Logo/Logo';
-import { AuthBar } from '@/components/AuthBar/AuthBar';
+import  AuthBar  from '@/components/AuthBar/AuthBar';
 import { UserBar } from '@/components/UserBar/UserBar';
+
+import type { AuthUser } from '@/lib/api/auth';
 
 interface LinkItem {
   href: string;
@@ -19,18 +21,22 @@ interface BurgerMenuProps {
   isOpen: boolean;
   onClose: () => void;
   isAuthenticated: boolean;
+  user?: AuthUser;
   links: LinkItem[];
   onOpenLogin: () => void;
   onOpenRegister: () => void;
+  onLogout: () => Promise<void> | void;
 }
 
 export const BurgerMenu = ({
   isOpen,
   onClose,
   isAuthenticated,
+  user,
   links,
   onOpenLogin,
   onOpenRegister,
+  onLogout,
 }: BurgerMenuProps) => {
   useEffect(() => {
     if (!isOpen) return;
@@ -56,20 +62,20 @@ export const BurgerMenu = ({
     <div className={css.overlay}>
       <aside className={css.panel}>
         <div className="container">
-          <div className={css.navBar}>
+          <div className={css.topBar}>
             <Logo />
 
-            <div className={css.navBarActions}>
+            <div className={css.topBarActions}>
               {isAuthenticated ? (
                 <Link
                   href="/articles/create"
-                  className={css.navBarPublishButton}
+                  className={css.topBarPublishButton}
                   onClick={onClose}
                 >
                   Опублікувати статтю
                 </Link>
               ) : (
-                <div className={css.navBarAuthBar}>
+                <div className={css.topBarAuthBar}>
                   <AuthBar
                     variant="inline"
                     onOpenLogin={onOpenLogin}
@@ -103,18 +109,21 @@ export const BurgerMenu = ({
           </nav>
 
           <div className={css.bottomGroup}>
-            {isAuthenticated ? (
-              <>
-                <Link
-                  href="/articles/create"
-                  className={css.publishButton}
-                  onClick={onClose}
-                >
-                  Опублікувати статтю
-                </Link>
+            {isAuthenticated && (
+              <Link
+                href="/articles/create"
+                className={css.publishButton}
+                onClick={onClose}
+              >
+                Опублікувати статтю
+              </Link>
+            )}
 
-                <UserBar />
-              </>
+            {isAuthenticated && user ? (
+              <UserBar
+                user={user}
+                onLogout={onLogout}
+              />
             ) : (
               <div className={css.bottomAuthBar}>
                 <AuthBar

@@ -1,0 +1,18 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #24331f;
+  text-decoration: none;
+}
+
+.icon {
+  display: inline-flex;
+  color: inherit;
+}
+
+.text {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+}

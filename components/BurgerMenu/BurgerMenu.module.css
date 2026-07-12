@@ -1,3 +1,4 @@
+
 .container {
   width: 100%;
   max-width: 1440px;
@@ -85,7 +86,7 @@
 .navLink {
   font-weight: 400;
   font-size: 16px;
-  line-height: 150%;
+  line-height: 1.5;
   color: var(--color-scheme-2-text);
 }
 
@@ -125,7 +126,7 @@
     width: 196px;
     font-weight: 500;
     font-size: 16px;
-    line-height: 150%;
+    line-height: 1.5%;
   }
 
   .navBarAuthBar {

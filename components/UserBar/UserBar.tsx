@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { RxExit } from 'react-icons/rx';
-
-import { ConfirmModal } from '@/components/ConfirmModal/ConfirmModal';
+import { AuthUser } from '@/lib/api/auth';
+import  ConfirmModal from '@/components/ConfirmModal/ConfirmModal';
 
 import css from './UserBar.module.css';
 
@@ -14,7 +14,7 @@ interface User {
 }
 
 interface UserBarProps {
-  user: User;
+  user: AuthUser;
   onLogout: () => Promise<void> | void;
 }
 
@@ -65,9 +65,8 @@ export const UserBar = ({ user, onLogout }: UserBarProps) => {
         cancelButtonText="Відмінити"
         onConfirm={handleLogout}
         onCancel={() => setIsModalOpen(false)}
-      >
-        Ми будемо сумувати за вами!
-      </ConfirmModal>
+        description= "Ми будемо сумувати за вами!"       
+      />
     </div>
   );
 };

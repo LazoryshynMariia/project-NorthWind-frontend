@@ -8,7 +8,7 @@ interface AuthBarProps {
   variant?: 'default' | 'inline';
 }
 
-export const AuthBar = ({
+const AuthBar = ({
   onOpenLogin,
   onOpenRegister,
   variant = 'default',

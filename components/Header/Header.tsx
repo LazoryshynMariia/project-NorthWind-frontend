@@ -1,124 +1,139 @@
-'use client';
 
+import { FC, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { createPortal } from 'react-dom';
-import { useEffect } from 'react';
-import { RxCross2 } from "react-icons/rx";
-import AuthBar from '@/components/AuthBar/AuthBar';
-import UserBar  from '@/components/UserBar/UserBar';
-import css from './BurgerMenu.module.css';
+import { RxHamburgerMenu } from 'react-icons/rx';
 
-interface NavLink {
+import Logo from '@/components/Logo/Logo';
+import AuthBar from '@/components/AuthBar/AuthBar';
+import UserBar from '@/components/UserBar/UserBar';
+import BurgerMenu from '@/components/BurgerMenu/BurgerMenu';
+
+import type { AuthUser } from '@/lib/api/auth';
+
+import css from './Header.module.css';
+
+interface LinkItem {
   href: string;
   label: string;
 }
 
-interface BurgerMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
+interface HeaderProps {
   isAuthenticated: boolean;
-  links: NavLink[];
+  user?: AuthUser;
   onOpenLogin: () => void;
   onOpenRegister: () => void;
+  onLogout: () => Promise<void> | void;
 }
-export const BurgerMenu = ({
-  isOpen,
-  onClose,
+
+const publicLinks: LinkItem[] = [
+  { href: '/', label: 'Головна' },
+  { href: '/articles', label: 'Статті' },
+  { href: '/travelers', label: 'Еко-Мандрівники' },
+];
+
+const privateLinks: LinkItem[] = [
+  { href: '/profile', label: 'Мій профіль' },
+  { href: '/articles/create', label: 'Опублікувати статтю' },
+];
+
+const Header: FC<HeaderProps> = ({
   isAuthenticated,
-  links,
+  user,
   onOpenLogin,
   onOpenRegister,
-}: BurgerMenuProps) => {
-  
+  onLogout,
+}) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
-    const html = document.documentElement;
-    const { body } = document;
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = body.style.overflow;
-    html.style.overflow = 'hidden';
-    body.style.overflow = 'hidden';
-    return () => {
-      html.style.overflow = prevHtmlOverflow;
-      body.style.overflow = prevBodyOverflow;
+    const header = headerRef.current;
+
+    if (!header) return;
+
+    const updateHeaderHeight = () => {
+      document.documentElement.style.setProperty(
+        '--header-height',
+        `${header.offsetHeight}px`
+      );
     };
-  }, [isOpen]);
 
-  if (!isOpen) return null;
+    updateHeaderHeight();
 
-  return createPortal(
-    <div className={css.overlay}>
-      <div className={`container ${css.panel}`}>
-        <div className={css.topBar}>
-          <Link href="/" className={css.logo} aria-label="Перейти на головну" onClick={onClose}>
-            <Image src="/icons/logo.svg" alt="" width={24} height={24} />
-            <span>
-              Природні
-              <br />
-              Мандри
-            </span>
-          </Link>
+    const resizeObserver = new ResizeObserver(updateHeaderHeight);
+    resizeObserver.observe(header);
 
-          <div className={css.topBarActions}>
-            {isAuthenticated ? (
-              <Link
-                href="/stories/new"
-                className={css.topBarPublishButton}
-                onClick={onClose}
-              >
-                Опублікувати статтю
-              </Link>
-            ) : (
-              <div className={css.topBarAuthBar}>
-                                  <AuthBar variant="inline"
-                                      onOpenLogin={onOpenLogin}
-                                      onOpenRegister={onOpenRegister}
-                                  />
-              </div>
-            )}
+    return () => resizeObserver.disconnect();
+  }, []);
 
-            <button
-              type="button"
-              className={css.closeButton}
-              aria-label="Закрити меню"
-              onClick={onClose}
+  const burgerLinks = isAuthenticated
+    ? [...publicLinks, ...privateLinks]
+    : publicLinks;
+
+  return (
+    <header ref={headerRef} className={css.header}>
+      <div className={css.container}>
+        <Logo />
+
+        <nav className={css.navigation}>
+          {publicLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={css.link}
             >
-              <RxCross2 size={24} />
-            </button>
-          </div>
-        </div>
-
-        <nav className={css.nav}>
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} className={css.navLink} onClick={onClose}>
               {link.label}
             </Link>
           ))}
+
+          {isAuthenticated &&
+            privateLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={css.link}
+              >
+                {link.label}
+              </Link>
+            ))}
         </nav>
 
-        <div className={css.bottomGroup}>
-          {isAuthenticated && (
-            <Link href="/stories/new" className={css.publishButton} onClick={onClose}>
-              Опублікувати статтю
-            </Link>
-          )}
-
-          {isAuthenticated ? (
-            <UserBar />
+        <div className={css.actions}>
+          {isAuthenticated && user ? (
+            <UserBar
+              user={user}
+              onLogout={onLogout}
+            />
           ) : (
-            <div className={css.bottomAuthBar}>
-                              <AuthBar
-                                  variant='inline'
-                                  onOpenLogin={onOpenLogin}
-                                  onOpenRegister={onOpenRegister}
-                              />
-            </div>
+            <AuthBar
+              onOpenLogin={onOpenLogin}
+              onOpenRegister={onOpenRegister}
+            />
           )}
         </div>
+
+        <button
+          type="button"
+          className={css.burgerButton}
+          aria-label="Відкрити меню"
+          onClick={() => setIsMenuOpen(true)}
+        >
+          <RxHamburgerMenu size={24} />
+        </button>
       </div>
-    </div>,
-    document.body,
+
+      <BurgerMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        isAuthenticated={isAuthenticated}
+        user={user}
+        links={burgerLinks}
+        onOpenLogin={onOpenLogin}
+        onOpenRegister={onOpenRegister}
+        onLogout={onLogout}
+      />
+    </header>
   );
 };
+
+export default Header;
