@@ -60,9 +60,7 @@ export default function LoginForm() {
 
       <h1 className={styles.title}>Вхід</h1>
 
-      <p className={styles.subtitle}>
-        Вітаємо знову у спільноті мандрівників!
-      </p>
+      <p className={styles.subtitle}>Вітаємо знову у спільноті мандрівників!</p>
 
       <Formik
         initialValues={initialValues}

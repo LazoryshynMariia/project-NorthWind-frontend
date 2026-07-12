@@ -7,11 +7,13 @@ import styles from './ImgPicker.module.css';
 type Props = {
   onChangePhoto: (file: File | null) => void;
   profilePhotoUrl?: string;
+  setError: (err:string)=>void
+  error: string
 };
 
-const ImgPicker = ({ profilePhotoUrl, onChangePhoto }: Props) => {
+const ImgPicker = ({ profilePhotoUrl, onChangePhoto, error, setError }: Props) => {
   const [previewUrl, setPreviewUrl] = useState<string>(profilePhotoUrl || '');
-  const [error, setError] = useState<string>('');
+ // const [error, setError] = useState<string>('');
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -45,8 +47,6 @@ const ImgPicker = ({ profilePhotoUrl, onChangePhoto }: Props) => {
     reader.readAsDataURL(file);
   };
 
-  console.log('[ImgPicker] render, previewUrl empty?', !previewUrl);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.preview}>
@@ -59,7 +59,7 @@ const ImgPicker = ({ profilePhotoUrl, onChangePhoto }: Props) => {
       </div>
 
       <label className={styles.button}>
-        Завантажити
+        Завантажити фото
         <input
           type="file"
           accept="image/*"

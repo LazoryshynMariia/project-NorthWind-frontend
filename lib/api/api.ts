@@ -5,6 +5,6 @@ export const nextServer = axios.create({
   headers: {
     //замокана авторизація
     authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNGVhOGQ0MDg0MmJlM2VhNzY1ZDI2OSIsImlhdCI6MTc4Mzg0NTQ3OCwiZXhwIjoxNzgzODQ5MDc4fQ.UWMuZEfOMNhY_YTrd55xTkcEVh37_-_unRP8nhYE8hI',
-  }
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNGVhOGQ0MDg0MmJlM2VhNzY1ZDI2OSIsImlhdCI6MTc4Mzg0OTEyNywiZXhwIjoxNzgzODUyNzI3fQ.POLmYM9m0k8BL-OqOsmrpINfjVoaCxcmF_fzCeAycUI',
+  },
 });
