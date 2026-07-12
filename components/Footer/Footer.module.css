@@ -61,6 +61,10 @@
     padding-inline: 32px;
   }
 
+  .top {
+    align-items: stretch;
+  }
+
   .brand {
     width: 100%;
     flex-direction: row;
@@ -82,7 +86,12 @@
     gap: 24px;
   }
 
+  /* На десктопі Logo/SocialList/FooterNav мають бути трьома
+     рівновіддаленими елементами в одному рядку, а не Logo+SocialList
+     разом. display:contents "розчиняє" .brand як обгортку - його
+     діти (Logo, SocialList) стають прямими flex-елементами .top
+     нарівні з FooterNav, без зміни JSX. */
   .brand {
-    width: auto;
+    display: contents;
   }
 }
