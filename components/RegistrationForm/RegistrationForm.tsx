@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 import { register } from '@/lib/api/auth';
 import { useRouter } from 'next/navigation';
 import { RegisterRequest, login } from '../../lib/api/auth';
+import axios from 'axios';
 
 const initialValues: RegisterRequest = {
   name: '',
@@ -16,10 +17,14 @@ const initialValues: RegisterRequest = {
 };
 
 const RegistrationFormSchema = Yup.object().shape({
-  name: Yup.string().max(32, 'Name is too long').required('Name is required'),
+  name: Yup.string()
+    .max(32, 'Name is too long')
+    .trim()
+    .required('Name is required'),
   email: Yup.string()
     .email('Invalid email format')
     .max(64, 'Email is too long')
+    .trim()
     .required('Email is required'),
   password: Yup.string()
     .min(8, 'Password must be at least 8 characters')
@@ -43,7 +48,12 @@ export default function RegistrationForm() {
       });
       router.push('/');
     } catch (error) {
-      toast.error('Не вдалося зареєструватися');
+      if (axios.isAxiosError(error)) {
+        const serverMessage = error.response?.data?.message;
+        toast.error(serverMessage || 'Не вдалося зареєструватися');
+      } else {
+        toast.error('Не вдалося зареєструватися');
+      }
     } finally {
       actions.setSubmitting(false);
     }
