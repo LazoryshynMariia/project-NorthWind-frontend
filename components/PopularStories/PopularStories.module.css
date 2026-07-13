@@ -40,6 +40,10 @@
   margin-bottom: 40px;
 }
 
+.slide {
+  height: auto;
+}
+
 .navigationControls {
   display: flex;
   gap: 10px;

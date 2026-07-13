@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
 import StoryCard from '@/components/StoryCard/StoryCard';
-import { Story } from '@/types/story';
+import { Story } from '@/types/index';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -80,12 +80,8 @@ export default function PopularStories() {
                   </SwiperSlide>
                 ))
               : stories.map(story => (
-                  <SwiperSlide key={story._id}>
-                    <StoryCard
-                      story={story}
-                      isAuthenticated={isAuthenticated}
-                      authToken={authToken}
-                    />
+                  <SwiperSlide key={story._id} className={css.slide}>
+                    <StoryCard story={story} />
                   </SwiperSlide>
                 ))}
           </Swiper>
