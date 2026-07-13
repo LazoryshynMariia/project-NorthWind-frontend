@@ -1,8 +1,7 @@
+
 .header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   width: 100%;
   z-index: 100;
   background: var(--color-scheme-2-background);
@@ -15,146 +14,133 @@
   padding: 16px 20px;
 }
 
-/* --- Лого --- */
-.logo {
+/* Правая часть */
+
+.rightGroup {
   display: flex;
   align-items: center;
-  width: 124px;
-  height: 40px;
-  justify-content: space-around;
-  color: var(--color-scheme-2-text);
+  margin-left: auto;
 }
 
-.logo span {
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 100%;
-  letter-spacing: -0.01em;
-}
+/* Навигация */
 
-/* --- Права група: nav + auth-блок, разом притиснуті вправо на десктопі --- */
-.rightGroup {
-  display: contents;
-}
-
-/* --- Навігація: на мобільному й планшеті ховається, вона в бургері --- */
-.nav {
+.navigation {
   display: none;
 }
 
 .navLink {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 150%;
-  color: var(--color-scheme-2-text);
-  white-space: nowrap;
   padding: 6px 4px;
   margin: -6px -4px;
+
   border-radius: 6px;
-  transition: box-shadow var(--main-transition), background-color var(--main-transition);
+
+  color: var(--color-scheme-2-text);
+  text-decoration: none;
+  white-space: nowrap;
+
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+
+  transition:
+    background-color var(--main-transition),
+    box-shadow var(--main-transition);
 }
 
 .navLink:hover,
 .navLink:focus {
-  box-shadow: 0 0 0 1px var(--color-scheme-2-text);
   outline: none;
+  box-shadow: 0 0 0 1px var(--color-scheme-2-text);
 }
 
 .navLink:focus-visible,
 .navLink:active {
-  background-color: var(--color-neutral-lighter);
+  background: var(--color-neutral-lighter);
 }
 
-/* --- CTA "Опублікувати статтю": видима на всіх екранах --- */
-/* .publishButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-mantis-dark);
-  color: var(--color-white);
-  font-weight: 500;
-  font-size: 13px;
-  border-radius: 6px;
-  padding: 8px 14px;
-  white-space: nowrap;
-  transition: background var(--main-transition);
-}
+/* Блок с кнопками */
 
-.publishButton:hover,
-.publishButton:focus {
-  background: var(--color-mantis-darker);
-  outline: none;
-}
-
-/* --- AuthBar/UserBar: ховається на мобільному, з'являється з планшета --- */
 .actions {
   display: none;
   align-items: center;
 }
 
-/* --- UserBar: лише на десктопі --- */
-.desktopUserActions {
-  display: none;
-  align-items: center;
-}
-
-.wrapper{
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
+/* Кнопка публикации */
 
 .publishButton {
   display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 196px;
+  height: 40px;
+
+  border: 1px solid var(--color-mantis-dark);
+  border-radius: 6px;
+
+  background: var(--color-mantis-dark);
+  color: var(--color-white);
+
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+
+  transition: background-color var(--main-transition);
 }
 
-/* --- Кнопка бургера: видима на мобільному й планшеті --- */
+.publishButton:hover {
+  background: var(--color-mantis-darker);
+}
+
+/* Бургер */
+
 .burgerButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-scheme-2-text);
-  padding: 4px;
-  border-radius: 6px;
+
+  width: 40px;
+  height: 40px;
+
+  margin-left: 16px;
+
   border: 1px solid var(--color-scheme-2-border);
+  border-radius: 6px;
+
   background: var(--opacity-neutral-darkest-5);
+  color: var(--color-scheme-2-text);
+
+  cursor: pointer;
 }
 
-/* ===== ПЛАНШЕТ (≥768px) ===== */
-@media only screen and (min-width: 768px) {
+/* =======================
+   Планшет
+======================= */
+
+@media (min-width: 768px) {
   .content {
     padding: 16px 32px;
   }
 
-  .publishButton {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 150%;
-    color: var(--color-white);
-    background: var(--color-mantis-dark);
-    border: 1px solid var(--color-mantis-dark);
-    border-radius: 6px;
-    padding: 4px 0;
-    width: 196px;
-    justify-content: center;
-    display: inline-flex;
-  }
-
   .actions {
     display: flex;
+    align-items: center;
   }
 }
 
-/* ===== ДЕСКТОП (≥1440px) ===== */
-@media only screen and (min-width: 1440px) {
+/* =======================
+   Десктоп
+======================= */
+
+@media (min-width: 1440px) {
   .content {
     padding: 16px 64px;
   }
 
   .rightGroup {
-    display: flex;
-    align-items: center;
-    gap: 40px;
+    gap: 32px;
   }
 
   .navigation {
@@ -165,6 +151,12 @@
 
   .actions {
     display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .publishButton {
+    display: inline-flex;
   }
 
   .burgerButton {

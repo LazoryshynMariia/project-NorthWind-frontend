@@ -1,8 +1,7 @@
 .authBar {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 .loginButton,
@@ -10,18 +9,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  border: 1px solid var(--color-scheme-2-border);
+
+  width: auto;
+  min-height: 40px;
+  padding: 4px 16px;
+
   border-radius: 6px;
-  padding: 4px 0;
-  font-weight: 500;
   font-size: 16px;
-  line-height: 1.5;
+  font-weight: 500;
+  line-height: 150%;
   white-space: nowrap;
-  transition: background var(--main-transition), color var(--main-transition), border var(--main-transition);
+  cursor: pointer;
+
+  transition:
+    background-color var(--main-transition),
+    color var(--main-transition),
+    border-color var(--main-transition);
 }
 
 .loginButton {
+  border: 1px solid var(--color-scheme-2-border);
   background: var(--opacity-neutral-darkest-5);
   color: var(--color-scheme-2-text);
 }
@@ -29,39 +36,36 @@
 .loginButton:hover,
 .loginButton:focus {
   background: var(--color-mantis-dark);
-  border: 1px solid var(--color-mantis-dark);
+  border-color: var(--color-mantis-dark);
   color: var(--color-white);
-  outline: none;
 }
 
 .registerButton {
+  border: 1px solid var(--color-mantis-dark);
   background: var(--color-mantis-dark);
   color: var(--color-white);
-  border: 1px solid var(--color-mantis-dark);
 }
 
 .registerButton:hover,
 .registerButton:focus {
-  background: var(--color-mantis-darker);
-  border: 1px solid var(--color-mantis-darker);
-  outline: none;
+  background: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
+  color: var(--color-scheme-2-text);
 }
 
-.authBar.inline {
-  flex-direction: row;
-  gap: 12px;
+.vertical {
+  flex-direction: column;
+  align-items: stretch;
 }
 
-.inline .loginButton,
-.inline .registerButton {
-  width: auto;
-  padding: 4px 10px;
+.vertical .loginButton,
+.vertical .registerButton {
+  width: 100%;
 }
 
-@media only screen and (min-width: 1440px) {
+@media (min-width: 1440px) {
   .loginButton,
   .registerButton {
     font-size: 20px;
-    line-height: 1.5;
   }
 }

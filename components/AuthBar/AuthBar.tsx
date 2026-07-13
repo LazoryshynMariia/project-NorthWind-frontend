@@ -5,18 +5,18 @@ import css from './AuthBar.module.css';
 interface AuthBarProps {
   onOpenLogin: () => void;
   onOpenRegister: () => void;
-  variant?: 'default' | 'inline';
+  variant?: 'default' | 'vertical';
 }
 
-const AuthBar = ({
+export default function AuthBar({
   onOpenLogin,
   onOpenRegister,
   variant = 'default',
-}: AuthBarProps) => {
+}: AuthBarProps) {
   return (
     <div
-      className={`${css.AuthBar} ${
-        variant === 'inline' ? css.inline : ''
+      className={`${css.authBar} ${
+        variant === 'vertical' ? css.vertical : ''
       }`}
     >
       <button
@@ -36,6 +36,4 @@ const AuthBar = ({
       </button>
     </div>
   );
-};
-
-export default AuthBar;
+}

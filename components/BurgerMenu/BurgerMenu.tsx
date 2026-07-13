@@ -77,7 +77,7 @@ export const BurgerMenu = ({
               ) : (
                 <div className={css.topBarAuthBar}>
                   <AuthBar
-                    variant="inline"
+                    
                     onOpenLogin={onOpenLogin}
                     onOpenRegister={onOpenRegister}
                   />

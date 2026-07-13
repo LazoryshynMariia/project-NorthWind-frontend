@@ -1,4 +1,6 @@
 
+'use client';
+
 import { FC, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { RxHamburgerMenu } from 'react-icons/rx';
@@ -26,14 +28,13 @@ interface HeaderProps {
 }
 
 const publicLinks: LinkItem[] = [
-  { href: '/', label: 'Головна' },
-  { href: '/articles', label: 'Статті' },
-  { href: '/travelers', label: 'Еко-Мандрівники' },
+  { label: 'Головна', href: '/' },
+  { label: 'Статті', href: '/stories' },
+  { label: 'Еко-Мандрівники', href: '/travellers' },
 ];
 
 const privateLinks: LinkItem[] = [
   { href: '/profile', label: 'Мій профіль' },
-  { href: '/articles/create', label: 'Опублікувати статтю' },
 ];
 
 const Header: FC<HeaderProps> = ({
@@ -45,6 +46,10 @@ const Header: FC<HeaderProps> = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+
+  const links = isAuthenticated
+    ? [...publicLinks, ...privateLinks]
+    : publicLinks;
 
   useEffect(() => {
     const header = headerRef.current;
@@ -66,73 +71,85 @@ const Header: FC<HeaderProps> = ({
     return () => resizeObserver.disconnect();
   }, []);
 
-  const burgerLinks = isAuthenticated
-    ? [...publicLinks, ...privateLinks]
-    : publicLinks;
-
   return (
-    <header ref={headerRef} className={css.header}>
-      <div className={css.container}>
-        <Logo />
+    <>
+      <header
+        ref={headerRef}
+        className={css.header}
+      >
+        <div className={css.content}>
+          <Logo />
 
-        <nav className={css.navigation}>
-          {publicLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={css.link}
-            >
-              {link.label}
-            </Link>
-          ))}
+          <div className={css.rightGroup}>
+            <nav className={css.navigation}>
+              {publicLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={css.navLink}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
-          {isAuthenticated &&
-            privateLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={css.link}
-              >
-                {link.label}
-              </Link>
-            ))}
-        </nav>
+              {isAuthenticated &&
+                privateLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={css.navLink}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+            </nav>
 
-        <div className={css.actions}>
-          {isAuthenticated && user ? (
-            <UserBar
-              user={user}
-              onLogout={onLogout}
-            />
-          ) : (
-            <AuthBar
-              onOpenLogin={onOpenLogin}
-              onOpenRegister={onOpenRegister}
-            />
-          )}
+            <div className={css.actions}>
+              {isAuthenticated && user ? (
+                <>
+                  <Link
+                    href="/articles/create"
+                    className={css.publishButton}
+                  >
+                    Опублікувати статтю
+                  </Link>
+
+                  <UserBar
+                    user={user}
+                    onLogout={onLogout}
+                  />
+                </>
+              ) : (
+                <AuthBar
+                  onOpenLogin={onOpenLogin}
+                  onOpenRegister={onOpenRegister}
+                />
+              )}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className={css.burgerButton}
+            aria-label="Відкрити меню"
+            onClick={() => setIsMenuOpen(true)}
+          >
+            <RxHamburgerMenu size={24} />
+          </button>
         </div>
-
-        <button
-          type="button"
-          className={css.burgerButton}
-          aria-label="Відкрити меню"
-          onClick={() => setIsMenuOpen(true)}
-        >
-          <RxHamburgerMenu size={24} />
-        </button>
-      </div>
+      </header>
 
       <BurgerMenu
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
+        links={links}
         isAuthenticated={isAuthenticated}
         user={user}
-        links={burgerLinks}
         onOpenLogin={onOpenLogin}
         onOpenRegister={onOpenRegister}
         onLogout={onLogout}
       />
-    </header>
+    </>
   );
 };
 
