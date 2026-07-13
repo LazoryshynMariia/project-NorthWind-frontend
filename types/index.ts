@@ -9,7 +9,7 @@ export interface Story {
   article: string;
   category: StoryCategory | string;
   img: string;
-  date: string;
+  date?: string;
   ownerId: string;
-  rate: number;
+  rate?: number;
 }

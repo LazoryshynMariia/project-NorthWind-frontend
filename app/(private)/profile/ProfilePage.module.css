@@ -64,3 +64,8 @@
     height: 145px;
   }
 }
+
+.error {
+  padding: 32px 0;
+  font-size: 18px;
+}

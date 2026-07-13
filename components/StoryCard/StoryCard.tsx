@@ -34,7 +34,7 @@ export default function StoryCard({ story, ownerName }: StoryCardProps) {
           <div>
             <p className={css.authorName}>{ownerName}</p>
             <p className={css.meta}>
-              {story.date.slice(0, 10)} • {story.rate} 🔖
+              {story.date ? story.date.slice(0, 10) : ''} • {story.rate ?? 0} 🔖
             </p>
           </div>
         </div>
