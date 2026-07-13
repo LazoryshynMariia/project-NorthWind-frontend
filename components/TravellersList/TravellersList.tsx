@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import TravellerCard from '@/components/TravellerCard/TravellerCard';
 import Pagination from '@/components/Pagination/Pagination';
-import { getTravellers } from '@/lib/api/travellers';
+import { getTravellers } from '@/lib/api/travellersApi';
 import type { Traveller } from '@/types/traveller';
 // import Loader from '@/components/LoaderProvider/Loader';
 import toast from 'react-hot-toast';
@@ -98,7 +98,11 @@ export default function TravellersList() {
       {errorMessage && <p className={css.error}>{errorMessage}</p>}
 
       {hasNextPage && (
-        <Pagination onClick={handleLoadMore} isLoading={isLoadingMore} />
+        <Pagination
+          onClick={handleLoadMore}
+          isLoading={isLoadingMore}
+          className={css.travellersPagination}
+        />
       )}
     </div>
   );

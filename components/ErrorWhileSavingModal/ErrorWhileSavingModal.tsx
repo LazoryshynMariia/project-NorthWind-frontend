@@ -61,14 +61,10 @@ export default function ErrorWhileSavingModal({
         </p>
 
         <div className={styles.actions}>
-          <Link
-            href="/auth/login"
-            className={styles.linkOutline}
-            onClick={onClose}
-          >
+          <Link href="/login" className={styles.linkOutline} onClick={onClose}>
             Увійти
           </Link>
-          <Link href="/auth/register" className={styles.link} onClick={onClose}>
+          <Link href="/register" className={styles.link} onClick={onClose}>
             Зареєструватись
           </Link>
         </div>

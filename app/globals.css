@@ -1,4 +1,6 @@
-/* 
+﻿@import 'ldrs/react/DotPulse.css';
+
+/*
    RESET */
 
 *,
@@ -19,7 +21,6 @@ html {
 
 body {
   min-height: 100vh;
-  min-width: 320px;
 
   font-family: var(--font-geist-sans), sans-serif;
 
@@ -56,33 +57,6 @@ button {
 ul,
 ol {
   list-style: none;
-}
-
-.container {
-  width: 100%;
-  min-width: 320px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-@media (min-width: 375px) {
-  .container {
-    max-width: 375px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding: 0 32px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding: 0 64px;
-  }
 }
 
 /*  DESIGN TOKENS */
@@ -158,4 +132,10 @@ ol {
   --space-6: 32px;
   --space-7: 40px;
   --space-8: 48px;
+
+  /* Transitions */
+
+  --transition-fast: 150ms ease-in-out;
+  --transition-default: 250ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
 }

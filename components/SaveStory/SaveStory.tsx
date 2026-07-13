@@ -2,7 +2,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import { saveStory, deleteSavedStory, checkIsSaved } from '@/lib/api';
+import {
+  saveStory,
+  deleteSavedStory,
+  checkIsSaved,
+} from '@/lib/api/savedStoriesApi';
 import ErrorWhileSavingModal from '@/components/ErrorWhileSavingModal/ErrorWhileSavingModal';
 import styles from './SaveStory.module.css';
 
