@@ -1,6 +1,7 @@
 ﻿'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuthStore } from '@/lib/store/authStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
@@ -16,16 +17,12 @@ import css from './StoryCard.module.css';
 interface StoryCardProps {
   story: Story;
   ownerName?: string;
-  isAuthenticated?: boolean;
-  authToken?: string;
   initialIsSaved?: boolean;
 }
 
 export default function StoryCard({
   story,
   ownerName,
-  isAuthenticated = false,
-  authToken,
   initialIsSaved = false,
 }: StoryCardProps) {
   const [isSaved, setIsSaved] = useState(initialIsSaved);
@@ -33,11 +30,7 @@ export default function StoryCard({
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const token = useMemo(() => {
-    if (authToken) return authToken;
-    if (typeof window === 'undefined') return undefined;
-    return localStorage.getItem('accessToken') || undefined;
-  }, [authToken]);
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
 
   const categoryName =
     typeof story.category === 'object'
@@ -52,7 +45,7 @@ export default function StoryCard({
   }, [saves]);
 
   useEffect(() => {
-    if (!isAuthenticated || !token) {
+    if (!isAuthenticated) {
       setIsSaved(false);
       return;
     }
@@ -61,7 +54,7 @@ export default function StoryCard({
 
     const syncSavedStatus = async () => {
       try {
-        const savedStatus = await checkIsSaved(story._id, token);
+        const savedStatus = await checkIsSaved(story._id);
         if (isMounted) {
           setIsSaved(savedStatus);
         }
@@ -78,10 +71,10 @@ export default function StoryCard({
     return () => {
       isMounted = false;
     };
-  }, [isAuthenticated, story._id, token]);
+  }, [isAuthenticated, story._id]);
 
   const handleSaveClick = async () => {
-    if (!isAuthenticated || !token) {
+    if (!isAuthenticated) {
       setIsModalOpen(true);
       return;
     }
@@ -89,11 +82,11 @@ export default function StoryCard({
     setIsLoading(true);
     try {
       if (isSaved) {
-        await deleteSavedStory(story._id, token);
+        await deleteSavedStory(story._id);
         setIsSaved(false);
         setSavedCount(prev => Math.max(prev - 1, 0));
       } else {
-        await saveStory(story._id, token);
+        await saveStory(story._id);
         setIsSaved(true);
         setSavedCount(prev => prev + 1);
       }

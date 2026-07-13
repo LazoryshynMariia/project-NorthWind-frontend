@@ -24,26 +24,11 @@ function getApiErrorMessage(error: unknown, fallbackMessage: string): string {
   return message || data?.error || fallbackMessage;
 }
 
-function withAuth(authToken?: string) {
-  return authToken
-    ? {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      }
-    : undefined;
-}
-
-export async function saveStory(
-  storyId: string,
-  authToken?: string
-): Promise<void> {
+export async function saveStory(storyId: string): Promise<void> {
   try {
-    await nextServer.post(
-      '/users/saved-stories',
-      { storyId },
-      withAuth(authToken)
-    );
+    await nextServer.post('/users/saved-stories', {
+      storyId,
+    });
   } catch (error) {
     throw new Error(
       getApiErrorMessage(
@@ -56,15 +41,9 @@ export async function saveStory(
   }
 }
 
-export async function deleteSavedStory(
-  storyId: string,
-  authToken?: string
-): Promise<void> {
+export async function deleteSavedStory(storyId: string): Promise<void> {
   try {
-    await nextServer.delete(
-      `/users/saved-stories/${storyId}`,
-      withAuth(authToken)
-    );
+    await nextServer.delete(`/users/saved-stories/${storyId}`);
   } catch (error) {
     throw new Error(
       getApiErrorMessage(error, 'Не вдалося видалити історію зі збережених')
@@ -72,14 +51,10 @@ export async function deleteSavedStory(
   }
 }
 
-export async function checkIsSaved(
-  storyId: string,
-  authToken?: string
-): Promise<boolean> {
+export async function checkIsSaved(storyId: string): Promise<boolean> {
   try {
     const { data } = await nextServer.get<SavedStoryStatusResponse>(
-      `/users/saved-stories/${storyId}`,
-      withAuth(authToken)
+      `/users/saved-stories/${storyId}`
     );
 
     return Boolean(data.isSaved);

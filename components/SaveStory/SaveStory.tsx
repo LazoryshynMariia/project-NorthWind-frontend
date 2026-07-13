@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuthStore } from '@/lib/store/authStore';
 import toast from 'react-hot-toast';
 import {
   saveStory,
@@ -12,28 +13,21 @@ import styles from './SaveStory.module.css';
 
 interface SaveStoryProps {
   storyId: string;
-  isAuthenticated: boolean;
-  authToken?: string;
   initialIsSaved?: boolean;
 }
 
 export default function SaveStory({
   storyId,
-  isAuthenticated,
-  authToken,
   initialIsSaved = false,
 }: SaveStoryProps) {
   const [isSaved, setIsSaved] = useState(initialIsSaved);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const token = useMemo(() => {
-    if (authToken) return authToken;
-    if (typeof window === 'undefined') return undefined;
-    return localStorage.getItem('accessToken') || undefined;
-  }, [authToken]);
+
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
 
   useEffect(() => {
-    if (!isAuthenticated || !token) {
+    if (!isAuthenticated) {
       setIsSaved(false);
       return;
     }
@@ -42,7 +36,7 @@ export default function SaveStory({
 
     const syncSavedStatus = async () => {
       try {
-        const savedStatus = await checkIsSaved(storyId, token);
+        const savedStatus = await checkIsSaved(storyId);
         if (isMounted) {
           setIsSaved(savedStatus);
         }
@@ -59,10 +53,10 @@ export default function SaveStory({
     return () => {
       isMounted = false;
     };
-  }, [isAuthenticated, storyId, token]);
+  }, [isAuthenticated, storyId]);
 
   const handleClick = async () => {
-    if (!isAuthenticated || !token) {
+    if (!isAuthenticated) {
       setIsModalOpen(true);
       return;
     }
@@ -70,10 +64,10 @@ export default function SaveStory({
     setIsLoading(true);
     try {
       if (isSaved) {
-        await deleteSavedStory(storyId, token);
+        await deleteSavedStory(storyId);
         setIsSaved(false);
       } else {
-        await saveStory(storyId, token);
+        await saveStory(storyId);
         setIsSaved(true);
       }
     } catch (error) {
