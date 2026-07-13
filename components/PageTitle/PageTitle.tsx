@@ -1,9 +1,9 @@
-import css from './PageTitle.module.css';
+import styles from './PageTitle.module.css';
 
-type PageTitleProps = {
-  children: React.ReactNode;
-};
+interface PageTitleProps {
+  title: string;
+}
 
-export default function PageTitle({ children }: PageTitleProps) {
-  return <h1 className={css.title}>{children}</h1>;
+export default function PageTitle({ title }: PageTitleProps) {
+  return <h1 className={styles.title}>{title}</h1>;
 }

@@ -1,87 +1,72 @@
-import StoryCard from '@/components/StoryCard/StoryCard';
+'use client';
 
+import { useRef, useState } from 'react';
+import toast from 'react-hot-toast';
+import { nextServer } from '@/lib/api/api';
+import type { PaginatedResponse } from '@/types/api';
+import type { Story } from '@/types';
+import Pagination from '../Pagination/Pagination';
+import StoryCard from '../StoryCard/StoryCard';
 import css from './TravellersStories.module.css';
 
-const stories = [
-  {
-    id: '1',
-    title: 'Карпати для новачків: маршрути, краєвиди та корисні поради',
-    image: '/story-placeholder.jpg',
-    author: 'Анастасія Олійник',
-    readingTime: '5',
-  },
-  {
-    id: '2',
-    title: 'Подорож до Шацьких озер: що потрібно знати',
-    image: '/story-placeholder1.jpg',
-    author: 'Назар Ткаченко',
-    readingTime: '5',
-  },
-  {
-    id: '3',
-    title: 'Полісся: мандрівка у світ дикої природи',
-    image: '/story-placeholder2.jpg',
-    author: 'Єва Бондаренко',
-    readingTime: '5',
-  },
-  {
-    id: '4',
-    title: 'Найкращі маршрути для сімейного відпочинку',
-    image: '/story-placeholder3.jpg',
-    author: 'Марія Коваль',
-    readingTime: '5',
-  },
-  {
-    id: '5',
-    title: 'Як подорожувати Україною екологічно',
-    image: '/story-placeholder4.jpg',
-    author: 'Олег Савчук',
-    readingTime: '5',
-  },
-  {
-    id: '6',
-    title: 'Місця, де можна відчути справжню українську культуру',
-    image: '/story-placeholder5.jpg',
-    author: 'Ірина Мельник',
-    readingTime: '5',
-  },
-  {
-    id: '7',
-    title: 'Локальні продукти, які варто спробувати',
-    image: '/story-placeholder6.jpg',
-    author: 'Тарас Бондар',
-    readingTime: '5',
-  },
-  {
-    id: '8',
-    title: 'Вихідні у Львові: готовий маршрут',
-    image: '/story-placeholder7.jpg',
-    author: 'Софія Левченко',
-    readingTime: '5',
-  },
-  {
-    id: '9',
-    title: 'Маловідомі природні локації України',
-    image: '/story-placeholder8.jpg',
-    author: 'Андрій Ткач',
-    readingTime: '5',
-  },
-];
+interface TravellersStoriesProps {
+  initialStories: Story[];
+  ownerName?: string;
+  // if author is passed, the list can load more pages by this filter
+  author?: string;
+  perPage?: number;
+  totalPages?: number;
+}
 
-export default function TravellersStories() {
+export default function TravellersStories({
+  initialStories,
+  ownerName,
+  author,
+  perPage = 6,
+  totalPages = 1,
+}: TravellersStoriesProps) {
+  const [stories, setStories] = useState<Story[]>(initialStories);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const hasNextPage = author ? page < totalPages : false;
+
+  const handleLoadMore = async () => {
+    setIsLoading(true);
+    try {
+      const nextPage = page + 1;
+      const response = await nextServer.get<PaginatedResponse<Story>>(
+        '/stories',
+        { params: { author, page: nextPage, perPage } }
+      );
+      const firstNewIndex = stories.length;
+      setStories(prev => [...prev, ...response.data.data]);
+      setPage(nextPage);
+      // scroll the freshly loaded portion to the top of the screen
+      requestAnimationFrame(() => {
+        const firstNewCard = listRef.current?.children[firstNewIndex];
+        firstNewCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    } catch {
+      toast.error('Не вдалося завантажити історії');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <section className={css.section}>
-      <ul className={css.list}>
+    <div className={css.wrapper}>
+      <ul className={css.grid} ref={listRef}>
         {stories.map(story => (
-          <li key={story.id}>
-            <StoryCard {...story} />
+          <li key={story._id}>
+            <StoryCard story={story} ownerName={ownerName} />
           </li>
         ))}
       </ul>
-
-      <button className={css.loadMore} type="button">
-        Показати ще
-      </button>
-    </section>
+      {hasNextPage && (
+        <Pagination onClick={handleLoadMore} isLoading={isLoading} />
+      )}
+    </div>
   );
 }

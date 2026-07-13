@@ -1,89 +1,54 @@
 import Image from 'next/image';
-import Link from 'next/link';
-
+import type { Story } from '@/types';
 import css from './StoryCard.module.css';
 
-type StoryCardProps = {
-  id: string;
-  title: string;
-  image: string;
-  author: string;
-  readingTime: string;
-};
-
-type BookmarkIconProps = {
-  size?: number;
-};
-
-function BookmarkIcon({ size = 20 }: BookmarkIconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path
-        d="M6 4.75C6 3.7835 6.7835 3 7.75 3H16.25C17.2165 3 18 3.7835 18 4.75V20L12 16.5L6 20V4.75Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+// temporary stub, real component is another task
+interface StoryCardProps {
+  story: Story;
+  ownerName?: string;
 }
 
-export default function StoryCard({
-  id,
-  title,
-  image,
-  author,
-  readingTime,
-}: StoryCardProps) {
+export default function StoryCard({ story, ownerName }: StoryCardProps) {
+  const categoryName =
+    typeof story.category === 'object' ? story.category.category : '';
+
   return (
     <article className={css.card}>
-      <div className={css.imageWrapper}>
-        <Image
-          className={css.image}
-          src={image}
-          alt={title}
-          fill
-          sizes="(min-width: 1440px) 421px, (min-width: 768px) 344px, 100vw"
-        />
-      </div>
-
+      <Image
+        className={css.photo}
+        src={story.img}
+        alt={story.title}
+        width={422}
+        height={422}
+        unoptimized
+      />
       <div className={css.content}>
-        <div className={css.meta}>
-          <span className={css.author}>{author}</span>
-
-          <span className={css.dot} aria-hidden="true">
-            •
-          </span>
-
-          <span className={css.readingTime}>{readingTime}</span>
-
-          <span className={css.metaBookmark}>
-            <BookmarkIcon size={14} />
-          </span>
+        <div className={css.author}>
+          <Image
+            className={css.authorAvatar}
+            src="/placeholder-avatar.svg"
+            alt={ownerName || 'author'}
+            width={48}
+            height={48}
+          />
+          <div>
+            <p className={css.authorName}>{ownerName}</p>
+            <p className={css.meta}>
+              {story.date.slice(0, 10)} • {story.rate} 🔖
+            </p>
+          </div>
         </div>
-
-        <h2 className={css.title}>{title}</h2>
-
+        <div className={css.body}>
+          {categoryName && <span className={css.tag}>{categoryName}</span>}
+          <h3 className={css.title}>{story.title}</h3>
+          <p className={css.excerpt}>{story.article}</p>
+        </div>
         <div className={css.actions}>
-          <Link className={css.link} href={`/stories/${id}`}>
+          <button type="button" className={css.viewBtn}>
             Переглянути статтю
-          </Link>
-
-          <button
-            className={css.saveButton}
-            type="button"
-            aria-label={`Зберегти статтю «${title}»`}
-          >
-            <BookmarkIcon size={20} />
+          </button>
+          <button type="button" className={css.saveBtn} aria-label="Зберегти">
+            🔖
           </button>
         </div>
       </div>
