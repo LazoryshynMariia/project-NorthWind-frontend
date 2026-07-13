@@ -14,21 +14,10 @@ import css from './PopularStories.module.css';
 
 export default function PopularStories() {
   const [stories, setStories] = useState<Story[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authToken, setAuthToken] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const initializeData = async () => {
-      const token =
-        typeof window !== 'undefined'
-          ? localStorage.getItem('accessToken')
-          : null;
-      if (token) {
-        setIsAuthenticated(true);
-        setAuthToken(token);
-      }
-
       try {
         setIsLoading(true);
 
