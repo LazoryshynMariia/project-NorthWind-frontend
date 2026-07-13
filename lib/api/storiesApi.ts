@@ -1,6 +1,16 @@
 import { AddStory, Story } from '@/types/stories';
 import { nextServer } from './api';
 
+const getAuthHeaders = () => {
+  if (typeof window === 'undefined') {
+    return undefined;
+  }
+
+  const token = localStorage.getItem('accessToken');
+
+  return token ? { Authorization: `Bearer ${token}` } : undefined;
+}; 
+
 export const addStory = async (data: AddStory, img: File): Promise<Story> => {
   const formData = new FormData();
   formData.append('img', img);
@@ -8,7 +18,9 @@ export const addStory = async (data: AddStory, img: File): Promise<Story> => {
   formData.append('article', data.article);
   formData.append('category', data.category);
 
-  const res = await nextServer.post<Story>('/stories', formData);
+  const res = await nextServer.post<Story>('/stories', formData, {
+      headers: getAuthHeaders(),
+    });
 
   return res.data;
 };
