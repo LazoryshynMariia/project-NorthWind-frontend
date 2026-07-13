@@ -134,4 +134,12 @@ ol {
   --space-7: 40px;
   --space-8: 48px;
 
+
+
+  /* Transitions */
+
+  --transition-fast: 150ms ease-in-out;
+  --transition-default: 250ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
+
 }
