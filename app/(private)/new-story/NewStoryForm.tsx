@@ -34,7 +34,7 @@ export default function NewStoryForm() {
 
   const handleSaveStory = async (data: AddStory) => {
     if (!imageFile) {
-      setImgError('Image is required')
+      setImgError('Image is required');
       return;
     }
     try {
@@ -73,14 +73,24 @@ export default function NewStoryForm() {
       }}
       validationSchema={Schema}
     >
-      {(form) => {
-        const isSubmitBtnDisabled = isloading || !(form.touched.article && form.touched.category && form.touched.title)
-        
+      {form => {
+        const isSubmitBtnDisabled =
+          isloading ||
+          !(
+            form.touched.article &&
+            form.touched.category &&
+            form.touched.title
+          );
+
         return (
           <Form className={styles.form}>
             <div className={styles.field}>
               <span className={styles.label}>Обкладинка статті</span>
-              <ImgPicker onChangePhoto={setImageFile} setError={setImgError} error={imgError} />
+              <ImgPicker
+                onChangePhoto={setImageFile}
+                setError={setImgError}
+                error={imgError}
+              />
             </div>
 
             <div className={styles.field}>
@@ -175,7 +185,11 @@ export default function NewStoryForm() {
               >
                 {isloading ? 'Збереження...' : 'Зберегти'}
               </button>
-              <button type="button" className={`${styles.button} ${styles.btnGhost}`} onClick={()=>form.resetForm()}>
+              <button
+                type="button"
+                className={`${styles.button} ${styles.btnGhost}`}
+                onClick={() => form.resetForm()}
+              >
                 Відмінити
               </button>
             </div>

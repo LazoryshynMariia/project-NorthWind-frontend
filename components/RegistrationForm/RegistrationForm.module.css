@@ -1,0 +1,149 @@
+.formTitle {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #000;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.formText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: #000;
+  margin-bottom: 32px;
+}
+
+.inputDiv {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  width: 335px;
+  gap: 8px;
+}
+
+.formDesc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.field {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 8px;
+  width: 100%;
+  /* width: 335px; */
+  height: 40px;
+  background: rgba(255, 255, 255, 0);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1b391b;
+}
+
+.field::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.field:focus {
+  border: 1px solid #5dbe5c;
+}
+
+.textError {
+  color: #b00101;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.field.inputError {
+  border: 1px solid #b00101;
+  color: #b00101;
+}
+
+.field.inputError:focus,
+.field.inputError:hover {
+  border: 1px solid #b00101;
+}
+
+.btn {
+  border: 1px solid #4a9849;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 10px 12px;
+  width: 335px;
+  height: 40px;
+  background: #4a9849;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn:active {
+  background: #4a9849;
+}
+
+.btn:hover,
+.btn:focus {
+  border: 1px solid #4a9849;
+  background: #def2de;
+  color: #1b391b;
+}
+
+.btn:disabled {
+  background: #4a9849;
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .formTitle {
+    font-size: 44px;
+  }
+
+  .inputDiv {
+    width: 644px;
+  }
+
+  .btn {
+    width: 644px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .formTitle {
+    font-size: 52px;
+  }
+
+  .formText {
+    font-size: 20px;
+  }
+
+  .formDesc {
+    font-size: 18px;
+  }
+
+  .form {
+    gap: 24px;
+  }
+}
