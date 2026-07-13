@@ -27,28 +27,6 @@ export const login = async (data: LoginData) => {
   return response.data;
 };
 
-interface User {
-  id: number;
-  email: string;
-}
-
-interface GetMeResponse {
-  id: number;
-  email: string;
-  data: User;
-}
-
-export const getMe = async () => {
-  const response = await nextServer.get<GetMeResponse>(
-    '/users/me',
-  );
-
-  return response.data.data;
-};
-
-export const logout = async () => {
-  await nextServer.post('/auth/logout');
-};
 export interface RegisterRequest {
   name: string;
   email: string;

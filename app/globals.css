@@ -1,9 +1,15 @@
-* {
+@import 'ldrs/react/DotPulse.css';
+
+/* 
+   RESET */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html,
-body {
+* {
   margin: 0;
   padding: 0;
   font-family: var(--font-montserrat), sans-serif;
@@ -128,4 +134,16 @@ ol {
   --space-7: 40px;
   --space-8: 48px;
 
+<<<<<<< HEAD
 }
+=======
+
+
+  /* Transitions */
+
+  --transition-fast: 150ms ease-in-out;
+  --transition-default: 250ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
+
+}
+>>>>>>> origin/main
