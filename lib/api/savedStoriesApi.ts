@@ -1,6 +1,4 @@
 import { nextServer } from '@/lib/api/api';
-import type { PaginatedResponse } from '@/types/api';
-import type { Story } from '@/types/story';
 
 type SavedStoryStatusResponse = {
   isSaved: boolean;
@@ -88,28 +86,6 @@ export async function checkIsSaved(
   } catch (error) {
     throw new Error(
       getApiErrorMessage(error, 'Не вдалося перевірити статус збереження')
-    );
-  }
-}
-
-export async function getSavedStories(
-  authToken?: string,
-  page = 1,
-  perPage = 10
-): Promise<PaginatedResponse<Story>> {
-  try {
-    const { data } = await nextServer.get<PaginatedResponse<Story>>(
-      '/users/saved-stories',
-      {
-        ...withAuth(authToken),
-        params: { page, perPage },
-      }
-    );
-
-    return data;
-  } catch (error) {
-    throw new Error(
-      getApiErrorMessage(error, 'Не вдалося отримати збережені історії')
     );
   }
 }
