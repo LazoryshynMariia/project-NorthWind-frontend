@@ -22,8 +22,7 @@ interface LinkItem {
 interface HeaderProps {
   isAuthenticated: boolean;
   user?: AuthUser;
-  onOpenLogin: () => void;
-  onOpenRegister: () => void;
+ 
   onLogout: () => Promise<void> | void;
 }
 
@@ -40,8 +39,8 @@ const privateLinks: LinkItem[] = [
 const Header: FC<HeaderProps> = ({
   isAuthenticated,
   user,
-  onOpenLogin,
-  onOpenRegister,
+  
+
   onLogout,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -104,26 +103,25 @@ const Header: FC<HeaderProps> = ({
                 ))}
             </nav>
 
-            <div className={css.actions}>
-              {isAuthenticated && user ? (
-                <>
-                  <Link
-                    href="/articles/create"
-                    className={css.publishButton}
-                  >
-                    Опублікувати статтю
-                  </Link>
+        <div className={css.actions}>
+  {isAuthenticated && user ? (
+    <>
+      <Link
+        href="/articles/create"
+        className={css.publishButton}
+      >
+        Опублікувати статтю
+      </Link>
 
-                  <UserBar
-                    user={user}
-                    onLogout={onLogout}
-                  />
-                </>
-              ) : (
-                <AuthBar
-                      />
-              )}
-            </div>
+      <UserBar
+        user={user}
+        onLogout={onLogout}
+      />
+    </>
+  ) : (
+      <AuthBar />
+  )}
+</div>
           </div>
 
           <button
@@ -143,8 +141,7 @@ const Header: FC<HeaderProps> = ({
         links={links}
         isAuthenticated={isAuthenticated}
         user={user}
-        onOpenLogin={onOpenLogin}
-        onOpenRegister={onOpenRegister}
+     
         onLogout={onLogout}
       />
     </>

@@ -9,8 +9,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import Logo from '@/components/Logo/Logo';
 import AuthBar from '@/components/AuthBar/AuthBar';
 import UserBar from '@/components/UserBar/UserBar';
-
-import type { AuthUser } from '@/lib/api/auth';
+import type { AuthUser } from '@/types/auth';
 
 import css from './BurgerMenu.module.css';
 
@@ -19,14 +18,15 @@ interface LinkItem {
   label: string;
 }
 
+
+
 interface BurgerMenuProps {
   isOpen: boolean;
   onClose: () => void;
   isAuthenticated: boolean;
-  user?: AuthUser;
+  
   links: LinkItem[];
-  onOpenLogin: () => void;
-  onOpenRegister: () => void;
+  user?: AuthUser;
   onLogout: () => Promise<void> | void;
 }
 
@@ -36,8 +36,7 @@ export default function BurgerMenu({
   isAuthenticated,
   user,
   links,
-  onOpenLogin,
-  onOpenRegister,
+ 
   onLogout,
 }: BurgerMenuProps) {
   useEffect(() => {
@@ -78,8 +77,7 @@ export default function BurgerMenu({
               ) : (
                 <div className={css.topBarAuthBar}>
                   <AuthBar
-                    onOpenLogin={onOpenLogin}
-                    onOpenRegister={onOpenRegister}
+
                   />
                 </div>
               )}
@@ -129,10 +127,8 @@ export default function BurgerMenu({
                 </>
               ) : (
                 <div className={css.bottomAuthBar}>
-                  <AuthBar
-                    onOpenLogin={onOpenLogin}
-                    onOpenRegister={onOpenRegister}
-                  />
+                    <AuthBar fullWidth />
+                    
                 </div>
               )}
             </div>

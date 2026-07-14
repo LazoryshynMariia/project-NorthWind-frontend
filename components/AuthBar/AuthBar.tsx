@@ -3,9 +3,17 @@
 import Link from 'next/link';
 import css from './AuthBar.module.css';
 
-export default function AuthBar() {
+interface AuthBarProps {
+  fullWidth?: boolean;
+}
+
+export default function AuthBar({
+  fullWidth = false,
+}: AuthBarProps) {
   return (
-    <div className={css.authBar}>
+    <div
+      className={`${css.authBar} ${fullWidth ? css.fullWidth : ''}`}
+    >
       <Link href="/login" className={css.loginButton}>
         Вхід
       </Link>

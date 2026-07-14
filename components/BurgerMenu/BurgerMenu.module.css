@@ -122,11 +122,31 @@
   align-items: center;
   gap: 24px;
   width: 100%;
+}.bottomGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: auto;
+  padding-bottom: 92px;
 }
 
-.bottomAuthBar button {
-  width: 335px;
+.bottomAuthBar {
+  width: 100%;
+}
+
+.bottomAuthBar > * {
+  width: 100%;
+}
+
+.bottomAuthBar .loginButton,
+.bottomAuthBar .registerButton {
+  width: 100%;
   height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 4px 0;
 }
 

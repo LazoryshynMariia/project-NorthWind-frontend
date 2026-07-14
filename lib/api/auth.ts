@@ -33,11 +33,7 @@ export interface RegisterRequest {
   email: string;
   password: string;
 }
-export const getMe = async (): Promise<AuthUser> => {
-  const response = await nextServer.get<GetMeResponse>('/users/me');
 
-  return response.data.data;
-};
 
 export const register = async (data: RegisterRequest) => {
   const res = await nextServer.post<AuthUser>('/auth/register', data);

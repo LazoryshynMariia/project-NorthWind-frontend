@@ -4,6 +4,16 @@
   gap: 16px;
 }
 
+.fullWidth {
+  width: 100%;
+}
+
+.fullWidth .loginButton,
+.fullWidth .registerButton {
+  width: 100%;
+  height: 32px;
+}
+
 .loginButton,
 .registerButton {
   display: inline-flex;
@@ -61,6 +71,19 @@
 .vertical .loginButton,
 .vertical .registerButton {
   width: 100%;
+}
+@media (min-width: 768px) {
+  .authBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+  .loginButton,
+  .registerButton {
+    width: auto;
+    flex-shrink: 0;
+  }
 }
 
 @media (min-width: 1440px) {
