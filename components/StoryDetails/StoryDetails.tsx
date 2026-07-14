@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { getCategories } from '@/lib/api/categoriesApi';
 import { getTravellerById } from '@/lib/api/travellersApi';
 import type { Story } from '@/types';
 
@@ -24,6 +25,15 @@ function formatDate(date: string): string {
   }).format(parsedDate);
 }
 
+async function getCategoryName(category: Story['category']): Promise<string> {
+  if (typeof category === 'object') {
+    return category.category;
+  }
+
+  const categories = await getCategories().catch(() => []);
+  return categories.find(item => item._id === category)?.category ?? '';
+}
+
 export default async function StoryDetails({ story }: StoryDetailsProps) {
   if (!story) {
     return (
@@ -39,12 +49,10 @@ export default async function StoryDetails({ story }: StoryDetailsProps) {
     );
   }
 
-  const author = await getTravellerById(story.ownerId);
-
-  const categoryName =
-    typeof story.category === 'object'
-      ? story.category.category
-      : story.category;
+  const [author, categoryName] = await Promise.all([
+    getTravellerById(story.ownerId),
+    getCategoryName(story.category),
+  ]);
 
   const paragraphs = story.article
     .split(/\n+/)
@@ -73,7 +81,7 @@ export default async function StoryDetails({ story }: StoryDetailsProps) {
 
               {categoryName && (
                 <p>
-                  <strong>{categoryName}</strong>
+                  <strong>Категорія</strong> {categoryName}
                 </p>
               )}
             </div>
