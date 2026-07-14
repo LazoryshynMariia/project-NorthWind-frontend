@@ -1,10 +1,16 @@
-.card {
+﻿.card {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-radius: var(--radius-card, 12px);
-  background-color: var(--color-surface, #def2de);
+  max-width: 340px;
   overflow: hidden;
+  border-radius: var(--radius-lg, 12px);
+  background-color: var(--color-scheme-2-foreground, #def2de);
+  transition: box-shadow var(--transition-default, 250ms ease-in-out);
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px var(--opacity-neutral-darkest-15);
 }
 
 .photo {
@@ -16,10 +22,10 @@
 
 .content {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 12px;
   padding: 16px;
-  flex-grow: 1;
 }
 
 .author {
@@ -38,80 +44,66 @@
 .authorName {
   font-size: 12px;
   font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-scheme-2-text);
 }
 
 .meta {
   font-size: 12px;
-}
-
-@media (min-width: 1440px) {
-  .authorName,
-  .meta {
-    font-size: 16px;
-  }
+  line-height: 1.5;
+  color: var(--color-scheme-2-text);
 }
 
 .body {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 8px;
-  flex-grow: 1;
 }
 
 .tag {
   align-self: flex-start;
-  border-radius: var(--radius-btn, 6px);
-  color: var(--color-heading, #000000);
+  border-radius: var(--radius-sm, 6px);
+  color: var(--color-scheme-2-text);
   font-size: 12px;
   font-weight: 600;
 }
 
-@media (min-width: 1440px) {
-  .tag {
-    font-size: 16px;
-  }
-}
-
 .title {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--color-scheme-2-text);
   font-size: 18px;
   font-weight: 700;
   line-height: 1.5;
-}
-
-@media (min-width: 1440px) {
-  .title {
-    font-size: 26px;
-  }
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .excerpt {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   overflow: hidden;
+  color: var(--color-scheme-2-text);
   font-size: 16px;
-}
-
-@media (min-width: 1440px) {
-  .excerpt {
-    font-size: 18px;
-  }
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .actions {
   display: flex;
   gap: 16px;
+  margin-top: 4px;
 }
 
 .viewBtn {
-  flex-grow: 1;
-  height: 48px;
+  flex: 1;
+  min-width: 0;
 }
 
 .saveBtn {
   width: 48px;
   height: 48px;
-  padding: 6px;
   flex-shrink: 0;
 }
 
@@ -122,20 +114,46 @@
   justify-content: center;
   gap: 8px;
   padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.15));
-  background: var(--color-btn-secondary-bg, rgba(0, 0, 0, 0.05));
-  color: var(--color-text, #1b391b);
-  font-weight: 500;
+  border: 1px solid var(--color-scheme-2-border);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--opacity-neutral-darkest-5);
+  color: var(--color-scheme-2-text);
+  cursor: pointer;
   font-size: 16px;
+  font-weight: 500;
   line-height: 1.5;
+  text-align: center;
+  transition:
+    background-color var(--transition-default, 250ms ease-in-out),
+    color var(--transition-default, 250ms ease-in-out),
+    opacity var(--transition-default, 250ms ease-in-out);
 }
 
-@media (min-width: 1440px) {
-  .viewBtn,
-  .saveBtn {
-    font-size: 20px;
-  }
+.viewBtn:hover,
+.saveBtn:hover,
+.saveBtn.saved {
+  background: var(--color-mantis-dark);
+  color: var(--color-white);
+}
+
+.viewBtn:active,
+.saveBtn:active {
+  background: var(--color-mantis-darker);
+  color: var(--color-white);
+}
+
+.saveBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-neutral-lighter);
+  border-top-color: var(--color-mantis);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
 }
 
 .title,
@@ -145,7 +163,34 @@
   margin: 0;
 }
 
-.viewBtn,
-.saveBtn {
-  cursor: pointer;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 1440px) {
+  .card {
+    width: 421px;
+    max-width: 421px;
+  }
+
+  .authorName,
+  .meta,
+  .tag {
+    font-size: 16px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .excerpt {
+    font-size: 18px;
+  }
+
+  .viewBtn,
+  .saveBtn {
+    font-size: 20px;
+  }
 }
