@@ -1,1 +1,1 @@
-﻿export type { Story } from './story';
+export type { CreateStoryData, Story } from './story';
