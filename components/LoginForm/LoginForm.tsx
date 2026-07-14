@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
+import { useId } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/store/authStore';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
@@ -26,7 +27,10 @@ const initialValues = {
 };
 
 export default function LoginForm() {
+  const fieldId = useId();
   const router = useRouter();
+
+  const setAuth = useAuthStore(state => state.setAuth);
 
   const handleSubmit = async (values: typeof initialValues) => {
     try {
@@ -38,6 +42,8 @@ export default function LoginForm() {
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
 
+      setAuth(response.data.user);
+
       toast.success(response.message);
       router.push('/');
     } catch {
@@ -46,21 +52,10 @@ export default function LoginForm() {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.tabs}>
-        <Link href="/register" className={styles.tab}>
-          Реєстрація
-        </Link>
+    <div>
+      <h1 className={styles.formTitle}>Вхід</h1>
 
-        <div className={styles.activeTab}>
-          <span>Вхід</span>
-          <div className={styles.divider}></div>
-        </div>
-      </div>
-
-      <h1 className={styles.title}>Вхід</h1>
-
-      <p className={styles.subtitle}>
+      <p className={styles.formText}>
         Вітаємо знову у спільноті мандрівників!
       </p>
 
@@ -69,37 +64,40 @@ export default function LoginForm() {
         validationSchema={loginSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors, touched }) => (
           <Form className={styles.form}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="email">
+            <div className={styles.inputDiv}>
+              <label className={styles.formDesc} htmlFor={`${fieldId}-email`}>
                 Пошта*
               </label>
 
               <Field
-                id="email"
-                className={styles.input}
+                id={`${fieldId}-email`}
+                className={`${styles.field} ${touched.email && errors.email ? styles.inputError : ''}`}
                 name="email"
                 type="email"
-                placeholder="hello@podorozhnyk.ua"
+                placeholder="hello@podorozhnyky.ua"
                 autoComplete="email"
               />
 
               <ErrorMessage
                 name="email"
-                component="p"
-                className={styles.error}
+                component="span"
+                className={styles.textError}
               />
             </div>
 
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="password">
+            <div className={styles.inputDiv}>
+              <label
+                className={styles.formDesc}
+                htmlFor={`${fieldId}-password`}
+              >
                 Пароль*
               </label>
 
               <Field
-                id="password"
-                className={styles.input}
+                id={`${fieldId}-password`}
+                className={`${styles.field} ${touched.password && errors.password ? styles.inputError : ''}`}
                 name="password"
                 type="password"
                 placeholder="********"
@@ -108,13 +106,13 @@ export default function LoginForm() {
 
               <ErrorMessage
                 name="password"
-                component="p"
-                className={styles.error}
+                component="span"
+                className={styles.textError}
               />
             </div>
 
             <button
-              className={styles.button}
+              className={styles.btn}
               type="submit"
               disabled={isSubmitting}
             >

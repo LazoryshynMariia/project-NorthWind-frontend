@@ -90,14 +90,12 @@ export default function ProfileEditForm() {
 
   const handleSubmit = async (values: UpdateUserProfileData) => {
     try {
-      if (avatarFile) {
-        toast.error('Завантаження аватара очікує endpoint на backend');
-        return;
-      }
-
-      await updateCurrentUser({
-        name: values.name.trim(),
-      });
+      await updateCurrentUser(
+        {
+          name: values.name.trim(),
+        },
+        avatarFile
+      );
 
       toast.success('Профіль оновлено');
       router.push('/profile');

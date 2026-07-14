@@ -46,3 +46,12 @@ export async function getTravellerStories(
     return null;
   }
 }
+
+export async function getHomePageTravellers(): Promise<Traveller[]> {
+  try {
+    const response = await getTravellers(1, 12);
+    return response?.data || [];
+  } catch {
+    return [];
+  }
+}
