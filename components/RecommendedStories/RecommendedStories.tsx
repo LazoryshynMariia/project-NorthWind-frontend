@@ -5,8 +5,9 @@ import css from './RecommendedStories.module.css';
 
 export default async function RecommendedStories() {
   const stories = await getRecommendedStories();
+  const visibleStories = stories.slice(0, 3);
 
-  if (stories.length === 0) {
+  if (visibleStories.length === 0) {
     return null;
   }
 
@@ -16,7 +17,7 @@ export default async function RecommendedStories() {
         <h2 className={css.title}>Вам також сподобається</h2>
 
         <ul className={css.list}>
-          {stories.map(story => (
+          {visibleStories.map(story => (
             <li className={css.item} key={story._id}>
               <StoryCard story={story} />
             </li>
