@@ -1,5 +1,11 @@
-﻿export interface StoryCategory {
+export interface StoryCategory {
   _id: string;
+  category: string;
+}
+
+export interface CreateStoryData {
+  title: string;
+  article: string;
   category: string;
 }
 
