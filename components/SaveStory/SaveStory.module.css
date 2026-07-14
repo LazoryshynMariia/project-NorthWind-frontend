@@ -2,8 +2,10 @@
   border: 0px solid var(--color-scheme-1-border);
   border-radius: 24px;
   padding: 32px 16px;
-  width: 335px;
+  width: 100%;
+  max-width: 335px;
   height: 217px;
+  margin: 0 auto;
   background: var(--color-scheme-2-foreground);
 }
 
@@ -89,7 +91,7 @@
 @media (min-width: 768px) {
   .wrapper {
     padding: 32px;
-    width: 704px;
+    max-width: 704px;
     height: 193px;
   }
 
@@ -101,7 +103,7 @@
 
 @media (min-width: 1440px) {
   .wrapper {
-    width: 866px;
+    max-width: 866px;
     height: 207px;
   }
 
