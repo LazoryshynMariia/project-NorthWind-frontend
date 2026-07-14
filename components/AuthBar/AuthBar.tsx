@@ -1,39 +1,18 @@
 'use client';
 
+import Link from 'next/link';
 import css from './AuthBar.module.css';
 
-interface AuthBarProps {
-  onOpenLogin: () => void;
-  onOpenRegister: () => void;
-  variant?: 'default' | 'vertical';
-}
-
-export default function AuthBar({
-  onOpenLogin,
-  onOpenRegister,
-  variant = 'default',
-}: AuthBarProps) {
+export default function AuthBar() {
   return (
-    <div
-      className={`${css.authBar} ${
-        variant === 'vertical' ? css.vertical : ''
-      }`}
-    >
-      <button
-        type="button"
-        className={css.loginButton}
-        onClick={onOpenLogin}
-      >
+    <div className={css.authBar}>
+      <Link href="/login" className={css.loginButton}>
         Вхід
-      </button>
+      </Link>
 
-      <button
-        type="button"
-        className={css.registerButton}
-        onClick={onOpenRegister}
-      >
+      <Link href="/register" className={css.registerButton}>
         Реєстрація
-      </button>
+      </Link>
     </div>
   );
 }

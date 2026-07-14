@@ -26,15 +26,9 @@ export default function RootLayout({
 
     <html lang="uk">
       <body className={montserrat.variable}>
-<<<<<<< HEAD
-        <Layout>
-        <LoaderProvider>{children}</LoaderProvider>
-        </Layout>
-=======
         <AuthProvider>
           <LoaderProvider>{children}</LoaderProvider>
         </AuthProvider>
->>>>>>> origin/main
         <ToastProvider />
           </body>
     </html>

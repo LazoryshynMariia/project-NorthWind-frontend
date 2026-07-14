@@ -10,7 +10,7 @@ import AuthBar from '@/components/AuthBar/AuthBar';
 import UserBar from '@/components/UserBar/UserBar';
 import BurgerMenu from '@/components/BurgerMenu/BurgerMenu';
 
-import type { AuthUser } from '@/lib/api/auth';
+import type { AuthUser } from '@/types/auth';
 
 import css from './Header.module.css';
 
@@ -121,9 +121,7 @@ const Header: FC<HeaderProps> = ({
                 </>
               ) : (
                 <AuthBar
-                  onOpenLogin={onOpenLogin}
-                  onOpenRegister={onOpenRegister}
-                />
+                      />
               )}
             </div>
           </div>

@@ -3,15 +3,12 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { RxExit } from 'react-icons/rx';
-import { AuthUser } from '@/lib/api/auth';
+import { AuthUser } from '@/types/auth' ;
 import  ConfirmModal from '@/components/ConfirmModal/ConfirmModal';
 
 import css from './UserBar.module.css';
 
-interface User {
-  name: string;
-  avatarUrl?: string;
-}
+
 
 interface UserBarProps {
   user: AuthUser;
