@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import type { Story } from '@/types';
+import { getTravellerById } from '@/lib/api/travellersApi';
 import {
   checkIsSaved,
   deleteSavedStory,
@@ -29,20 +30,38 @@ export default function StoryCard({
   const [savedCount, setSavedCount] = useState(story.rate ?? 0);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [authorName, setAuthorName] = useState(
+    ownerName || story.ownerName || 'Мандрівник'
+  );
 
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
 
-  const categoryName =
-    typeof story.category === 'object'
-      ? story.category.category
-      : story.category;
-  const authorName = ownerName || story.ownerName || 'Невідомий автор';
   const imageSrc = story.img || '/placeholder-avatar.svg';
   const saves = story.savesCount ?? story.rate ?? 0;
 
   useEffect(() => {
     setSavedCount(saves);
   }, [saves]);
+
+  useEffect(() => {
+    if (ownerName || story.ownerName || !story.ownerId) return;
+
+    let isMounted = true;
+
+    const loadAuthor = async () => {
+      const traveller = await getTravellerById(story.ownerId);
+
+      if (isMounted && traveller) {
+        setAuthorName(traveller.name);
+      }
+    };
+
+    loadAuthor();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [ownerName, story.ownerId, story.ownerName]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -114,25 +133,26 @@ export default function StoryCard({
 
         <div className={css.content}>
           <div className={css.author}>
-            <Image
-              className={css.authorAvatar}
-              src="/placeholder-avatar.svg"
-              alt={authorName}
-              width={48}
-              height={48}
-            />
-            <div>
-              <p className={css.authorName}>{authorName}</p>
-              <p className={css.meta}>
-                {story.date?.slice(0, 10)} • {savedCount} 🔖
-              </p>
-            </div>
+            <p className={css.authorName}>{authorName}</p>
+            <span aria-hidden="true">•</span>
+            <p className={css.meta}>
+              {savedCount}
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <path d="M6 4h12v16l-6-4-6 4V4Z" />
+              </svg>
+            </p>
           </div>
 
           <div className={css.body}>
-            {categoryName && <span className={css.tag}>{categoryName}</span>}
             <h3 className={css.title}>{story.title}</h3>
-            <p className={css.excerpt}>{story.article}</p>
           </div>
 
           <div className={css.actions}>
@@ -148,7 +168,21 @@ export default function StoryCard({
               aria-label={isSaved ? 'Видалити зі збережених' : 'Зберегти'}
               aria-pressed={isSaved}
             >
-              {isLoading ? <span className={css.loader} /> : '🔖'}
+              {isLoading ? (
+                <span className={css.loader} />
+              ) : (
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path d="M6 4h12v16l-6-4-6 4V4Z" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
