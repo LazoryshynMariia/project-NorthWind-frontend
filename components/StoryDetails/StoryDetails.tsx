@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getStoryById } from '@/lib/api/storiesApi';
+import { getTravellerById } from '@/lib/api/travellersApi';
+import type { Story } from '@/types';
 
 import css from './StoryDetails.module.css';
 
 type StoryDetailsProps = {
-  storyId: string;
+  story: Story | null;
 };
 
 function formatDate(date: string): string {
@@ -23,9 +24,7 @@ function formatDate(date: string): string {
   }).format(parsedDate);
 }
 
-export default async function StoryDetails({ storyId }: StoryDetailsProps) {
-  const story = await getStoryById(storyId);
-
+export default async function StoryDetails({ story }: StoryDetailsProps) {
   if (!story) {
     return (
       <section className={css.section}>
@@ -39,6 +38,8 @@ export default async function StoryDetails({ storyId }: StoryDetailsProps) {
       </section>
     );
   }
+
+  const author = await getTravellerById(story.ownerId);
 
   const categoryName =
     typeof story.category === 'object'
@@ -63,7 +64,7 @@ export default async function StoryDetails({ storyId }: StoryDetailsProps) {
 
             <div className={css.meta}>
               <p>
-                <strong>Автор статті</strong> Мандрівник
+                <strong>Автор статті</strong> {author?.name ?? 'Мандрівник'}
               </p>
 
               <p>

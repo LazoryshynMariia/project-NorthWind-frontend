@@ -34,12 +34,17 @@ export async function generateMetadata({
 
 export default async function StoryPage({ params }: StoryPageProps) {
   const { storyId } = await params;
+  const story = await getStoryById(storyId);
+
+  if (!story) {
+    return <StoryDetails story={null} />;
+  }
 
   return (
-    <main>
-      <StoryDetails storyId={storyId} />
+    <>
+      <StoryDetails story={story} />
       <SaveStory storyId={storyId} />
       <RecommendedStories />
-    </main>
+    </>
   );
 }
