@@ -7,6 +7,7 @@ import styles from './RegistrationForm.module.css';
 import { toast } from 'react-hot-toast';
 import { register, type RegisterRequest, login } from '@/lib/api/auth';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/store/authStore';
 import axios from 'axios';
 
 const initialValues: RegisterRequest = {
@@ -34,6 +35,7 @@ const RegistrationFormSchema = Yup.object().shape({
 export default function RegistrationForm() {
   const fieldId = useId();
   const router = useRouter();
+  const setAuth = useAuthStore(state => state.setAuth);
 
   const handleSubmit = async (
     values: RegisterRequest,
@@ -49,6 +51,8 @@ export default function RegistrationForm() {
 
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
+
+      setAuth(response.data.user);
 
       router.push('/');
     } catch (error) {
