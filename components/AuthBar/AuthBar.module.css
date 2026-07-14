@@ -1,0 +1,60 @@
+.authBar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.loginButton,
+.registerButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-mantis-dark);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.5;
+    transition:
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        background-color var(--transition-fast);
+}
+
+.loginButton {
+    color: var(--color-scheme-2-text);
+    background-color: transparent;
+}
+
+.registerButton {
+    color: var(--color-white);
+    background-color: var(--color-mantis-dark);
+}
+
+.loginButton:hover,
+.loginButton:focus-visible {
+    background-color: var(--color-mantis-lighter);
+    outline: none;
+}
+
+.registerButton:hover,
+.registerButton:focus-visible {
+    border-color: var(--color-mantis-darker);
+    background-color: var(--color-mantis-darker);
+    outline: none;
+}
+
+@media screen and (max-width: 767px) {
+    .authBar {
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+    }
+
+    .loginButton,
+    .registerButton {
+        width: 100%;
+        min-height: 48px;
+    }
+}
