@@ -1,6 +1,21 @@
 import { nextServer } from '@/lib/api/api';
-import type { Story } from '@/types';
-import type { ApiResponse } from '@/types/api';
+import type { ApiResponse, PaginatedResponse } from '@/types/api';
+import type { CreateStoryData, Story } from '@/types';
+
+export async function addStory(
+  data: CreateStoryData,
+  img: File
+): Promise<Story> {
+  const formData = new FormData();
+  formData.append('img', img);
+  formData.append('title', data.title);
+  formData.append('article', data.article);
+  formData.append('category', data.category);
+
+  const response = await nextServer.post<Story>('/stories', formData);
+
+  return response.data;
+}
 
 export async function getPopularStories(): Promise<Story[]> {
   const response =
@@ -31,4 +46,16 @@ export async function getRecommendedStories(): Promise<Story[]> {
   } catch {
     return [];
   }
+}
+
+export async function getStoriesByAuthor(
+  author: string,
+  page = 1,
+  perPage = 12
+): Promise<PaginatedResponse<Story>> {
+  const response = await nextServer.get<PaginatedResponse<Story>>('/stories', {
+    params: { author, page, perPage },
+  });
+
+  return response.data;
 }
