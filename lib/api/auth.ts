@@ -1,14 +1,9 @@
 import { nextServer } from '@/lib/api/api';
+import type { AuthUser } from '@/types/auth';
 
 export interface LoginData {
   email: string;
   password: string;
-}
-
-export interface AuthUser {
-  id: string;
-  name: string;
-  email: string;
 }
 
 export interface AuthResponse {
@@ -47,4 +42,33 @@ export const getMe = async (): Promise<AuthUser> => {
 export const register = async (data: RegisterRequest) => {
   const res = await nextServer.post<AuthUser>('/auth/register', data);
   return res.data;
+};
+
+interface CurrentUserResponse {
+  status: number;
+  message: string;
+  data: AuthUser;
+}
+
+export const getCurrentUser = async () => {
+  const response = await nextServer.get<CurrentUserResponse>('/users/me');
+
+  return response.data.data;
+};
+
+interface RefreshResponse {
+  status: number;
+  message: string;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
+}
+
+export const refreshSession = async (refreshToken: string) => {
+  const response = await nextServer.post<RefreshResponse>('/auth/refresh', {
+    refreshToken,
+  });
+
+  return response.data;
 };
