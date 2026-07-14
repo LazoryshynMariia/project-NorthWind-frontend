@@ -1,0 +1,169 @@
+.layaoutCard {
+  width: 335px;
+  height: 517px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  background-color: #def2de;
+}
+
+.section {
+  padding: 64px 0;
+  background-color: #eef8ee;
+}
+
+.container {
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #000000;
+  margin: 0 0 40px 0;
+}
+
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.slide {
+  height: auto;
+}
+
+.navigationControls {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+.navBtn {
+  width: 48px;
+  height: 48px;
+  background-color: #def2de;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navBtn:hover:not(:global(.swiper-button-disabled)) {
+  background-color: #f2f2f2;
+  border-color: #8dd18c;
+}
+
+.navBtn:active:not(:global(.swiper-button-disabled)) {
+  background-color: #8dd18c;
+}
+
+.navBtn:global(.swiper-button-disabled) {
+  background-color: #f2f2f2;
+  opacity: 0.4;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: not-allowed;
+}
+
+.linkBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 100%;
+  height: 48px;
+  padding: 6px 12px;
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: #4a9849;
+  transition: all 0.3s ease;
+}
+
+.linkBtn:hover,
+.linkBtn:focus {
+  background: #def2de;
+  color: #1b391b;
+}
+
+.linkBtn:active {
+  background: #254c24;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .title {
+    order: 1;
+    margin-bottom: 0;
+    font-size: 44px;
+  }
+  .linkBtn {
+    order: 2;
+    width: auto;
+  }
+  .sliderWrapper {
+    order: 3;
+    margin-top: 40px;
+  }
+  .navigationControls {
+    order: 4;
+  }
+  .layaoutCard {
+    width: 340px;
+    height: 522px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .section {
+    padding: 72px 0;
+  }
+
+  .container {
+    max-width: 1440px;
+    padding: 0 64px;
+  }
+
+  .title {
+    font-size: 52px;
+  }
+  .mockCard {
+    width: 421px;
+    height: 633px;
+  }
+  .linkBtn {
+    width: 120px;
+  }
+  .layaoutCard {
+    width: 421px;
+    max-width: 421px;
+    max-height: 633px;
+  }
+}
