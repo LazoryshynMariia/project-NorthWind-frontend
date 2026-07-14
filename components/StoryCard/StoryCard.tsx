@@ -21,6 +21,14 @@ interface StoryCardProps {
   initialIsSaved?: boolean;
 }
 
+function getStoryOwnerId(story: Story): string {
+  return typeof story.ownerId === 'string' ? story.ownerId : story.ownerId._id;
+}
+
+function getStoryOwnerName(story: Story): string | undefined {
+  return typeof story.ownerId === 'string' ? story.ownerName : story.ownerId.name;
+}
+
 export default function StoryCard({
   story,
   ownerName,
@@ -31,7 +39,7 @@ export default function StoryCard({
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [authorName, setAuthorName] = useState(
-    ownerName || story.ownerName || 'Мандрівник'
+    ownerName || getStoryOwnerName(story) || 'Мандрівник'
   );
 
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
@@ -44,12 +52,15 @@ export default function StoryCard({
   }, [saves]);
 
   useEffect(() => {
-    if (ownerName || story.ownerName || !story.ownerId) return;
+    const storyOwnerName = getStoryOwnerName(story);
+    const storyOwnerId = getStoryOwnerId(story);
+
+    if (ownerName || storyOwnerName || !storyOwnerId) return;
 
     let isMounted = true;
 
     const loadAuthor = async () => {
-      const traveller = await getTravellerById(story.ownerId);
+      const traveller = await getTravellerById(storyOwnerId);
 
       if (isMounted && traveller) {
         setAuthorName(traveller.name);
@@ -61,7 +72,7 @@ export default function StoryCard({
     return () => {
       isMounted = false;
     };
-  }, [ownerName, story.ownerId, story.ownerName]);
+  }, [ownerName, story]);
 
   useEffect(() => {
     if (!isAuthenticated) {

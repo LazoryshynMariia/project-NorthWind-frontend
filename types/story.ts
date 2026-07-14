@@ -1,7 +1,11 @@
+import type { Traveller } from './traveller';
+
 export interface StoryCategory {
   _id: string;
   category: string;
 }
+
+export type StoryOwner = string | Pick<Traveller, '_id' | 'name' | 'avatarUrl'>;
 
 export interface CreateStoryData {
   title: string;
@@ -16,7 +20,7 @@ export interface Story {
   article: string;
   category: StoryCategory | string;
   rate: number;
-  ownerId: string;
+  ownerId: StoryOwner;
   date: string;
   ownerName?: string;
   savesCount?: number;

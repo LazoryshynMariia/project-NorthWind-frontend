@@ -34,6 +34,15 @@ async function getCategoryName(category: Story['category']): Promise<string> {
   return categories.find(item => item._id === category)?.category ?? '';
 }
 
+async function getAuthorName(ownerId: Story['ownerId']): Promise<string> {
+  if (typeof ownerId === 'object') {
+    return ownerId.name;
+  }
+
+  const author = await getTravellerById(ownerId);
+  return author?.name ?? 'Мандрівник';
+}
+
 export default async function StoryDetails({ story }: StoryDetailsProps) {
   if (!story) {
     return (
@@ -49,8 +58,8 @@ export default async function StoryDetails({ story }: StoryDetailsProps) {
     );
   }
 
-  const [author, categoryName] = await Promise.all([
-    getTravellerById(story.ownerId),
+  const [authorName, categoryName] = await Promise.all([
+    getAuthorName(story.ownerId),
     getCategoryName(story.category),
   ]);
 
@@ -72,7 +81,7 @@ export default async function StoryDetails({ story }: StoryDetailsProps) {
 
             <div className={css.meta}>
               <p>
-                <strong>Автор статті</strong> {author?.name ?? 'Мандрівник'}
+                <strong>Автор статті</strong> {authorName}
               </p>
 
               <p>
