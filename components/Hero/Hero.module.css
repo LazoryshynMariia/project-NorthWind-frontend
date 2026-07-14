@@ -1,0 +1,126 @@
+.heroSection {
+  padding: 64px 0;
+  background-color: #eef8ee;
+}
+
+.container {
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #1b391b;
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1b391b;
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+.joinBtn {
+  display: inline-block;
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  padding: 6px 12px;
+  width: 100%;
+  max-width: 335px;
+  align-self: center;
+  height: 39px;
+  color: #ffffff;
+  line-height: 1.5;
+  font-weight: 500;
+  font-size: 16px;
+  background: #4a9849;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.joinBtn:hover,
+.joinBtn:focus {
+  background: #def2de;
+  color: #1b391b;
+}
+.joinBtn:active {
+  background: #254c24;
+  color: #ffffff;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 469px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0 32px;
+    max-width: 768px;
+  }
+  .title {
+    font-size: 48px;
+  }
+  .joinBtn {
+    max-width: 228px;
+    align-self: flex-start;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .heroSection {
+    padding: 72px 0;
+  }
+  .container {
+    padding: 0 64px;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 24px;
+    align-items: center;
+  }
+  .content {
+    justify-content: center;
+    flex: 0 0 644px;
+  }
+  .title {
+    font-size: 56px;
+  }
+  .description {
+    font-size: 20px;
+  }
+  .imageWrapper {
+    flex: 0 0 644px;
+    height: 580px;
+    margin-bottom: 0;
+  }
+  .joinBtn {
+    max-width: 278px;
+    font-size: 20px;
+  }
+}

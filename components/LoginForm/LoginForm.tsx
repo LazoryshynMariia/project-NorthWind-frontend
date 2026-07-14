@@ -2,6 +2,7 @@
 
 import { useId } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/store/authStore';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
@@ -29,6 +30,8 @@ export default function LoginForm() {
   const fieldId = useId();
   const router = useRouter();
 
+  const setAuth = useAuthStore(state => state.setAuth);
+
   const handleSubmit = async (values: typeof initialValues) => {
     try {
       const response = await login({
@@ -38,6 +41,8 @@ export default function LoginForm() {
 
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
+
+      setAuth(response.data.user);
 
       toast.success(response.message);
       router.push('/');
