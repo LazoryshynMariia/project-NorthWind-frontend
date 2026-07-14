@@ -1,92 +1,112 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useAuthStore } from '@/lib/store/authStore';
 import toast from 'react-hot-toast';
-
 import {
-  checkSavedStory,
-  removeSavedStory,
   saveStory,
-} from '@/lib/api/storiesApi';
+  deleteSavedStory,
+  checkIsSaved,
+} from '@/lib/api/savedStoriesApi';
+import ErrorWhileSavingModal from '@/components/ErrorWhileSavingModal/ErrorWhileSavingModal';
+import styles from './SaveStory.module.css';
 
-import css from './SaveStory.module.css';
-
-type SaveStoryProps = {
+interface SaveStoryProps {
   storyId: string;
-};
+  initialIsSaved?: boolean;
+}
 
-export default function SaveStory({ storyId }: SaveStoryProps) {
-  const [isSaved, setIsSaved] = useState(false);
-  const [isChecking, setIsChecking] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export default function SaveStory({
+  storyId,
+  initialIsSaved = false,
+}: SaveStoryProps) {
+  const [isSaved, setIsSaved] = useState(initialIsSaved);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
 
   useEffect(() => {
-    const loadSavedState = async () => {
-      try {
-        const saved = await checkSavedStory(storyId);
-        setIsSaved(saved);
-      } catch {
-        // Незалогінений користувач або недоступний endpoint.
-        setIsSaved(false);
-      } finally {
-        setIsChecking(false);
-      }
-    };
-
-    void loadSavedState();
-  }, [storyId]);
-
-  const handleSaveToggle = async () => {
-    if (isSubmitting) {
+    if (!isAuthenticated) {
+      setIsSaved(false);
       return;
     }
 
-    setIsSubmitting(true);
+    let isMounted = true;
 
+    const syncSavedStatus = async () => {
+      try {
+        const savedStatus = await checkIsSaved(storyId);
+        if (isMounted) {
+          setIsSaved(savedStatus);
+        }
+      } catch {
+        if (isMounted) {
+          setIsSaved(false);
+        }
+      }
+    };
+
+    syncSavedStatus();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isAuthenticated, storyId]);
+
+  const handleClick = async () => {
+    if (!isAuthenticated) {
+      setIsModalOpen(true);
+      return;
+    }
+
+    setIsLoading(true);
     try {
       if (isSaved) {
-        await removeSavedStory(storyId);
+        await deleteSavedStory(storyId);
         setIsSaved(false);
-        toast.success('Історію видалено зі збережених');
       } else {
         await saveStory(storyId);
         setIsSaved(true);
-        toast.success('Історію збережено');
       }
-    } catch {
+    } catch (error) {
       toast.error(
-        'Не вдалося змінити стан історії. Увійдіть у профіль і спробуйте ще раз.'
+        error instanceof Error
+          ? error.message
+          : 'Не вдалося виконати дію. Спробуйте ще раз.'
       );
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
-  const buttonText = isChecking
-    ? 'Перевірка...'
-    : isSubmitting
-      ? 'Зачекайте...'
-      : isSaved
-        ? 'Видалити зі збережених'
-        : 'Зберегти';
-
   return (
-    <section className={css.section}>
-      <h2 className={css.title}>Збережіть собі історію</h2>
+    <>
+      <div className={styles.wrapper}>
+        <h2 className={styles.title}>Збережіть собі історію</h2>
+        <p className={styles.description}>
+          Вона буде доступна у вашому профілі у розділі збережене
+        </p>
+        <button
+          className={styles.button}
+          onClick={handleClick}
+          disabled={isLoading}
+          type="button"
+        >
+          {isLoading ? (
+            <span className={styles.loader} />
+          ) : isSaved ? (
+            'Видалити зі збережених'
+          ) : (
+            'Зберегти'
+          )}
+        </button>
+      </div>
 
-      <p className={css.text}>
-        Вона буде доступна у вашому профілі у розділі збережене
-      </p>
-
-      <button
-        className={css.button}
-        type="button"
-        onClick={handleSaveToggle}
-        disabled={isChecking || isSubmitting}
-        aria-pressed={isSaved}
-      >
-        {buttonText}
-      </button>
-    </section>
+      <ErrorWhileSavingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }

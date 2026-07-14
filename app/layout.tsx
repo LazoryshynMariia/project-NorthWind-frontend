@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
+import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
 import ToastProvider from '@/components/ToastProvider/ToastProvider';
 import LoaderProvider from '@/components/LoaderProvider/LoaderProvider';
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={montserrat.variable}>
-        <LoaderProvider>{children}</LoaderProvider>
+        <AuthProvider>
+          <LoaderProvider>{children}</LoaderProvider>
+        </AuthProvider>
         <ToastProvider />
       </body>
     </html>
