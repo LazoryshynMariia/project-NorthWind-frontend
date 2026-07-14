@@ -98,15 +98,11 @@ export default function TravellersList() {
       {errorMessage && <p className={css.error}>{errorMessage}</p>}
 
       {hasNextPage && (
-<<<<<<< HEAD
-        <Pagination onClick={handleLoadMore} isLoading={isLoadingMore} />
-=======
         <Pagination
           onClick={handleLoadMore}
           isLoading={isLoadingMore}
           className={css.travellersPagination}
         />
->>>>>>> origin/main
       )}
     </div>
   );

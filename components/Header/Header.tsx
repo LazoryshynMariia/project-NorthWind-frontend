@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 'use client';
 
@@ -155,8 +154,3 @@ const Header: FC<HeaderProps> = ({
 };
 
 export default Header;
-=======
-export default function Header() {
-  return null;
-}
->>>>>>> origin/main

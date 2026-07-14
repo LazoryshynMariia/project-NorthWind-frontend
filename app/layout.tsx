@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-import type { Metadata } from "next";
-import "./globals.css";
-import Layout from '@/components/Layout/Layout';
-import { Montserrat } from 'next/font/google';
-
-=======
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
->>>>>>> origin/main
-
+import Layout from '@/components/Layout/Layout';
 import ToastProvider from '@/components/ToastProvider/ToastProvider';
 import LoaderProvider from '@/components/LoaderProvider/LoaderProvider';
 
@@ -29,7 +21,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-<<<<<<< HEAD
 
     <html lang="uk">
       <body className={montserrat.variable}>
@@ -38,13 +29,6 @@ export default function RootLayout({
         </Layout>
         <ToastProvider />
           </body>
-=======
-    <html lang="uk">
-      <body className={montserrat.variable}>
-        <LoaderProvider>{children}</LoaderProvider>
-        <ToastProvider />
-      </body>
->>>>>>> origin/main
     </html>
   );
 }

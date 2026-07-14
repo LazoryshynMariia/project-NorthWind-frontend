@@ -1,16 +1,18 @@
+
 'use client';
 
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { IoCloseOutline } from 'react-icons/io5';
 
-import css from './BurgerMenu.module.css';
-
 import Logo from '@/components/Logo/Logo';
-import  AuthBar  from '@/components/AuthBar/AuthBar';
-import { UserBar } from '@/components/UserBar/UserBar';
+import AuthBar from '@/components/AuthBar/AuthBar';
+import UserBar from '@/components/UserBar/UserBar';
 
 import type { AuthUser } from '@/lib/api/auth';
+
+import css from './BurgerMenu.module.css';
 
 interface LinkItem {
   href: string;
@@ -28,7 +30,7 @@ interface BurgerMenuProps {
   onLogout: () => Promise<void> | void;
 }
 
-export const BurgerMenu = ({
+export default function BurgerMenu({
   isOpen,
   onClose,
   isAuthenticated,
@@ -37,28 +39,27 @@ export const BurgerMenu = ({
   onOpenLogin,
   onOpenRegister,
   onLogout,
-}: BurgerMenuProps) => {
+}: BurgerMenuProps) {
   useEffect(() => {
     if (!isOpen) return;
 
-    const html = document.documentElement;
-    const { body } = document;
+    const { documentElement, body } = document;
 
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = body.style.overflow;
+    const htmlOverflow = documentElement.style.overflow;
+    const bodyOverflow = body.style.overflow;
 
-    html.style.overflow = 'hidden';
+    documentElement.style.overflow = 'hidden';
     body.style.overflow = 'hidden';
 
     return () => {
-      html.style.overflow = prevHtmlOverflow;
-      body.style.overflow = prevBodyOverflow;
+      documentElement.style.overflow = htmlOverflow;
+      body.style.overflow = bodyOverflow;
     };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className={css.overlay}>
       <aside className={css.panel}>
         <div className="container">
@@ -77,7 +78,6 @@ export const BurgerMenu = ({
               ) : (
                 <div className={css.topBarAuthBar}>
                   <AuthBar
-                    
                     onOpenLogin={onOpenLogin}
                     onOpenRegister={onOpenRegister}
                   />
@@ -87,56 +87,60 @@ export const BurgerMenu = ({
               <button
                 type="button"
                 className={css.closeButton}
-                aria-label="Закрити меню"
                 onClick={onClose}
+                aria-label="Закрити меню"
               >
                 <IoCloseOutline size={24} />
               </button>
             </div>
           </div>
 
-          <nav className={css.nav}>
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={css.navLink}
-                onClick={onClose}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <div className={css.burgerGroup}>
+            <nav className={css.nav}>
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={css.navLink}
+                  onClick={onClose}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-          <div className={css.bottomGroup}>
-            {isAuthenticated && (
-              <Link
-                href="/articles/create"
-                className={css.publishButton}
-                onClick={onClose}
-              >
-                Опублікувати статтю
-              </Link>
-            )}
+            <div className={css.bottomGroup}>
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    href="/articles/create"
+                    className={css.publishButton}
+                    onClick={onClose}
+                  >
+                    Опублікувати статтю
+                  </Link>
 
-            {isAuthenticated && user ? (
-              <UserBar
-                user={user}
-                onLogout={onLogout}
-              />
-            ) : (
-              <div className={css.bottomAuthBar}>
-                <AuthBar
-                  onOpenLogin={onOpenLogin}
-                  onOpenRegister={onOpenRegister}
-                />
-              </div>
-            )}
+                  {user && (
+                    <UserBar
+                      user={user}
+                      onLogout={onLogout}
+                    />
+                  )}
+                </>
+              ) : (
+                <div className={css.bottomAuthBar}>
+                  <AuthBar
+                    onOpenLogin={onOpenLogin}
+                    onOpenRegister={onOpenRegister}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </aside>
-    </div>
+    </div>,
+    document.body
   );
-};
+}
 
-export default BurgerMenu;
