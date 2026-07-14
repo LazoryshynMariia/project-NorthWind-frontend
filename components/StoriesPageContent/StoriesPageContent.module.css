@@ -1,0 +1,13 @@
+.content {
+  width: 100%;
+  min-height: 260px;
+}
+
+.empty {
+  width: 100%;
+  padding: 64px 0;
+  color: var(--color-scheme-2-text);
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+}
