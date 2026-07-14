@@ -1,4 +1,4 @@
-import Logo from '@/components/Logo/Logo';
+﻿import Logo from '@/components/Logo/Logo';
 import SocialList from '@/components/SocialList/SocialList';
 import FooterNav from '@/components/FooterNav/FooterNav';
 import Copyright from '@/components/Copyright/Copyright';
@@ -10,12 +10,17 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.top}>
-          <div className={styles.brand}>
+          <div className={styles.logoBox}>
             <Logo />
+          </div>
+
+          <div className={styles.socialBox}>
             <SocialList />
           </div>
 
-          <FooterNav />
+          <div className={styles.navBox}>
+            <FooterNav />
+          </div>
         </div>
 
         <div className={styles.bottom}>

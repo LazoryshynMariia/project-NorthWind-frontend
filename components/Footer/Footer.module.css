@@ -1,4 +1,4 @@
-.footer {
+﻿.footer {
   background: var(--color-scheme-2-foreground);
   color: var(--color-scheme-2-text);
 
@@ -6,9 +6,6 @@
   padding-inline: 20px;
 }
 
-/* "лайаут" / "десктоп контейнер" / "контент внутрі" / "рамка лого" -
-   у Figma це 4 вкладені auto-layout фрейми з однаковими 1312x123,
-   але без різних стилів/призначення, тож звели в один .container */
 .container {
   width: 100%;
   max-width: 1312px;
@@ -19,7 +16,6 @@
   gap: 24px;
 }
 
-/* "лейаут верхгій... лого, соц.лінки, лінки" */
 .top {
   display: flex;
   flex-direction: column;
@@ -27,15 +23,23 @@
   gap: 40px;
 }
 
-/* "рамка лого природні мандри" + "соціальні лінки" згруповані разом */
-.brand {
+.logoBox {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 24px;
 }
 
-/* "лейаут нижній... усі права захищені" */
+.socialBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .bottom {
   display: flex;
   flex-direction: column;
@@ -49,7 +53,6 @@
   background-color: var(--color-scheme-2-border);
 }
 
-/* "лейаут контейнеру самого тексту" - обгортка над текстом копірайту */
 .copyrightRow {
   display: flex;
   justify-content: center;
@@ -62,14 +65,23 @@
   }
 
   .top {
-    align-items: stretch;
-  }
-
-  .brand {
-    width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .logoBox {
+    width: auto;
+  }
+
+  .socialBox {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .navBox {
+    width: auto;
+    justify-content: flex-end;
   }
 }
 
@@ -80,18 +92,23 @@
   }
 
   .top {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 400px auto 400px;
     align-items: center;
-    justify-content: space-between;
     gap: 24px;
   }
 
-  /* На десктопі Logo/SocialList/FooterNav мають бути трьома
-     рівновіддаленими елементами в одному рядку, а не Logo+SocialList
-     разом. display:contents "розчиняє" .brand як обгортку - його
-     діти (Logo, SocialList) стають прямими flex-елементами .top
-     нарівні з FooterNav, без зміни JSX. */
-  .brand {
-    display: contents;
+  .logoBox {
+    width: 400px;
+    justify-content: flex-start;
+  }
+
+  .socialBox {
+    justify-content: center;
+  }
+
+  .navBox {
+    width: 400px;
+    justify-content: flex-end;
   }
 }
