@@ -1,31 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useAuthStore } from '@/lib/store/authStore';
 import css from './Join.module.css';
 
 export default function Join() {
-  const [isAuth, setIsAuth] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    const initializeComponent = async () => {
-      const token = localStorage.getItem('accessToken');
-      if (token) {
-        setIsAuth(true);
-      }
-      setIsMounted(true);
-    };
-
-    initializeComponent();
-  }, []);
+  const isAuth = useAuthStore(state => state.isAuthenticated);
+  const isCheckingAuth = useAuthStore(state => state.isCheckingAuth);
 
   const buttonText = isAuth ? 'Збережені статті' : 'Зареєструватися';
 
-  const buttonLink = isAuth ? '/profile' : '/auth/register';
+  const buttonLink = isAuth ? '/profile' : '/register';
 
   return (
-    <section className={css.section}>
+    <section id="join" className={css.section}>
       <div className={css.container}>
         <div className={css.card}>
           <div className={css.content}>
@@ -39,7 +27,7 @@ export default function Join() {
               для сталих мандрів та натхнення для нових маршрутів Україною.
             </p>
 
-            {isMounted ? (
+            {!isCheckingAuth ? (
               <Link href={buttonLink} className={css.button}>
                 {buttonText}
               </Link>

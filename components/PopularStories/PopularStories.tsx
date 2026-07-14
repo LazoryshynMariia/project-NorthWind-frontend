@@ -7,6 +7,8 @@ import { Navigation } from 'swiper/modules';
 
 import StoryCard from '@/components/StoryCard/StoryCard';
 import { Story } from '@/types/index';
+import { getPopularStories } from '@/lib/api/storiesApi';
+import toast from 'react-hot-toast';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -21,20 +23,11 @@ export default function PopularStories() {
       try {
         setIsLoading(true);
 
-        const baseUrl =
-          process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+        const popularStories = await getPopularStories();
 
-        const response = await fetch(`${baseUrl}/api/stories/popular`);
-
-        if (!response.ok) {
-          throw new Error('Не вдалося отримати дані з сервера');
-        }
-
-        const json = await response.json();
-
-        setStories(json.data);
-      } catch (error) {
-        console.error('Помилка при завантаженні популярних історій:', error);
+        setStories(popularStories);
+      } catch {
+        toast.error('Не вдалося завантажити популярні статті');
       } finally {
         setIsLoading(false);
       }
