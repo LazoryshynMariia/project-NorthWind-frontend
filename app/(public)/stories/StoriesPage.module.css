@@ -21,10 +21,11 @@
 }
 
 .titleWrap h1 {
-  color: var(--color-scheme-1-text);
+  color: #000;
   font-size: 32px;
   font-weight: 700;
   line-height: 1.1;
+  letter-spacing: 0;
 }
 
 @media (min-width: 768px) {

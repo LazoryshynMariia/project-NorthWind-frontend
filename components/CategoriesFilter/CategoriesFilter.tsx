@@ -22,7 +22,7 @@ export default function CategoriesFilter({
   return (
     <div className={css.wrapper}>
       <label className={css.selectLabel}>
-        <span className={css.labelText}>Категорія</span>
+        <span className={css.labelText}>Категорії</span>
         <select
           className={css.select}
           value={activeCategory}
