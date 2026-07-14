@@ -7,14 +7,16 @@ import TravellersStories from '@/components/TravellersStories/TravellersStories'
 import { getSavedStories } from '@/lib/api/savedStoriesApi';
 import type { Story } from '@/types';
 
+const PER_PAGE = 12;
+
 export default function SavedStoriesPage() {
   const [stories, setStories] = useState<Story[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    getSavedStories()
-      .then(response => setStories(response.data))
+    getSavedStories(1, PER_PAGE)
+      .then(result => setStories(result.stories))
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
   }, []);
