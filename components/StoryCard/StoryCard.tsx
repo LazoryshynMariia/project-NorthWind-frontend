@@ -58,11 +58,10 @@ export default function StoryCard({
         if (isMounted) {
           setIsSaved(savedStatus);
         }
-      } catch (error) {
+      } catch {
         if (isMounted) {
           setIsSaved(false);
         }
-        console.error(error);
       }
     };
 

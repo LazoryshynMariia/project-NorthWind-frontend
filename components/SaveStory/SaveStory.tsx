@@ -40,11 +40,10 @@ export default function SaveStory({
         if (isMounted) {
           setIsSaved(savedStatus);
         }
-      } catch (error) {
+      } catch {
         if (isMounted) {
           setIsSaved(false);
         }
-        console.error(error);
       }
     };
 
@@ -97,7 +96,7 @@ export default function SaveStory({
           {isLoading ? (
             <span className={styles.loader} />
           ) : isSaved ? (
-            'Видалити'
+            'Видалити зі збережених'
           ) : (
             'Зберегти'
           )}
