@@ -1,0 +1,120 @@
+.wrapper {
+  border: 0px solid var(--color-scheme-1-border);
+  border-radius: 24px;
+  padding: 32px 16px;
+  width: 335px;
+  height: 217px;
+  background: var(--color-scheme-2-foreground);
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+  margin: 0px;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-1-text);
+  margin: 0px;
+  margin-bottom: 16px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  /*text*/
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-white);
+  /*box*/
+  border: 1px solid var(--color-mantis-dark);
+  border-radius: 6px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  width: 303px;
+  height: 48px;
+  background: var(--color-mantis-dark);
+}
+
+.button:hover {
+  color: var(--color-scheme-2-text);
+  border: 1px solid var(--color-mantis-dark);
+  border-radius: 6px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background: var(--color-mantis-lighter);
+}
+.button:active {
+  color: var(--color-white);
+  border: 1px solid var(--color-mantis-dark);
+  border-radius: 6px;
+  padding: 6px 12px;
+  background: var(--color-mantis-dark);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--opacity-white-30);
+  border-top-color: var(--color-white);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 32px;
+    width: 704px;
+    height: 193px;
+  }
+
+  .button {
+    padding: 6px 12px;
+    width: 103px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wrapper {
+    width: 866px;
+    height: 207px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .button {
+    font-size: 20px;
+    width: 123px;
+  }
+}
