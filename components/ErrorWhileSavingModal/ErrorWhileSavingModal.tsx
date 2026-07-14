@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import styles from './ErrorWhileSavingModal.module.css';
 
@@ -36,7 +37,7 @@ export default function ErrorWhileSavingModal({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
       className={styles.backdrop}
       onClick={onClose}
@@ -69,6 +70,7 @@ export default function ErrorWhileSavingModal({
           </Link>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
