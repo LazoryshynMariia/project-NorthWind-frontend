@@ -90,7 +90,7 @@ export default async function StoryDetails({ story }: StoryDetailsProps) {
 
               {categoryName && (
                 <p>
-                  <strong>Категорія</strong> {categoryName}
+                  <strong>{categoryName}</strong>
                 </p>
               )}
             </div>
