@@ -175,5 +175,3 @@ Vercel Preview.
 
 Frontend розгортається на Vercel. Pull Request створює Preview deployment, а
 зміни з `main` використовуються для production deployment.
-
-> > > > > > > origin/main

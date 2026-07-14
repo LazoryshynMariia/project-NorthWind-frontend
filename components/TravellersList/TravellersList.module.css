@@ -31,6 +31,7 @@
 .error {
   color: var(--color-error, #d32f2f);
 }
+
 .travellersPagination {
   margin-top: 24px;
 }

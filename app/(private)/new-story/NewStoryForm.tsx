@@ -1,92 +1,87 @@
 'use client';
 
-import ImgPicker from '@/components/ImgPicker/ImgPicker';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
-
-import styles from './NewStoryForm.module.css';
-import { addStory } from '@/lib/api/storiesApi';
-import { AddStory } from '@/types/stories';
 import { useRouter } from 'next/navigation';
-import * as Yup from 'yup';
-import { getGategories } from '@/lib/api/categoriesApi';
-import { Category } from '@/types/categories';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import toast from 'react-hot-toast';
+import * as Yup from 'yup';
+import ImgPicker from '@/components/ImgPicker/ImgPicker';
+import { addStory } from '@/lib/api/storiesApi';
+import { getCategories } from '@/lib/api/categoriesApi';
+import type { CreateStoryData } from '@/types';
+import type { Category } from '@/types/categories';
+import styles from './NewStoryForm.module.css';
 
-const Schema = Yup.object().shape({
+const schema = Yup.object({
   title: Yup.string()
-    .min(2, 'Title must be at least 2 characters')
-    .max(40, 'Title is too long')
-    .required('Title is required'),
+    .min(2, 'Мінімум 2 символи')
+    .max(40, 'Максимум 40 символів')
+    .required("Обов'язкове поле"),
   article: Yup.string()
-    .min(12, 'Text must be at least 12 characters')
-    .max(3000, 'Text is too long')
-    .required('Text is required'),
-  category: Yup.string().required('Category is required'),
+    .min(12, 'Мінімум 12 символів')
+    .max(3000, 'Максимум 3000 символів')
+    .required("Обов'язкове поле"),
+  category: Yup.string().required("Обов'язкове поле"),
 });
 
 export default function NewStoryForm() {
   const router = useRouter();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [isloading, setIsloading] = useState(false);
-  const [imgError, setImgError] = useState<string>('');
-
-  const handleSaveStory = async (data: AddStory) => {
-    if (!imageFile) {
-      setImgError('Image is required');
-      return;
-    }
-    try {
-      setIsloading(true);
-      const createdStory = await addStory(data, imageFile);
-      router.push(`/stories/${createdStory._id}`);
-
-      toast.success('Історія збережена');
-    } catch (error) {
-      toast.error('Щось пішло не так');
-    } finally {
-      setIsloading(false);
-    }
-  };
+  const [isLoading, setIsLoading] = useState(false);
+  const [imgError, setImgError] = useState('');
+  const [pickerKey, setPickerKey] = useState(0);
 
   useEffect(() => {
     async function fetchCategories() {
       try {
-        setIsloading(true);
-        const res = await getGategories();
-        setCategories(res);
-      } catch (e) {
-        toast.error('Щось пішло не так');
+        setIsLoading(true);
+        const result = await getCategories();
+        setCategories(result);
+      } catch {
+        toast.error('Не вдалося завантажити категорії');
       } finally {
-        setIsloading(false);
+        setIsLoading(false);
       }
     }
+
     fetchCategories();
   }, []);
 
+  const handleSaveStory = async (data: CreateStoryData) => {
+    if (!imageFile) {
+      setImgError("Обов'язково додайте зображення");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const createdStory = await addStory(data, imageFile);
+      toast.success('Історія збережена');
+      router.push(`/stories/${createdStory._id}`);
+    } catch {
+      toast.error('Не вдалося зберегти історію');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <Formik<AddStory>
+    <Formik<CreateStoryData>
       initialValues={{ title: '', article: '', category: '' }}
-      onSubmit={data => {
-        handleSaveStory(data);
-      }}
-      validationSchema={Schema}
+      onSubmit={handleSaveStory}
+      validationSchema={schema}
     >
       {form => {
         const isSubmitBtnDisabled =
-          isloading ||
-          !(
-            form.touched.article &&
-            form.touched.category &&
-            form.touched.title
-          );
+          isLoading || !form.isValid || !form.dirty || !imageFile;
 
         return (
           <Form className={styles.form}>
             <div className={styles.field}>
               <span className={styles.label}>Обкладинка статті</span>
               <ImgPicker
+                key={pickerKey}
                 onChangePhoto={setImageFile}
                 setError={setImgError}
                 error={imgError}
@@ -104,7 +99,6 @@ export default function NewStoryForm() {
                 placeholder="Введіть заголовок історії"
                 className={styles.input}
               />
-
               <ErrorMessage
                 name="title"
                 component="p"
@@ -126,13 +120,11 @@ export default function NewStoryForm() {
                   <option value="" disabled>
                     Категорія
                   </option>
-                  {categories.map(item => {
-                    return (
-                      <option key={item._id} value={item._id}>
-                        {item.category}
-                      </option>
-                    );
-                  })}
+                  {categories.map(item => (
+                    <option key={item._id} value={item._id}>
+                      {item.category}
+                    </option>
+                  ))}
                 </Field>
                 <svg
                   className={styles.selectChevron}
@@ -149,7 +141,6 @@ export default function NewStoryForm() {
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </div>
-
               <ErrorMessage
                 name="category"
                 component="p"
@@ -169,7 +160,6 @@ export default function NewStoryForm() {
                 placeholder="Ваша історія тут"
                 className={styles.input}
               />
-
               <ErrorMessage
                 name="article"
                 component="p"
@@ -183,12 +173,17 @@ export default function NewStoryForm() {
                 className={`${styles.button} ${styles.btnPrimary}`}
                 disabled={isSubmitBtnDisabled}
               >
-                {isloading ? 'Збереження...' : 'Зберегти'}
+                {isLoading ? 'Збереження...' : 'Зберегти'}
               </button>
               <button
                 type="button"
                 className={`${styles.button} ${styles.btnGhost}`}
-                onClick={() => form.resetForm()}
+                onClick={() => {
+                  form.resetForm();
+                  setImageFile(null);
+                  setImgError('');
+                  setPickerKey(key => key + 1);
+                }}
               >
                 Відмінити
               </button>

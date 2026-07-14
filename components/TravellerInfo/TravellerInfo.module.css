@@ -1,26 +1,26 @@
 .info {
-  width: 100%;
-  font-family: 'Montserrat', sans-serif;
-  padding-bottom: 16px;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    padding-bottom: 16px;
 }
 
 .name {
-  margin: 0 0 8px;
+    margin: 0 0 8px;
 
-  color: #1b391b;
+    color: #1b391b;
 
-  font-size: 18px;
-  line-height: 1.5;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .articles {
-  margin: 0;
+    margin: 0;
 
-  color: #1b391b;
-  font-size: 14px;
-  line-height: 1.4;
+    color: #1b391b;
+    font-size: 14px;
+    line-height: 1.4;
 }

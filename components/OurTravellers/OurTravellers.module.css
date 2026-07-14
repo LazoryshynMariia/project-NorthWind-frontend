@@ -1,209 +1,209 @@
 .section {
-  width: 100%;
-  max-width: 375px;
-  margin: 0 auto;
-  padding: 40px 16px;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 40px 16px;
 }
 
 .header {
-  margin-bottom: 24px;
+    margin-bottom: 24px;
 }
 
 .title {
-  margin: 0 0 24px;
+    margin: 0 0 24px;
 
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: #000;
-  font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: #000;
+    font-family: "Montserrat", sans-serif;
 }
 
 .topLink {
-  display: none;
+    display: none;
 }
 
 .controls {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 
-  margin-top: 48px;
-  margin-bottom: 48px;
+    margin-top: 48px;
+    margin-bottom: 48px;
 }
 
 .arrowIcon {
-  width: 16px;
-  height: 16px;
-  color: currentColor;
+    width: 16px;
+    height: 16px;
+    color: currentColor;
 }
 
 .nextArrow .arrowIcon {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .swiper {
-  width: 100%;
+    width: 100%;
 }
 
 .travellersGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
 
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 
-  list-style: none;
+    list-style: none;
 }
 
 @media screen and (min-width: 768px) {
-  .travellersGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-  }
+    .travellersGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+    }
 }
 
 @media screen and (min-width: 1440px) {
-  .travellersGrid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+    .travellersGrid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  margin-top: 24px;
+    margin-top: 24px;
 
-  background-color: #def2de;
-  color: #1b391b;
+    background-color: #def2de;
+    color: #1b391b;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-  padding: 12px;
-  width: 48px;
-  height: 48px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 12px;
+    width: 48px;
+    height: 48px;
 
-  cursor: pointer;
-  transition:
-    background-color 250ms ease,
-    color 250ms ease;
+    cursor: pointer;
+    transition:
+        background-color 250ms ease,
+        color 250ms ease;
 }
 
 .arrow:hover:not(:disabled),
 .arrow:focus-visible:not(:disabled) {
-  color: #254c24;
-  background-color: #eef8ee;
+    color: #254c24;
+    background-color: #eef8ee;
 }
 
 .arrow:active:not(:disabled) {
-  color: #254c24;
-  background-color: #eef8ee;
+    color: #254c24;
+    background-color: #eef8ee;
 }
 
 .arrow:disabled {
-  color: #1b391b;
-  background-color: #f2f2f2;
+    color: #1b391b;
+    background-color: #f2f2f2;
 
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  opacity: 0.3;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    opacity: 0.3;
 
-  cursor: not-allowed;
+    cursor: not-allowed;
 }
 
 .bottomLink {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  width: 100%;
-  height: 48px;
+    width: 100%;
+    height: 48px;
 
-  background-color: #4a9849;
+    background-color: #4a9849;
 
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
 
-  border: 1px solid #4a9849;
-  border-radius: 6px;
-  padding-block: 6px;
-  padding-inline: 12px;
+    border: 1px solid #4a9849;
+    border-radius: 6px;
+    padding-block: 6px;
+    padding-inline: 12px;
 
-  transition: background-color 250ms ease;
+    transition: background-color 250ms ease;
 }
 
 .topLink:hover,
 .topLink:focus,
 .bottomLink:hover,
 .bottomLink:focus {
-  background-color: #214421;
+    background-color: #214421;
 }
 
 /* TABLET */
 @media screen and (min-width: 768px) {
-  .section {
-    max-width: 768px;
-    padding: 64px 32px;
-  }
+    .section {
+        max-width: 768px;
+        padding: 64px 32px;
+    }
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-  .title {
-    font-size: 44px;
-  }
+    .title {
+        font-size: 44px;
+    }
 
-  .topLink {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .topLink {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    width: 166px;
-    height: 48px;
+        width: 166px;
+        height: 48px;
 
-    border-radius: 6px;
-    background-color: #4a9849;
+        border-radius: 6px;
+        background-color: #4a9849;
 
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+        font-family: "Montserrat", sans-serif;
 
-    padding-block: 6px;
-    padding-inline: 12px;
-  }
+        padding-block: 6px;
+        padding-inline: 12px;
+    }
 
-  .bottomLink {
-    display: none;
-  }
+    .bottomLink {
+        display: none;
+    }
 }
 
 /* DESKTOP */
 @media screen and (min-width: 1440px) {
-  .section {
-    max-width: 1224px;
-    padding: 80px 64px;
-  }
+    .section {
+        max-width: 1224px;
+        padding: 80px 64px;
+    }
 
-  .title {
-    font-size: 52px;
-  }
+    .title {
+        font-size: 52px;
+    }
 
-  .topLink {
-    width: 202px;
-    font-size: 20px;
-  }
+    .topLink {
+        width: 202px;
+        font-size: 20px;
+    }
 }

@@ -1,26 +1,49 @@
-import { AddStory, Story } from '@/types/stories';
-import { nextServer } from './api';
+import { nextServer } from '@/lib/api/api';
+import type { CreateStoryData, Story } from '@/types';
+import type { ApiResponse } from '@/types/api';
 
-const getAuthHeaders = () => {
-  if (typeof window === 'undefined') {
-    return undefined;
-  }
-
-  const token = localStorage.getItem('accessToken');
-
-  return token ? { Authorization: `Bearer ${token}` } : undefined;
-}; 
-
-export const addStory = async (data: AddStory, img: File): Promise<Story> => {
+export async function addStory(
+  data: CreateStoryData,
+  img: File
+): Promise<Story> {
   const formData = new FormData();
   formData.append('img', img);
   formData.append('title', data.title);
   formData.append('article', data.article);
   formData.append('category', data.category);
 
-  const res = await nextServer.post<Story>('/stories', formData, {
-      headers: getAuthHeaders(),
-    });
+  const response = await nextServer.post<Story>('/stories', formData);
 
-  return res.data;
-};
+  return response.data;
+}
+
+export async function getPopularStories(): Promise<Story[]> {
+  const response =
+    await nextServer.get<ApiResponse<Story[]>>('/stories/popular');
+
+  return response.data.data;
+}
+
+export async function getStoryById(storyId: string): Promise<Story | null> {
+  try {
+    const response = await nextServer.get<ApiResponse<Story>>(
+      `/stories/${storyId}`
+    );
+
+    return response.data.data;
+  } catch {
+    return null;
+  }
+}
+
+export async function getRecommendedStories(): Promise<Story[]> {
+  try {
+    const response = await nextServer.get<ApiResponse<Story[]>>(
+      '/stories/recommended'
+    );
+
+    return response.data.data;
+  } catch {
+    return [];
+  }
+}

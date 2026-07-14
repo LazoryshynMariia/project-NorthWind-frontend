@@ -1,14 +1,11 @@
-import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 import NewStoryForm from './NewStoryForm';
 import styles from './page.module.css';
 
-export default function StoriesPage() {
+export default function NewStoryPage() {
   return (
-    <ProtectedRoute>
-      <main>
-        <h1 className={styles.title}>Створити нову історію</h1>
-        <NewStoryForm />
-      </main>
-    </ProtectedRoute>
+    <main>
+      <h1 className={styles.title}>Створити нову історію</h1>
+      <NewStoryForm />
+    </main>
   );
 }

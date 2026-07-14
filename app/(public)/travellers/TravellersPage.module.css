@@ -1,48 +1,48 @@
 .title {
-  margin-bottom: 32px;
+    margin-bottom: 32px;
 
-  font-size: 40px;
-  font-weight: 700;
-  text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
 }
 
 .page {
-  min-height: 100vh;
-  background-color: #eef8ee;
+    min-height: 100vh;
+    background-color: #eef8ee;
 }
 
 .section {
-  padding-top: 32px;
-  padding-bottom: 64px;
+    padding-top: 32px;
+    padding-bottom: 64px;
 }
 
 .container {
-  width: 100%;
-  max-width: 375px;
-  margin: 0 auto;
-  padding-inline: 20px;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    padding-inline: 20px;
 }
 
 @media screen and (min-width: 768px) {
-  .section {
-    padding-top: 40px;
-    padding-bottom: 80px;
-  }
+    .section {
+        padding-top: 40px;
+        padding-bottom: 80px;
+    }
 
-  .container {
-    max-width: 768px;
-    padding-inline: 32px;
-  }
+    .container {
+        max-width: 768px;
+        padding-inline: 32px;
+    }
 }
 
 @media screen and (min-width: 1440px) {
-  .section {
-    padding-top: 48px;
-    padding-bottom: 96px;
-  }
+    .section {
+        padding-top: 48px;
+        padding-bottom: 96px;
+    }
 
-  .container {
-    max-width: 1440px;
-    padding-inline: 64px;
-  }
+    .container {
+        max-width: 1440px;
+        padding-inline: 64px;
+    }
 }

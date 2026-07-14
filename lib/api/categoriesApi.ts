@@ -1,7 +1,9 @@
-import { Category } from '@/types/categories';
-import { nextServer } from './api';
+import { nextServer } from '@/lib/api/api';
+import type { ApiResponse } from '@/types/api';
+import type { Category } from '@/types/categories';
 
-export const getGategories = async (): Promise<Category[]> => {
-  const res = await nextServer.get('/categories');
-  return res.data.data;
+export const getCategories = async (): Promise<Category[]> => {
+  const response = await nextServer.get<ApiResponse<Category[]>>('/categories');
+
+  return response.data.data;
 };
