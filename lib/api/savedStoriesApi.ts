@@ -1,4 +1,11 @@
 import { nextServer } from '@/lib/api/api';
+import type { PaginatedResponse } from '@/types/api';
+import type { Story } from '@/types';
+
+interface SavedStoryLink {
+  _id: string;
+  storyId: Story;
+}
 
 type SavedStoryStatusResponse = {
   isSaved: boolean;
@@ -63,4 +70,25 @@ export async function checkIsSaved(storyId: string): Promise<boolean> {
       getApiErrorMessage(error, 'Не вдалося перевірити статус збереження')
     );
   }
+}
+
+export interface SavedStoriesPage {
+  stories: Story[];
+  totalPages: number;
+}
+
+// saved-stories returns link objects, the real story lives in storyId
+export async function getSavedStories(
+  page = 1,
+  perPage = 12
+): Promise<SavedStoriesPage> {
+  const response = await nextServer.get<PaginatedResponse<SavedStoryLink>>(
+    '/users/saved-stories',
+    { params: { page, perPage } }
+  );
+
+  return {
+    stories: response.data.data.map(item => item.storyId),
+    totalPages: response.data.totalPages,
+  };
 }

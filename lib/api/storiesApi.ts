@@ -1,6 +1,6 @@
 import { nextServer } from '@/lib/api/api';
+import type { ApiResponse, PaginatedResponse } from '@/types/api';
 import type { CreateStoryData, Story } from '@/types';
-import type { ApiResponse } from '@/types/api';
 
 export async function addStory(
   data: CreateStoryData,
@@ -46,4 +46,16 @@ export async function getRecommendedStories(): Promise<Story[]> {
   } catch {
     return [];
   }
+}
+
+export async function getStoriesByAuthor(
+  author: string,
+  page = 1,
+  perPage = 12
+): Promise<PaginatedResponse<Story>> {
+  const response = await nextServer.get<PaginatedResponse<Story>>('/stories', {
+    params: { author, page, perPage },
+  });
+
+  return response.data;
 }
