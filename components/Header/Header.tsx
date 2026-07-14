@@ -27,7 +27,7 @@ interface HeaderProps {
 }
 
 const publicLinks: LinkItem[] = [
-  { label: 'Головна', href: '/' },
+ { label: 'Головна', href: '/' },
   { label: 'Статті', href: '/stories' },
   { label: 'Еко-Мандрівники', href: '/travellers' },
 ];
