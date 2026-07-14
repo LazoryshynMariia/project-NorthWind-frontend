@@ -1,0 +1,120 @@
+.section {
+  padding: 32px 0;
+  background-color: #eef8ee;
+}
+
+.container {
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.card {
+  background-image: url('/images/Join/Join-img-mobile.png');
+  background-size: cover;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  background-color: #4a9849;
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+  box-sizing: border-box;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.button:hover,
+.button:focus {
+  background: #def2de;
+  color: #1b391b;
+}
+.button:active {
+  background: #254c24;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+
+  .card {
+    background-image: url(/images/Join/Join-img.png);
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .button {
+    width: auto;
+    align-self: flex-start;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .section {
+    padding: 48px 0;
+  }
+
+  .container {
+    max-width: 1440px;
+    padding: 0 64px;
+  }
+
+  .card {
+    padding: 62.66px 479px 63.34px 64px;
+  }
+
+  .title {
+    font-size: 48px;
+  }
+
+  .description {
+    font-size: 20px;
+  }
+
+  .button {
+    font-size: 20px;
+  }
+}

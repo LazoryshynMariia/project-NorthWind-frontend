@@ -1,9 +1,6 @@
-import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
+import { redirect } from 'next/navigation';
 
+// saved stories tab is active by default
 export default function ProfilePage() {
-  return (
-    <ProtectedRoute>
-      <h1>Profile Page</h1>
-    </ProtectedRoute>
-  );
+  redirect('/profile/saved');
 }

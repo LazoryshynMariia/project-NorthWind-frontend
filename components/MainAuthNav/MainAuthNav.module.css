@@ -1,0 +1,30 @@
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
+.navLink {
+  padding: 12px 40px;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.activeLink {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 768px) {
+  .navLink {
+    padding: 12px 117px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .navLink {
+    padding: 11px 112px;
+    font-size: 18px;
+  }
+}

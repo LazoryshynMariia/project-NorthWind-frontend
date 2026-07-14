@@ -1,0 +1,27 @@
+.registerPageContainer {
+  min-height: 100vh;
+}
+
+.container {
+  min-height: 100vh;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    padding: 0 64px;
+  }
+}

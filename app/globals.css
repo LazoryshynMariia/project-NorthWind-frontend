@@ -1,6 +1,6 @@
-@import 'ldrs/react/DotPulse.css';
+﻿@import 'ldrs/react/DotPulse.css';
 
-/* 
+/*
    RESET */
 
 *,
@@ -62,7 +62,6 @@ ol {
 /*  DESIGN TOKENS */
 
 :root {
-
   /* Colors */
 
   --color-scheme-1-background: var(--color-white);
@@ -78,28 +77,28 @@ ol {
   --color-neutral-dark: #4c4c4c;
   --color-neutral-darker: #191919;
 
-  --opacity-transparent: rgba(255,255,255,0);
+  --opacity-transparent: rgba(255, 255, 255, 0);
 
   --color-scheme-1-foreground: var(--color-neutral-lightest);
   --color-scheme-1-accent: var(--color-mantis);
 
-  --opacity-white-5: rgba(255,255,255,.05);
-  --opacity-white-10: rgba(255,255,255,.1);
-  --opacity-white-15: rgba(255,255,255,.15);
-  --opacity-white-20: rgba(255,255,255,.2);
-  --opacity-white-30: rgba(255,255,255,.3);
-  --opacity-white-40: rgba(255,255,255,.4);
-  --opacity-white-50: rgba(255,255,255,.5);
-  --opacity-white-60: rgba(255,255,255,.6);
+  --opacity-white-5: rgba(255, 255, 255, 0.05);
+  --opacity-white-10: rgba(255, 255, 255, 0.1);
+  --opacity-white-15: rgba(255, 255, 255, 0.15);
+  --opacity-white-20: rgba(255, 255, 255, 0.2);
+  --opacity-white-30: rgba(255, 255, 255, 0.3);
+  --opacity-white-40: rgba(255, 255, 255, 0.4);
+  --opacity-white-50: rgba(255, 255, 255, 0.5);
+  --opacity-white-60: rgba(255, 255, 255, 0.6);
 
-  --opacity-neutral-darkest-5: rgba(0,0,0,.05);
-  --opacity-neutral-darkest-10: rgba(0,0,0,.1);
-  --opacity-neutral-darkest-15: rgba(0,0,0,.15);
-  --opacity-neutral-darkest-20: rgba(0,0,0,.2);
-  --opacity-neutral-darkest-30: rgba(0,0,0,.3);
-  --opacity-neutral-darkest-40: rgba(0,0,0,.4);
-  --opacity-neutral-darkest-50: rgba(0,0,0,.5);
-  --opacity-neutral-darkest-60: rgba(0,0,0,.6);
+  --opacity-neutral-darkest-5: rgba(0, 0, 0, 0.05);
+  --opacity-neutral-darkest-10: rgba(0, 0, 0, 0.1);
+  --opacity-neutral-darkest-15: rgba(0, 0, 0, 0.15);
+  --opacity-neutral-darkest-20: rgba(0, 0, 0, 0.2);
+  --opacity-neutral-darkest-30: rgba(0, 0, 0, 0.3);
+  --opacity-neutral-darkest-40: rgba(0, 0, 0, 0.4);
+  --opacity-neutral-darkest-50: rgba(0, 0, 0, 0.5);
+  --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
 
   --color-mantis-lightest: #eef8ee;
   --color-mantis-lighter: #def2de;
@@ -134,4 +133,9 @@ ol {
   --space-7: 40px;
   --space-8: 48px;
 
+  /* Transitions */
+
+  --transition-fast: 150ms ease-in-out;
+  --transition-default: 250ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
 }

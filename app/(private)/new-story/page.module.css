@@ -1,0 +1,29 @@
+/* Заголовок вирівнюється по тому ж контейнеру, що й форма */
+.title {
+  margin: 0 auto;
+  padding: 20px 20px 0;
+  width: 100%;
+  max-width: 100%;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #1b391b;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .title {
+    max-width: 704px;
+    padding: 24px 32px 0;
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .title {
+    max-width: 1091px;
+    padding: 24px 0 0;
+    font-size: 40px;
+  }
+}
