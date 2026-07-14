@@ -24,7 +24,7 @@ export default function PopularStories() {
         const baseUrl =
           process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
-        const response = await fetch(`${baseUrl}/stories/popular`);
+        const response = await fetch(`${baseUrl}/api/stories/popular`);
 
         if (!response.ok) {
           throw new Error('Не вдалося отримати дані з сервера');
