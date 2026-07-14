@@ -11,6 +11,7 @@ import BurgerMenu, {
 import Logo from '@/components/Logo/Logo';
 import UserBar from '@/components/UserBar/UserBar';
 import { useAuthStore } from '@/lib/store/authStore';
+import { logout } from '@/lib/api/auth';
 
 import css from './Header.module.css';
 
@@ -89,12 +90,16 @@ export default function Header() {
   }, []);
 
   const handleLogout = async () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    try {
+      await logout();
+    } finally {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
 
-    clearAuth();
-    closeMenu();
-    router.replace('/');
+      clearAuth();
+      closeMenu();
+      router.replace('/');
+    }
   };
 
   return (

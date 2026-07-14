@@ -61,3 +61,7 @@ export const refreshSession = async (refreshToken: string) => {
 
   return response.data;
 };
+
+export const logout = async () => {
+  await nextServer.post('/auth/logout');
+};
