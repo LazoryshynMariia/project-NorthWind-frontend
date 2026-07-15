@@ -37,7 +37,6 @@
     justify-content: flex-end;
     gap: 10px;
 
-    margin-top: 48px;
     margin-bottom: 48px;
 }
 
@@ -84,7 +83,7 @@
     align-items: center;
     justify-content: center;
 
-    margin-top: 24px;
+    margin-top: 48px;
 
     background-color: #def2de;
     color: #1b391b;
@@ -202,7 +201,7 @@
 /* DESKTOP */
 @media screen and (min-width: 1440px) {
     .container {
-        max-width: 1224px;
+        max-width: 1312px;
         padding: 80px 64px;
     }
 
