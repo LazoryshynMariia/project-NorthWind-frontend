@@ -1,6 +1,10 @@
 import { nextServer } from '@/lib/api/api';
-import type { ApiResponse, PaginatedResponse } from '@/types/api';
+import type { ApiResponse, PaginatedResponse, PaginationParams } from '@/types/api';
 import type { CreateStoryData, Story } from '@/types';
+
+type StoriesParams = PaginationParams & {
+  category?: string;
+};
 
 export async function addStory(
   data: CreateStoryData,
@@ -46,6 +50,22 @@ export async function getRecommendedStories(): Promise<Story[]> {
   } catch {
     return [];
   }
+}
+
+export async function getStories({
+  page = 1,
+  perPage = 9,
+  category,
+}: StoriesParams = {}): Promise<PaginatedResponse<Story>> {
+  const response = await nextServer.get<PaginatedResponse<Story>>('/stories', {
+    params: {
+      page,
+      perPage,
+      category: category || undefined,
+    },
+  });
+
+  return response.data;
 }
 
 export async function getStoriesByAuthor(

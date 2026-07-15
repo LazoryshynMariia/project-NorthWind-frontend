@@ -42,8 +42,9 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
   return (
     <>
-      <StoryDetails story={story} />
-      <SaveStory storyId={storyId} />
+      <StoryDetails story={story}>
+        <SaveStory storyId={storyId} />
+      </StoryDetails>
       <RecommendedStories />
     </>
   );

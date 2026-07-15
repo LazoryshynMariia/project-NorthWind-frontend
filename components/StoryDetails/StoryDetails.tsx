@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
+import { getCategories } from '@/lib/api/categoriesApi';
 import { getTravellerById } from '@/lib/api/travellersApi';
 import type { Story } from '@/types';
 
@@ -8,6 +10,7 @@ import css from './StoryDetails.module.css';
 
 type StoryDetailsProps = {
   story: Story | null;
+  children?: ReactNode;
 };
 
 function formatDate(date: string): string {
@@ -24,7 +27,25 @@ function formatDate(date: string): string {
   }).format(parsedDate);
 }
 
-export default async function StoryDetails({ story }: StoryDetailsProps) {
+async function getCategoryName(category: Story['category']): Promise<string> {
+  if (typeof category === 'object') {
+    return category.category;
+  }
+
+  const categories = await getCategories().catch(() => []);
+  return categories.find(item => item._id === category)?.category ?? '';
+}
+
+async function getAuthorName(ownerId: Story['ownerId']): Promise<string> {
+  if (typeof ownerId === 'object') {
+    return ownerId.name;
+  }
+
+  const author = await getTravellerById(ownerId);
+  return author?.name ?? 'Мандрівник';
+}
+
+export default async function StoryDetails({ story, children }: StoryDetailsProps) {
   if (!story) {
     return (
       <section className={css.section}>
@@ -39,12 +60,10 @@ export default async function StoryDetails({ story }: StoryDetailsProps) {
     );
   }
 
-  const author = await getTravellerById(story.ownerId);
-
-  const categoryName =
-    typeof story.category === 'object'
-      ? story.category.category
-      : story.category;
+  const [authorName, categoryName] = await Promise.all([
+    getAuthorName(story.ownerId),
+    getCategoryName(story.category),
+  ]);
 
   const paragraphs = story.article
     .split(/\n+/)
@@ -52,52 +71,60 @@ export default async function StoryDetails({ story }: StoryDetailsProps) {
     .filter(Boolean);
 
   return (
-    <section className={css.section}>
-      <div className={css.container}>
-        <div className={css.top}>
-          <div className={css.info}>
-            <Link className={css.backLink} href="/stories">
-              ← Всі статті
-            </Link>
+    <>
+      <section className={css.section}>
+        <div className={css.container}>
+          <div className={css.top}>
+            <div className={css.info}>
+              <Link className={css.backLink} href="/stories">
+                ← Всі статті
+              </Link>
 
-            <h1 className={css.title}>{story.title}</h1>
+              <h1 className={css.title}>{story.title}</h1>
 
-            <div className={css.meta}>
-              <p>
-                <strong>Автор статті</strong> {author?.name ?? 'Мандрівник'}
-              </p>
-
-              <p>
-                <strong>Опубліковано</strong> {formatDate(story.date)}
-              </p>
-
-              {categoryName && (
+              <div className={css.meta}>
                 <p>
-                  <strong>{categoryName}</strong>
+                  <strong>Автор статті</strong> {authorName}
                 </p>
-              )}
+
+                <p>
+                  <strong>Опубліковано</strong> {formatDate(story.date)}
+                </p>
+
+                {categoryName && (
+                  <p className={css.categoryTag}>
+                    <strong>{categoryName}</strong>
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className={css.imageWrapper}>
+              <Image
+                className={css.image}
+                src={story.img}
+                alt={story.title}
+                fill
+                priority
+                unoptimized
+                sizes="(min-width: 1440px) 755px, 100vw"
+              />
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className={css.imageWrapper}>
-            <Image
-              className={css.image}
-              src={story.img}
-              alt={story.title}
-              fill
-              priority
-              unoptimized
-              sizes="(min-width: 1440px) 755px, 100vw"
-            />
+      <section className={css.contentSection}>
+        <div className={css.contentContainer}>
+          <div className={css.article}>
+            {paragraphs.map((paragraph, index) => (
+              <p key={`${story._id}-${index}`}>{paragraph}</p>
+            ))}
           </div>
-        </div>
 
-        <div className={css.article}>
-          {paragraphs.map((paragraph, index) => (
-            <p key={`${story._id}-${index}`}>{paragraph}</p>
-          ))}
+          {children}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
