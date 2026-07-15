@@ -51,7 +51,13 @@ export default async function StoryDetails({ story, children }: StoryDetailsProp
       <section className={css.section}>
         <div className={css.container}>
           <Link className={css.backLink} href="/stories">
-            ← Всі статті
+            <span className={css.backIcon} aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M19 12H5" />
+                <path d="M12 5l-7 7 7 7" />
+              </svg>
+            </span>
+            Всі статті
           </Link>
 
           <p>Така історія відсутня</p>
@@ -77,7 +83,13 @@ export default async function StoryDetails({ story, children }: StoryDetailsProp
           <div className={css.top}>
             <div className={css.info}>
               <Link className={css.backLink} href="/stories">
-                ← Всі статті
+                <span className={css.backIcon} aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M19 12H5" />
+                    <path d="M12 5l-7 7 7 7" />
+                  </svg>
+                </span>
+                Всі статті
               </Link>
 
               <h1 className={css.title}>{story.title}</h1>
