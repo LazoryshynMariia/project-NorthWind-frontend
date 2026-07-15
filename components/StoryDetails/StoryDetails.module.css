@@ -22,6 +22,8 @@
 .backLink {
   order: 1;
   display: inline-flex;
+  align-items: center;
+  gap: 8px;
   align-self: flex-start;
 
   margin: 0 0 16px;
@@ -30,6 +32,23 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
+}
+
+.backIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.backIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .backLink:hover,
