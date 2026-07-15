@@ -91,29 +91,72 @@
     }
 
 @media screen and (min-width: 1440px) {
+  /* Container: 1440 width, 283 hug height, 80px vertical / 64px horizontal
+     page padding — matches Section Padding/padding-section-medium and
+     Page Padding/padding-global tokens used across other sections. */
   .footer {
     padding-block: 80px;
     padding-inline: 64px;
   }
 
-  .top {
-    display: grid;
-    grid-template-columns: 400px auto 400px;
-    align-items: center;
+  /* Content wrapper: 1312 x 123 (hug), 24px gap between the top row (43px)
+     and the bottom row (56px): 43 + 24 + 56 = 123. */
+  .container {
+    width: 100%;
+    max-width: 1312px;
     gap: 24px;
   }
 
-  .logoBox {
-    width: 400px;
-    justify-content: flex-start;
+  /* Top row: 1312 x 43, three fixed-width columns spaced with
+     justify-content: space-between instead of a grid, per spec. */
+  .top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    width: 100%;
+    height: 43px;
   }
 
+  /* Logo: 400 x 40, gap 10px (already set inside the Logo component),
+     text pinned to the left. */
+  .logoBox {
+    width: 400px;
+    height: 40px;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  /* Socials: 132 x 24 (hug), gap 12px (set inside SocialList),
+     pinned to the top, centered horizontally within its own box. */
   .socialBox {
+    width: 132px;
+    height: 24px;
+    align-items: flex-start;
     justify-content: center;
   }
 
+  /* Nav links: 400 x 43, gap 24px, pinned to the right. */
   .navBox {
     width: 400px;
+    max-width: 400px;
+    height: 43px;
+    gap: 24px;
     justify-content: flex-end;
+    align-items: center;
+  }
+
+  /* Bottom row: 1312 x 56, 32px gap between the divider and the
+     copyright text. */
+  .bottom {
+    width: 100%;
+    height: 56px;
+    gap: 32px;
+  }
+
+  .copyrightRow {
+    width: 100%;
+    height: 24px;
   }
 }
