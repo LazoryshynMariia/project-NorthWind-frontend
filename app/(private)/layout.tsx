@@ -1,7 +1,8 @@
+import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 import { ReactNode } from 'react';
 
 import Layout from '@/components/Layout/Layout';
-import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
+
 
 type PrivateLayoutProps = {
   children: ReactNode;

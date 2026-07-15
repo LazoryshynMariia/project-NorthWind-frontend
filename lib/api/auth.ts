@@ -16,6 +16,12 @@ export interface AuthResponse {
   };
 }
 
+export interface GetMeResponse {
+  status: number;
+  message: string;
+  data: AuthUser;
+}
+
 export const login = async (data: LoginData) => {
   const response = await nextServer.post<AuthResponse>('/auth/login', data);
 
@@ -27,6 +33,7 @@ export interface RegisterRequest {
   email: string;
   password: string;
 }
+
 
 export const register = async (data: RegisterRequest) => {
   const res = await nextServer.post<AuthUser>('/auth/register', data);

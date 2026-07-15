@@ -1,197 +1,165 @@
+﻿.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 300;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 100dvh;
-    overflow-y: auto;
-    color: var(--color-scheme-2-text);
-    background-color: var(--color-scheme-2-background);
+  position: fixed;
+  inset: 0;
+  background: var(--color-scheme-2-background);
+  z-index: 200;
 }
 
-.menuHeader {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    width: 100%;
-    height: 72px;
-    padding: 0 20px;
+.panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--color-scheme-2-background, #fff);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 20px 0 20px;
 }
 
-.logoWrapper {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.logoWrapper a {
-    gap: 6px;
+.topBarActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.logoWrapper svg {
-    width: 20px;
-    height: 20px;
+.topBarPublishButton {
+  display: none;
 }
 
-.logoWrapper a>span:last-child {
-    font-size: 14px;
-    line-height: 1;
-}
-
-.tabletActions {
-    display: none;
+.topBarAuthBar {
+  display: none;
 }
 
 .closeButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    margin-left: auto;
-    border: 1px solid var(--color-scheme-2-border);
-    border-radius: var(--radius-md);
-    color: var(--color-scheme-2-text);
-    background-color: var(--color-mantis-lighter);
-    transition:
-        border-color var(--transition-fast),
-        background-color var(--transition-fast);
+  display: inline-flex;
+  color: var(--color-scheme-2-text);
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--color-scheme-2-border);
+  background: var(--opacity-neutral-darkest-5);
 }
 
-.closeButton:hover,
-.closeButton:focus-visible {
-    border-color: var(--color-mantis-dark);
-    background-color: var(--color-mantis-light);
-    outline: none;
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  margin-top: 24px;
 }
 
-.navigation {
-    display: flex;
-    justify-content: center;
-    padding: 40px 20px 24px;
-}
-
-.linkList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-}
-
-.link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 24px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--color-scheme-2-text);
-    transition: color var(--transition-fast);
-}
-
-.link:hover,
-.link:focus-visible,
-.activeLink {
-    color: var(--color-mantis-dark);
-    outline: none;
-}
-
-.menuFooter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    margin-top: auto;
-    padding: 24px 20px 32px;
+.navLink {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-scheme-2-text);
 }
 
 .publishButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-mantis-dark);
+  color: var(--color-white);
+  border-radius: 6px;
+  width: 100%;
+  padding: 4px 0;
+  font-weight: 500;
+}
+
+.panel :global(.container) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.burgerGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.bottomGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin-top: auto;
+  padding-bottom: 92px;
+}
+
+.bottomAuthBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.bottomAuthBar > * {
+  width: 100%;
+}
+
+.bottomAuthBar .loginButton,
+.bottomAuthBar .registerButton {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .publishButton {
+    display: none;
+  }
+
+  .topBarPublishButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 40px;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.5;
+    background: var(--color-mantis-dark);
     color: var(--color-white);
-    white-space: nowrap;
-    background-color: var(--color-mantis-dark);
-    transition: background-color var(--transition-fast);
+    border: 1px solid var(--color-mantis-dark);
+    border-radius: 6px;
+    padding: 4px 0;
+    width: 196px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .bottomAuthBar {
+    display: none;
+  }
+
+  .topBarAuthBar {
+    display: flex;
+  }
 }
 
-.publishButton:hover,
-.publishButton:focus-visible {
-    background-color: var(--color-mantis-darker);
-    outline: none;
-}
-
-.mobilePublishButton,
-.mobileAuthBar {
-    width: 100%;
-}
-
-@media screen and (min-width: 768px) {
-    .menuHeader {
-        padding: 0 32px;
-    }
-
-    .logoWrapper a {
-        gap: 8px;
-    }
-
-    .logoWrapper svg {
-        width: 22px;
-        height: 22px;
-    }
-
-    .logoWrapper a>span:last-child {
-        font-size: 16px;
-    }
-
-    .tabletActions {
-        display: flex;
-        align-items: center;
-        margin-left: auto;
-    }
-
-    .closeButton {
-        margin-left: 16px;
-    }
-
-    .navigation {
-        padding-top: 32px;
-    }
-
-    .menuFooter {
-        width: auto;
-        align-self: center;
-        padding-bottom: 32px;
-    }
-
-    .mobilePublishButton,
-    .mobileAuthBar {
-        display: none;
-    }
-}
-
-@media screen and (min-width: 1440px) {
-    .overlay {
-        display: none;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    .closeButton,
-    .link,
-    .publishButton {
-        transition: none;
-    }
+@media only screen and (min-width: 1440px) {
+  .overlay {
+    display: none;
+  }
 }

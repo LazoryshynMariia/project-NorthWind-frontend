@@ -1,12 +1,9 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Image from 'next/image';
-
 import ConfirmModal from '@/components/ConfirmModal/ConfirmModal';
-
 import type { AuthUser } from '@/types/auth';
-
 import css from './UserBar.module.css';
 
 type UserBarProps = {
@@ -34,7 +31,6 @@ function LogoutIcon() {
 
 export default function UserBar({ user, onLogout }: UserBarProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleLogout = async () => {

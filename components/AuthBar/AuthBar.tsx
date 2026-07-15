@@ -1,25 +1,24 @@
+﻿'use client';
 import Link from 'next/link';
-
 import css from './AuthBar.module.css';
 
-type AuthBarProps = {
+interface AuthBarProps {
+  fullWidth?: boolean;
   onNavigate?: () => void;
-};
+}
 
-export default function AuthBar({ onNavigate }: AuthBarProps) {
+export default function AuthBar({ fullWidth = false, onNavigate }: AuthBarProps) {
   return (
-    <nav className={css.authBar} aria-label="Авторизація">
+    <div
+      className={`${css.authBar} ${fullWidth ? css.fullWidth : ''}`}
+      aria-label="Авторизація"
+    >
       <Link href="/login" className={css.loginButton} onClick={onNavigate}>
         Вхід
       </Link>
-
-      <Link
-        href="/register"
-        className={css.registerButton}
-        onClick={onNavigate}
-      >
+      <Link href="/register" className={css.registerButton} onClick={onNavigate}>
         Реєстрація
       </Link>
-    </nav>
+    </div>
   );
 }

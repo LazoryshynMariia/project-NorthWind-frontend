@@ -1,40 +1,36 @@
-.footer {
-  background-color: #dbe9d3;
-  color: #24331f;
+﻿.footer {
+  background: var(--color-header-background, rgba(255, 255, 255, 0.6));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-scheme-2-text);
 }
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 24px 32px;
 }
-
 .top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
 }
-
 .topRight {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-
 .nav {
   display: flex;
   justify-content: center;
   margin-top: 40px;
 }
-
 .divider {
   height: 1px;
   border: none;
-  background-color: #b8cdac;
+  background-color: var(--color-scheme-2-border);
   margin: 32px 0 24px;
 }
-
 @media (max-width: 640px) {
   .top {
     flex-direction: column;

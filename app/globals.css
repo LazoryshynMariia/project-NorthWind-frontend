@@ -18,16 +18,17 @@
   --color-border: #e0e0e0;
   --color-toggle-track: #d9d9d9;
   --color-toggle-track-active: #4a4a4a;
+  --color-header-background: rgba(255, 255, 255, 0.6);
 }
 
 [data-theme='dark'] {
-  --color-bg: #0d0d0d;
-  --color-bg-secondary: #1a1a1a;
-  --color-text: #e8e8e8;
-  --color-text-secondary: #a0a0a0;
-  --color-border: #2e2e2e;
   --color-toggle-track: #555555;
   --color-toggle-track-active: #7ac1ff;
+  --color-header-background: rgba(20, 20, 20, 0.6);
+  --color-scheme-2-text: var(--color-mantis-lightest);
+  --color-scheme-2-background: var(--color-mantis-darkest);
+  --color-scheme-2-border: rgba(255, 255, 255, .15);
+  --color-scheme-2-foreground: var(--color-mantis-darker);
 }
 
 * {
