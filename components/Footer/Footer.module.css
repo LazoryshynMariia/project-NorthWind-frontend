@@ -1,7 +1,6 @@
 ﻿.footer {
   background: var(--color-scheme-2-foreground);
   color: var(--color-scheme-2-text);
-
   padding-block: 40px;
   padding-inline: 20px;
 }
@@ -10,7 +9,6 @@
   width: 100%;
   max-width: 1312px;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -59,36 +57,36 @@
 }
 
 @media screen and (min-width: 768px) {
-      .footer {
-        padding-block: 48px;
-        padding-inline: 32px;
-      }
-  
-      .top {
-        display: grid;
-        grid-template-columns: auto minmax(240px, 1fr) auto;
-        align-items: center;
-        gap: 24px;
-        width: 100%;
-      }
-  
-      .logoBox {
-        justify-self: start;
-        grid-column: 1;
-      }
-  
-      .navBox {
-        grid-column: 2;
-        justify-self: center;
-        width: auto;
-        min-width: 0;
-      }
-  
-      .socialBox {
-        grid-column: 3;
-        justify-self: end;
-      }
-    }
+  .footer {
+    padding-block: 48px;
+    padding-inline: 32px;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 16px;
+    column-gap: 24px;
+    width: 100%;
+  }
+
+  .logoBox {
+    flex: 0 0 auto;
+  }
+
+  .socialBox {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+  }
+
+  .navBox {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
 
 @media screen and (min-width: 1440px) {
   .footer {
@@ -96,24 +94,58 @@
     padding-inline: 64px;
   }
 
-  .top {
-    display: grid;
-    grid-template-columns: 400px auto 400px;
-    align-items: center;
+  .container {
+    width: 100%;
+    max-width: 1312px;
     gap: 24px;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    width: 100%;
+    height: 43px;
   }
 
   .logoBox {
     width: 400px;
+    height: 40px;
+    gap: 10px;
     justify-content: flex-start;
+    align-items: center;
+    flex: 0 0 400px;
   }
 
   .socialBox {
+    width: 132px;
+    height: 24px;
+    align-items: flex-start;
     justify-content: center;
+    flex: 0 0 132px;
   }
 
   .navBox {
     width: 400px;
+    max-width: 400px;
+    height: 43px;
+    gap: 24px;
     justify-content: flex-end;
+    align-items: center;
+    flex: 0 0 400px;
+  }
+
+  .bottom {
+    width: 100%;
+    height: 56px;
+    gap: 32px;
+  }
+
+  .copyrightRow {
+    width: 100%;
+    height: 24px;
   }
 }

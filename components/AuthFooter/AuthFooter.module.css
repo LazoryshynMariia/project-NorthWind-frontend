@@ -1,6 +1,7 @@
 .copyrightForm {
   margin-top: auto;
   display: block;
+  padding-bottom: 32px;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.5;
@@ -8,8 +9,15 @@
   color: #000;
 }
 
+@media (min-width: 768px) {
+  .copyrightForm {
+    padding-bottom: 40px;
+  }
+}
+
 @media (min-width: 1440px) {
   .copyrightForm {
+    padding-bottom: 48px;
     font-size: 16px;
   }
 }

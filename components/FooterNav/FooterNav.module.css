@@ -57,3 +57,11 @@
     gap: 32px;
   }
 }
+
+@media screen and (min-width: 1440px) {
+  .list {
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 24px;
+  }
+}
