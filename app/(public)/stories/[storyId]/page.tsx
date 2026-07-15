@@ -4,12 +4,17 @@ import RecommendedStories from '@/components/RecommendedStories/RecommendedStori
 import SaveStory from '@/components/SaveStory/SaveStory';
 import StoryDetails from '@/components/StoryDetails/StoryDetails';
 import { getStoryById } from '@/lib/api/storiesApi';
+import type { Story } from '@/types';
 
 type StoryPageProps = {
   params: Promise<{
     storyId: string;
   }>;
 };
+
+function getStoryCategoryId(category: Story['category']): string {
+  return typeof category === 'string' ? category : category._id;
+}
 
 export async function generateMetadata({
   params,
@@ -45,7 +50,10 @@ export default async function StoryPage({ params }: StoryPageProps) {
       <StoryDetails story={story}>
         <SaveStory storyId={storyId} />
       </StoryDetails>
-      <RecommendedStories />
+      <RecommendedStories
+        categoryId={getStoryCategoryId(story.category)}
+        currentStoryId={storyId}
+      />
     </>
   );
 }
