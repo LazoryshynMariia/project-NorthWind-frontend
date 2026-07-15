@@ -14,6 +14,7 @@ interface TravellersStoriesProps {
   ownerName?: string;
   // if author is passed, the list can load more pages by this filter
   author?: string;
+  category?: string;
   perPage?: number;
   totalPages?: number;
 }
@@ -22,6 +23,7 @@ export default function TravellersStories({
   initialStories,
   ownerName,
   author,
+  category,
   perPage = 6,
   totalPages = 1,
 }: TravellersStoriesProps) {
@@ -30,7 +32,7 @@ export default function TravellersStories({
   const [isLoading, setIsLoading] = useState(false);
   const listRef = useRef<HTMLUListElement>(null);
 
-  const hasNextPage = author ? page < totalPages : false;
+  const hasNextPage = page < totalPages;
 
   const handleLoadMore = async () => {
     setIsLoading(true);
@@ -38,7 +40,7 @@ export default function TravellersStories({
       const nextPage = page + 1;
       const response = await nextServer.get<PaginatedResponse<Story>>(
         '/stories',
-        { params: { author, page: nextPage, perPage } }
+        { params: { author, category, page: nextPage, perPage } }
       );
       const firstNewIndex = stories.length;
       setStories(prev => [...prev, ...response.data.data]);

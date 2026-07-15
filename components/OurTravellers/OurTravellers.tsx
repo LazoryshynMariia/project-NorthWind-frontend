@@ -106,58 +106,60 @@ export default function OurTravellers({ travellers }: OurTravellersProps) {
 
   return (
     <section className={css.section}>
-      <div className={css.header}>
-        <h2 className={css.title}>Наші Мандрівники</h2>
+      <div className={css.container}>
+        <div className={css.header}>
+          <h2 className={css.title}>Наші Мандрівники</h2>
 
-        <Link href="/travellers" className={css.topLink}>
+          <Link href="/travellers" className={css.topLink}>
+            Всі мандрівники
+          </Link>
+        </div>
+
+        <Swiper
+          key={`${itemsPerGroup}-${travellerGroups.length}`}
+          className={css.swiper}
+          slidesPerView={1}
+          spaceBetween={24}
+          onSwiper={handleSwiper}
+          onSlideChange={updateNavigationState}
+        >
+          {travellerGroups.map((group, groupIndex) => (
+            <SwiperSlide key={groupIndex}>
+              <ul className={css.travellersGrid}>
+                {group.map(traveller => (
+                  <TravellerCard key={traveller._id} traveller={traveller} />
+                ))}
+              </ul>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <div className={css.controls}>
+          <button
+            type="button"
+            className={`travellersPrev ${css.arrow}`}
+            aria-label="Попередні мандрівники"
+            onClick={handlePrevious}
+            disabled={isBeginning}
+          >
+            <ArrowIcon />
+          </button>
+
+          <button
+            type="button"
+            className={`travellersNext ${css.arrow} ${css.nextArrow}`}
+            aria-label="Наступні мандрівники"
+            onClick={handleNext}
+            disabled={isEnd}
+          >
+            <ArrowIcon />
+          </button>
+        </div>
+
+        <Link href="/travellers" className={css.bottomLink}>
           Всі мандрівники
         </Link>
       </div>
-
-      <Swiper
-        key={`${itemsPerGroup}-${travellerGroups.length}`}
-        className={css.swiper}
-        slidesPerView={1}
-        spaceBetween={24}
-        onSwiper={handleSwiper}
-        onSlideChange={updateNavigationState}
-      >
-        {travellerGroups.map((group, groupIndex) => (
-          <SwiperSlide key={groupIndex}>
-            <ul className={css.travellersGrid}>
-              {group.map(traveller => (
-                <TravellerCard key={traveller._id} traveller={traveller} />
-              ))}
-            </ul>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      <div className={css.controls}>
-        <button
-          type="button"
-          className={`travellersPrev ${css.arrow}`}
-          aria-label="Попередні мандрівники"
-          onClick={handlePrevious}
-          disabled={isBeginning}
-        >
-          <ArrowIcon />
-        </button>
-
-        <button
-          type="button"
-          className={`travellersNext ${css.arrow} ${css.nextArrow}`}
-          aria-label="Наступні мандрівники"
-          onClick={handleNext}
-          disabled={isEnd}
-        >
-          <ArrowIcon />
-        </button>
-      </div>
-
-      <Link href="/travellers" className={css.bottomLink}>
-        Всі мандрівники
-      </Link>
     </section>
   );
 }

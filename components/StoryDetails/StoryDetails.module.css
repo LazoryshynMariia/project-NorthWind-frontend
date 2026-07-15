@@ -7,7 +7,7 @@
   width: 100%;
   max-width: 1312px;
   margin: 0 auto;
-  padding: 32px 20px;
+  padding: 32px 20px 48px;
 }
 
 .top {
@@ -85,13 +85,51 @@
   font-weight: 600;
 }
 
+.categoryTag {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: var(--opacity-neutral-darkest-5);
+
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.categoryTag strong {
+  margin: 0;
+}
+
 .article {
   width: 100%;
-  margin: 32px auto 0;
+  margin: 0;
 
   color: #1b391b;
   font-size: 14px;
   line-height: 1.5;
+}
+
+.contentSection {
+  width: 100%;
+  padding: 0 20px 48px;
+  background-color: #eef8ee;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+
+  width: 100%;
+  max-width: 1312px;
+  margin: 0 auto;
 }
 
 .article p {
@@ -106,7 +144,7 @@
 
 @media screen and (min-width: 768px) {
   .container {
-    padding: 48px 32px 32px;
+    padding: 48px 32px;
   }
 
   .backLink {
@@ -131,10 +169,14 @@
 
   .article {
     max-width: 866px;
-    margin-top: 40px;
 
     font-size: 16px;
     line-height: 1.6;
+  }
+
+  .contentSection {
+    padding-right: 32px;
+    padding-left: 32px;
   }
 }
 
@@ -142,7 +184,7 @@
 
 @media screen and (min-width: 1440px) {
   .container {
-    padding: 64px 0 32px;
+    padding: 64px 0 48px;
   }
 
   .top {
@@ -183,6 +225,10 @@
 
   .article {
     max-width: 866px;
-    margin-top: 48px;
+  }
+
+  .contentSection {
+    padding-right: 64px;
+    padding-left: 64px;
   }
 }

@@ -1,0 +1,24 @@
+.page {
+  min-height: 100vh;
+  padding: 40px 19px 80px;
+
+  background: var(--color-scheme-1-background);
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: 56px 38px 96px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .page {
+    padding: 64px 70px 112px;
+  }
+}

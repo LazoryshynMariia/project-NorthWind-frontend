@@ -1,28 +1,48 @@
 .list {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Стани: Normal / Hover / Focus / Active, за атомом Link з дизайн-системи. */
 .link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background-color: #24331f;
-  color: #eef3e9;
+  width: 32px;
+  height: 32px;
+
+  color: var(--color-scheme-2-text);
+
+  border: 1px solid transparent;
+  border-radius: 6px;
+
   transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .link:hover,
 .link:focus-visible {
-  background-color: #35492c;
-  transform: translateY(-2px);
+  border-color: var(--color-scheme-2-border);
+}
+
+.link:active {
+  background-color: var(--color-mantis-lightest);
+  border-color: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    gap: 12px;
+  }
+
+  .link {
+    width: 24px;
+    height: 24px;
+  }
 }
