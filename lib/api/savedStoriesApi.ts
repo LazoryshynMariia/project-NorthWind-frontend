@@ -87,8 +87,11 @@ export async function getSavedStories(
     { params: { page, perPage } }
   );
 
+  // some saved links can point to a deleted story (storyId is null), skip them
+  const links = response.data.data.filter(item => item.storyId);
+
   return {
-    stories: response.data.data.map(item => item.storyId),
+    stories: links.map(item => item.storyId),
     totalPages: response.data.totalPages,
   };
 }
