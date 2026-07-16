@@ -1,242 +1,243 @@
 .header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-    height: 72px;
-    background-color: var(--color-scheme-2-background);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 72px;
+  background-color: var(--color-scheme-2-background);
 }
 
 .content {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 1440px;
-    height: 72px;
-    margin: 0 auto;
-    padding: 0 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 375px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .logoWrapper {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .logoWrapper a {
-    gap: 6px;
+  gap: 6px;
 }
 
 .logoWrapper svg {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
-.logoWrapper a>span:last-child {
-    font-size: 14px;
-    line-height: 1;
+.logoWrapper a > span:last-child {
+  font-size: 14px;
+  line-height: 1;
 }
 
 .desktopContent,
 .tabletActions {
-    display: none;
+  display: none;
 }
 
 .burgerButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    margin-left: auto;
-    border: 1px solid var(--color-scheme-2-border);
-    border-radius: var(--radius-md);
-    color: var(--color-scheme-2-text);
-    background-color: var(--color-mantis-lighter);
-    transition:
-        border-color var(--transition-fast),
-        background-color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  border: 1px solid var(--color-scheme-2-border);
+  border-radius: var(--radius-md);
+  color: var(--color-scheme-2-text);
+  background-color: var(--color-mantis-lighter);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .burgerButton:hover,
 .burgerButton:focus-visible {
-    border-color: var(--color-mantis-dark);
-    background-color: var(--color-mantis-light);
-    outline: none;
+  border-color: var(--color-mantis-dark);
+  background-color: var(--color-mantis-light);
+  outline: none;
 }
 
 .publishButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--color-white);
-    white-space: nowrap;
-    background-color: var(--color-mantis-dark);
-    transition: background-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-white);
+  white-space: nowrap;
+  background-color: var(--color-mantis-dark);
+  transition: background-color var(--transition-fast);
 }
 
 .publishButton:hover,
 .publishButton:focus-visible {
-    background-color: var(--color-mantis-darker);
-    outline: none;
+  background-color: var(--color-mantis-darker);
+  outline: none;
 }
 
 .authHeader {
-    position: static;
-    background-color: transparent;
+  position: static;
+  background-color: transparent;
 }
 
 .authHeader .content {
-    padding: 0;
+  padding: 0;
 }
 
 .authHeader .logoWrapper a {
-    gap: 12px;
+  gap: 12px;
 }
 
 .authHeader .logoWrapper svg {
-    width: 28px;
-    height: 28px;
+  width: 28px;
+  height: 28px;
 }
 
-.authHeader .logoWrapper a>span:last-child {
-    font-size: 20px;
-    line-height: 1.1;
+.authHeader .logoWrapper a > span:last-child {
+  font-size: 20px;
+  line-height: 1.1;
 }
 
 @media screen and (min-width: 768px) {
-    .content {
-        padding: 0 32px;
-    }
+  .content {
+    padding: 0 32px;
+    max-width: 768px;
+  }
 
-    .logoWrapper a {
-        gap: 8px;
-    }
+  .logoWrapper a {
+    gap: 8px;
+  }
 
-    .logoWrapper svg {
-        width: 22px;
-        height: 22px;
-    }
+  .logoWrapper svg {
+    width: 22px;
+    height: 22px;
+  }
 
-    .logoWrapper a>span:last-child {
-        font-size: 16px;
-    }
+  .logoWrapper a > span:last-child {
+    font-size: 16px;
+  }
 
-    .tabletActions {
-        display: flex;
-        align-items: center;
-        margin-left: auto;
-    }
+  .tabletActions {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
 
-    .burgerButton {
-        margin-left: 16px;
-    }
+  .burgerButton {
+    margin-left: 16px;
+  }
 
-    .authHeader .content {
-        padding: 0;
-    }
+  .authHeader .content {
+    padding: 0;
+  }
 
-    .authHeader .logoWrapper a {
-        gap: 12px;
-    }
+  .authHeader .logoWrapper a {
+    gap: 12px;
+  }
 
-    .authHeader .logoWrapper svg {
-        width: 28px;
-        height: 28px;
-    }
+  .authHeader .logoWrapper svg {
+    width: 28px;
+    height: 28px;
+  }
 
-    .authHeader .logoWrapper a>span:last-child {
-        font-size: 20px;
-    }
+  .authHeader .logoWrapper a > span:last-child {
+    font-size: 20px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-    .content {
-        padding: 0 64px;
-    }
+  .content {
+    padding: 0 64px;
+    max-width: 1440px;
+  }
 
-    .desktopContent {
-        display: flex;
-        align-items: center;
-        margin-left: auto;
-    }
+  .desktopContent {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
 
-    .navigation {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-    }
+  .navigation {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
 
-    .navLink {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        min-height: 40px;
-        font-weight: 500;
-        font-size: 14px;
-        color: var(--color-scheme-2-text);
-        transition: color var(--transition-fast);
-    }
+  .navLink {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-scheme-2-text);
+    transition: color var(--transition-fast);
+  }
 
-    .navLink::after {
-        position: absolute;
-        right: 0;
-        bottom: 4px;
-        left: 0;
-        height: 2px;
-        border-radius: 2px;
-        background-color: var(--color-mantis-dark);
-        content: '';
-        opacity: 0;
-        transform: scaleX(0);
-        transition:
-            opacity var(--transition-default),
-            transform var(--transition-default);
-    }
+  .navLink::after {
+    position: absolute;
+    right: 0;
+    bottom: 4px;
+    left: 0;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--color-mantis-dark);
+    content: '';
+    opacity: 0;
+    transform: scaleX(0);
+    transition:
+      opacity var(--transition-default),
+      transform var(--transition-default);
+  }
 
-    .navLink:hover,
-    .navLink:focus-visible {
-        color: var(--color-mantis-dark);
-        outline: none;
-    }
+  .navLink:hover,
+  .navLink:focus-visible {
+    color: var(--color-mantis-dark);
+    outline: none;
+  }
 
-    .navLink:hover::after,
-    .navLink:focus-visible::after,
-    .activeNavLink::after {
-        opacity: 1;
-        transform: scaleX(1);
-    }
+  .navLink:hover::after,
+  .navLink:focus-visible::after,
+  .activeNavLink::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 
-    .desktopActions {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-left: 24px;
-    }
+  .desktopActions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 24px;
+  }
 
-    .tabletActions,
-    .burgerButton {
-        display: none;
-    }
+  .tabletActions,
+  .burgerButton {
+    display: none;
+  }
 
-    .authHeader .content {
-        padding: 0;
-    }
+  .authHeader .content {
+    padding: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-
-    .burgerButton,
-    .publishButton,
-    .navLink,
-    .navLink::after {
-        transition: none;
-    }
+  .burgerButton,
+  .publishButton,
+  .navLink,
+  .navLink::after {
+    transition: none;
+  }
 }
