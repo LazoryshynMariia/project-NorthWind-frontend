@@ -1,0 +1,116 @@
+﻿.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  width: 100%;
+  z-index: 100;
+  background: var(--color-header-background, rgba(255, 255, 255, 0.6));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-scheme-2-border);
+}
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+.rightGroup {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.navigation {
+  display: none;
+}
+.navLink {
+  padding: 6px 4px;
+  margin: -6px -4px;
+  border-radius: 6px;
+  color: var(--color-scheme-2-text);
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  transition:
+    background-color var(--main-transition),
+    box-shadow var(--main-transition);
+}
+.navLink:hover,
+.navLink:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--color-scheme-2-text);
+}
+.navLink:focus-visible,
+.navLink:active {
+  background: var(--color-neutral-lighter);
+}
+.actions {
+  display: none;
+  align-items: center;
+}
+.publishButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 196px;
+  height: 40px;
+  border: 1px solid var(--color-mantis-dark);
+  border-radius: 6px;
+  background: var(--color-mantis-dark);
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  transition: background-color var(--main-transition);
+}
+.publishButton:hover {
+  background: var(--color-mantis-darker);
+}
+.burgerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 16px;
+  border: 1px solid var(--color-scheme-2-border);
+  border-radius: 6px;
+  background: var(--opacity-neutral-darkest-5);
+  color: var(--color-scheme-2-text);
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .content {
+    padding: 16px 32px;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+  }
+}
+@media (min-width: 1440px) {
+  .content {
+    padding: 16px 64px;
+  }
+  .rightGroup {
+    gap: 32px;
+  }
+  .navigation {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .publishButton {
+    display: inline-flex;
+  }
+  .burgerButton {
+    display: none;
+  }
+}

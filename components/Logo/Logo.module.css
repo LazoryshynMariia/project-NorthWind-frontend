@@ -1,8 +1,8 @@
-.logo {
+﻿.logo {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  color: #24331f;
+  gap: 10px;
+  color: var(--color-scheme-2-text);
   text-decoration: none;
 }
 
@@ -12,7 +12,8 @@
 }
 
 .text {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.1;
+  font-weight: 500;
+  font-size: 17.94px;
+  line-height: 1;
+  letter-spacing: -0.01em;
 }

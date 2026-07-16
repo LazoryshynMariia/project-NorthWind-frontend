@@ -1,0 +1,48 @@
+﻿.userBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--color-scheme-2-text);
+}
+.avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--color-mantis-lighter);
+}
+.userName {
+  max-width: 130px;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--color-scheme-2-border);
+}
+.logoutButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--color-scheme-2-text);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+.logoutButton:hover,
+.logoutButton:focus-visible {
+  color: var(--color-mantis-darker);
+  background-color: var(--color-mantis-lighter);
+  outline: none;
+}

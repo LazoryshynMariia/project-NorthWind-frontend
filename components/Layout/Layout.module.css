@@ -1,0 +1,149 @@
+/*.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding-top: var(--header-height);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(15, 23, 20, 0.5);
+  padding: 1rem;
+  z-index: 1000;
+}
+.modalContent {
+  width: 100%;
+}
+
+.modalContent :global(.wrapper) {
+  max-width: 100%;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  height: auto;
+   max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 0;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #6b7a71;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: #f0f2ef;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    max-width: 678px;
+  }
+}*/
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
+
+/* Модальное окно */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(15, 23, 20, 0.5);
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 416px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background: #fff;
+  padding: 40px 32px 32px;
+  box-sizing: border-box;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Планшет */
+
+@media (min-width: 768px) {
+  .backdrop {
+    padding: 32px;
+  }
+
+  .modal {
+    max-width: 678px;
+    padding: 48px 64px;
+  }
+}
+
+/* Десктоп */
+
+@media (min-width: 1440px) {
+  .modal {
+    max-width: 678px;
+    padding: 48px 64px;
+  }
+}
+

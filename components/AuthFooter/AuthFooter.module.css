@@ -1,0 +1,15 @@
+.copyrightForm {
+  margin-top: auto;
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: #000;
+}
+
+@media (min-width: 1440px) {
+  .copyrightForm {
+    font-size: 16px;
+  }
+}

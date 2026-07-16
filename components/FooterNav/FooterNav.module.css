@@ -1,23 +1,59 @@
 .list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* "лінк [назва]" - лейаут-обгортка з padding/gap над текст-ареа.
+   Стани: Normal / Hover / Focus / Active, за атомом Link з дизайн-системи. */
 .link {
-  font-size: 18px;
-  font-weight: 600;
-  color: #24331f;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 8px 12px;
+  margin-inline: -12px;
+
+  color: var(--color-scheme-2-text);
   text-decoration: none;
-  transition: color 0.2s ease;
+
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .link:hover,
 .link:focus-visible {
-  color: #4f7a3a;
+  border-color: var(--color-scheme-2-border);
+}
+
+.link:active {
+  background-color: var(--color-mantis-lightest);
+  border-color: transparent;
+}
+
+/* "текст-ареа" */
+.linkText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
 }

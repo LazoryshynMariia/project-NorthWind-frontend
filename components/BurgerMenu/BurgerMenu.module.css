@@ -1,0 +1,165 @@
+﻿.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-scheme-2-background);
+  z-index: 200;
+}
+
+.panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--color-scheme-2-background, #fff);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 20px 0 20px;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topBarActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topBarPublishButton {
+  display: none;
+}
+
+.topBarAuthBar {
+  display: none;
+}
+
+.closeButton {
+  display: inline-flex;
+  color: var(--color-scheme-2-text);
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--color-scheme-2-border);
+  background: var(--opacity-neutral-darkest-5);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.navLink {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-scheme-2-text);
+}
+
+.publishButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-mantis-dark);
+  color: var(--color-white);
+  border-radius: 6px;
+  width: 100%;
+  padding: 4px 0;
+  font-weight: 500;
+}
+
+.panel :global(.container) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.burgerGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.bottomGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin-top: auto;
+  padding-bottom: 92px;
+}
+
+.bottomAuthBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.bottomAuthBar > * {
+  width: 100%;
+}
+
+.bottomAuthBar .loginButton,
+.bottomAuthBar .registerButton {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .publishButton {
+    display: none;
+  }
+
+  .topBarPublishButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-mantis-dark);
+    color: var(--color-white);
+    border: 1px solid var(--color-mantis-dark);
+    border-radius: 6px;
+    padding: 4px 0;
+    width: 196px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .bottomAuthBar {
+    display: none;
+  }
+
+  .topBarAuthBar {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .overlay {
+    display: none;
+  }
+}
