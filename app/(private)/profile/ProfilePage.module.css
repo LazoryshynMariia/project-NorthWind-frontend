@@ -51,6 +51,32 @@
   }
 }
 
+.avatarLink {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editLink {
+  align-self: flex-start;
+  color: var(--color-mantis);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+
+.editLink:hover {
+  color: var(--color-mantis-dark);
+}
+
 .avatar {
   width: 113px;
   height: 113px;
